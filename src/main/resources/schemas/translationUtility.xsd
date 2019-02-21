@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://eai.officedepot.com/service/TranslationUtility"
+	xmlns:tns="http://eai.officedepot.com/service/TranslationUtility"
+	elementFormDefault="qualified">
+
+
+<element name="TranslationLookupRequest" type="tns:TranslationLookupRequestType"/>
+<element name="TranslationLookupResponse" type="tns:TranslationLookupResponseType"/>
+<element name="BulkTranslationLookupResponse" type="tns:BulkTranslationLookupResponseType"/>
+<element name="BulkTranslationLookupRequest" type="tns:BulkTranslationLookupRequestType"/>
+<element name="TranslationDeleteRequest" type="tns:BulkTranslationLookupRequestType"/>
+<element name="BulkTranslationDeleteRequest" type="tns:BulkTranslationLookupRequestType"/>
+<element name="TranslationUpsertRequest" type="tns:BulkTranslationLookupRequestType"/>
+<element name="BulkTranslationUpsertRequest" type="tns:BulkTranslationLookupRequestType"/>
+
+	<complexType name="TranslationLookupRequestType">
+		<annotation>
+			<documentation>Translation lookup Request</documentation>
+		</annotation>
+		<sequence>
+			<element name="header" type="tns:HeaderType" minOccurs="1"
+				maxOccurs="1" />
+			<element name="criteria" type="tns:CriteriaType" minOccurs="1"
+				maxOccurs="1" />
+
+		</sequence>
+	</complexType>
+	
+	<complexType name="BulkTranslationLookupRequestType">
+		<annotation>
+			<documentation>Translation lookup Request</documentation>
+		</annotation>
+		<sequence>
+			<element name="header" type="tns:HeaderType" minOccurs="1"
+				maxOccurs="1" />
+			<element name="criteria" type="tns:CriteriaType" minOccurs="1"
+				maxOccurs="unbounded" />
+
+		</sequence>
+	</complexType>
+	<complexType name="TranslationLookupResponseType">
+		<annotation>
+			<documentation>Translation lookup Response</documentation>
+		</annotation>
+		<sequence>
+			<element name="result" type="tns:ResultType" minOccurs="1"
+				maxOccurs="1" />
+		</sequence>
+	</complexType>
+	
+	<complexType name="BulkTranslationLookupResponseType">
+		<annotation>
+			<documentation>Translation lookup Response</documentation>
+		</annotation>
+		<sequence>
+			<element name="results" type="tns:ResultType" minOccurs="1"
+				maxOccurs="unbounded" />
+		</sequence>
+	</complexType>
+
+	<complexType name="HeaderType">
+		<annotation>
+			<documentation>Header type</documentation>
+		</annotation>
+
+		<sequence>
+			<element name="transactionId" type="string" maxOccurs="1"
+				minOccurs="1" />
+			<element name="consumer" type="string" maxOccurs="1"
+				minOccurs="0" />
+		</sequence>
+	</complexType>
+
+	<complexType name="CriteriaType">
+		<annotation>
+			<documentation>Criteria type</documentation>
+		</annotation>
+
+		<sequence>
+			<element name="translationId" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="translationName" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="isTranslationEnabled" type="boolean"
+				minOccurs="0" maxOccurs="1" />
+			<element name="isTranslationValueEnabled" type="boolean"
+				minOccurs="0" maxOccurs="1" />
+			<element name="translationValue" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="activeTranslationStartDate" type="date"
+				minOccurs="0" maxOccurs="1" nillable="true" />
+			<element name="activeTranslationEndDate" type="date"
+				minOccurs="0" maxOccurs="1"  nillable="true"/>
+			<element name="activeTranslationValueStartDate" type="date"
+				minOccurs="0" maxOccurs="1" nillable="true"/>
+			<element name="activeTranslationValueEndDate" type="date"
+				minOccurs="0" maxOccurs="1" nillable="true"/>
+
+			<element name="sourceField1" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="sourceField2" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="sourceField3" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="sourceField4" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="sourceField5" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="sourceField6" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="sourceField7" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="sourceField8" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="sourceField9" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="sourceField10" type="string" minOccurs="0"
+				maxOccurs="1" />
+
+		</sequence>
+	</complexType>
+
+	
+
+
+	<complexType name="ResultType">
+		<annotation>
+			<documentation>Status type</documentation>
+		</annotation>
+
+		<sequence>
+			<element name="result" type="tns:ResultDocType" minOccurs="0"
+				maxOccurs="1" />
+			<element name="status" type="tns:StatusType" minOccurs="1"
+				maxOccurs="1" />
+			<element name="criteria" type="tns:CriteriaType" minOccurs="1"
+				maxOccurs="1" />
+				<element name="header" type="tns:HeaderType" minOccurs="1"
+				maxOccurs="1" />
+		</sequence>
+	</complexType>
+
+	<complexType name="StatusType">
+		<annotation>
+			<documentation>Status type</documentation>
+		</annotation>
+
+		<sequence>
+			<element name="status" type="string" minOccurs="1" maxOccurs="1" />
+			<element name="statusCode" type="int" minOccurs="0"
+				maxOccurs="1" />
+			<element name="statusDescription" type="string" minOccurs="0"
+				maxOccurs="1" />
+		</sequence>
+	</complexType>
+
+
+	<complexType name="ResultDocType">
+		<annotation>
+			<documentation>Results type</documentation>
+		</annotation>
+
+		<sequence>
+			<element name="targetField1" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="targetField2" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="targetField3" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="targetField4" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="targetField5" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="targetField6" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="targetField7" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="targetField8" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="targetField9" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="targetField10" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="targetField11" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="targetField12" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="targetField13" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="targetField14" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="targetField15" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="targetField16" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="targetField17" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="targetField18" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="targetField19" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="targetField20" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="targetField21" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="targetField22" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="targetField23" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="targetField24" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="targetField25" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="targetField26" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="targetField27" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="targetField28" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="targetField29" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="targetField30" type="string" minOccurs="0"
+				maxOccurs="1" />
+		</sequence>
+	</complexType>
+
+</schema>

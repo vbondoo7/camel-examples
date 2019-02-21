@@ -36,17 +36,24 @@ public class ServiceApplication extends BaseEAIServiceApplication {
 		runApp(ServiceApplication.class, args);
 	}
 	
-	
-	@Bean
-	ServletRegistrationBean servletRegistrationBean() {
-		log.info("Loaded properties from [{}]", propFile);
-		log.info("Registering camel servlet with (name, context)=(["+camelServletName+"],[" + camelServletContext+"])");
-		return getCamelServletRegistrationBean(camelServletName, camelServletContext);
-	}
+//	@Bean
+//	ServletRegistrationBean servletRegistrationBean() {
+//		log.info("Loaded properties from [{}]", propFile);
+//		log.info("Registering camel servlet with (name, context)=(["+camelServletName+"],[" + camelServletContext+"])");
+//		return getCamelServletRegistrationBean(camelServletName, camelServletContext);
+//	}
 
 	 @Bean
      ServletRegistrationBean hystrixServlet() {
         return new ServletRegistrationBean(new HystrixEventStreamServlet(), "/eai-odhystrix.stream");
     }
+	 
+	 @Bean
+	    public ServletRegistrationBean cxfServlet() {
+	        org.apache.cxf.transport.servlet.CXFServlet cxfServlet = new org.apache.cxf.transport.servlet.CXFServlet();
+	        ServletRegistrationBean servletDef = new ServletRegistrationBean(cxfServlet, "/eaiapi/*");
+	        servletDef.setLoadOnStartup(1);
+	        return servletDef;
+	    }
 
 }

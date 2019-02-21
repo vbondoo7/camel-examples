@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:tus="http://eai.officedepot.com/translationUtilityService/"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	name="translationUtilityService" targetNamespace="http://eai.officedepot.com/translationUtilityService/"
+	xmlns:xsd1="http://eai.officedepot.com/service/TranslationUtility">
+	<wsdl:types>
+		<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+			<xsd:import namespace="http://eai.officedepot.com/service/TranslationUtility"
+				schemaLocation="../schemas/translationUtility.xsd">
+			</xsd:import>
+		</xsd:schema>
+	</wsdl:types>
+	<wsdl:message name="translationLookUpRequestRequest">
+		<wsdl:part element="xsd1:TranslationLookupRequest" name="parameters" />
+	</wsdl:message>
+	<wsdl:message name="translationLookUpRequestResponse">
+		<wsdl:part element="xsd1:TranslationLookupResponse" name="parameters" />
+	</wsdl:message>
+	<wsdl:message name="bulkTranslationLookUpRequestRequest">
+		<wsdl:part name="parameters" element="xsd1:BulkTranslationLookupRequest"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="bulkTranslationLookUpRequestResponse">
+		<wsdl:part name="parameters" element="xsd1:BulkTranslationLookupResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:portType name="translationUtilityService">
+		<wsdl:operation name="translationLookUpRequest">
+			<wsdl:input message="tus:translationLookUpRequestRequest" />
+			<wsdl:output message="tus:translationLookUpRequestResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="bulkTranslationLookUpRequest">
+			<wsdl:input message="tus:bulkTranslationLookUpRequestRequest"></wsdl:input>
+			<wsdl:output message="tus:bulkTranslationLookUpRequestResponse"></wsdl:output>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="translationUtilityServiceSOAP" type="tus:translationUtilityService">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="translationLookUpRequest">
+			<soap:operation
+				soapAction="http://eai.officedepot.com/translationUtilityService/translationLookUpRequest" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="translationUtilityService">
+		<wsdl:port binding="tus:translationUtilityServiceSOAP" name="translationUtilityServiceSOAP">
+			<soap:address
+				location="https://dev-internal.odplabs.com/services/dev-translation-utility-service/eaiapi/translationUtility" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>
