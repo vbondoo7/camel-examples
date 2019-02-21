@@ -204,7 +204,7 @@
 							<sourceRoot>target/generated-sources/</sourceRoot>
 							<wsdlOptions>
 								<wsdlOption>
-									<wsdl>${basedir}\src\main\resources\wsdl\TranslationUtility.wsdl</wsdl>
+									<wsdl>${basedir}/src/main/resources/wsdl/TranslationUtility.wsdl</wsdl>
 									<extraargs>
 										<extraarg>-verbose</extraarg>
 									</extraargs>
