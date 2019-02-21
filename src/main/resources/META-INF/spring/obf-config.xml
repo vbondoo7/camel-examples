@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- ********************** -->
+	<!-- BASE Obfuscators BEGIN -->
+	<!-- ********************** -->
+	<bean id="nameObfuscator" class="com.od.eai.framework.dataobfuscator.coreobfuscators.NameObfuscator" scope="singleton"/>
+	<bean id="creditCardObfuscator" class="com.od.eai.framework.dataobfuscator.coreobfuscators.CreditCardObfuscator" scope="singleton"/>
+	<!-- ********************** -->
+	<!-- BASE Obfuscators END   -->
+	<!-- ********************** -->
+	
+	<!-- ************************************************ -->
+	<!-- The Factory bean (is must be obfuscatorFactory)  -->
+	<!-- ************************************************ -->
+	<bean id="obfuscatorFactory" class="com.od.eai.framework.dataobfuscator.ObfuscatorFactoryImpl" scope="singleton">
+<!-- 	      <property name="obfuscatorsMap"> -->
+<!-- 	         <map> -->
+<!-- 	            <entry key="eaiaudit_log_elk" value-ref="xmlWithNamespaceObf"/> -->
+<!-- 	            <entry key="eaiaudit_elk_obfus" value-ref="xmlWithNamespaceObf"/> -->
+<!-- 	         </map> -->
+<!-- 	      </property> -->
+	</bean>
+
+
+	
+
+	<!-- 	      ##  ######   #######  ##    ##  -->
+	<!-- 	      ## ##    ## ##     ## ###   ##  -->
+	<!-- 	      ## ##       ##     ## ####  ##  -->
+	<!-- 	      ##  ######  ##     ## ## ## ##  -->
+	<!-- 	##    ##       ## ##     ## ##  ####  -->
+	<!-- 	##    ## ##    ## ##     ## ##   ###  -->
+	<!-- 	 ######   ######   #######  ##    ##  -->
+	<!--    IMPORTANT RE JSON DOC HANDLER :: scope=prototype -->
+<!-- 	<bean id="jsonDocHandler" class="com.od.eai.framework.utils.dochandlers.JsonDocumentHandler" scope="prototype"/> -->
+<!-- 	<bean id="name of document this obf is operating on" class="com.od.eai.framework.dataobfuscator.coreobfuscators.JsonDocumentObfuscator" scope="singleton"> -->
+<!-- 		<property name="documentHandler" ref="jsonDocHandler"/> -->
+<!-- 		<property name="attributesToObfuscate"> -->
+<!-- 			<map> -->
+<!-- 				<entry key="JSON Path for the attrbute you want to obfuscate" value-ref="creditCardObfuscator"/> -->
+<!-- 				<entry key="JSON Path for the attrbute you want to obfuscate" value-ref="nameObfuscator"/> -->
+<!-- 			</map> -->
+<!-- 		</property> -->
+<!-- 	</bean> -->
+
+	
+
+
+	<!-- 	##     ## ##     ## ##        -->
+	<!-- 	 ##   ##  ###   ### ##        -->
+	<!-- 	  ## ##   #### #### ##        -->
+	<!-- 	   ###    ## ### ## ##        -->
+	<!-- 	  ## ##   ##     ## ##        -->
+	<!-- 	 ##   ##  ##     ## ##        -->
+	<!-- 	##     ## ##     ## ########  -->
+	<!--    IMPORTANT RE XML DOC HANDLER :: scope=prototype -->
+<!-- 	<bean id="xmlDocNoNamespaceHandler"  class="com.od.eai.framework.utils.dochandlers.XmlDocumentHandler"  scope="prototype"/> -->
+<!-- 	<bean id="xmlDocWithNamespaceHandler"  class="com.od.eai.framework.utils.dochandlers.XmlDocumentHandler"  scope="prototype"> -->
+<!-- 		<property name="namespaces"> -->
+<!-- 			<map> -->
+<!-- 				<entry key="env" value="http://schemas.xmlsoap.org/soap/envelope/"/> -->
+<!-- 				<entry key="wsa" value="http://www.w3.org/2005/08/addressing"/> -->
+<!-- 				<entry key="ns1" value="http://..."/> -->
+<!-- 			</map> -->
+<!-- 		</property> -->
+<!-- 	</bean> -->
+<!-- 	<bean id="name of document this obf is operating on" class="com.od.eai.framework.dataobfuscator.coreobfuscators.XmlDocumentObfuscator" scope="singleton"> -->
+<!-- 		<property name="documentHandler" ref="xmlDocWithNamespaceHandler or xmlDocNoNamespaceHandler, depending"/> -->
+<!-- 		<property name="attributesToObfuscate"> -->
+<!-- 			<map> -->
+<!-- 				<entry key="XPath for the attrbute you want to obfuscate" value-ref="nameObfuscator"/> -->
+<!-- 				<entry key="XPath for the attrbute you want to obfuscate"  value-ref="nameObfuscator"/> -->
+<!-- 			</map> -->
+<!-- 		</property> -->
+<!-- 	</bean> -->
+
+
+
+
+
+
+
+	<!-- 	 ######   ######  ##     ##  -->
+	<!-- 	##    ## ##    ## ##     ##  -->
+	<!-- 	##       ##       ##     ##  -->
+	<!-- 	##        ######  ##     ##  -->
+	<!-- 	##             ##  ##   ##   -->
+	<!-- 	##    ## ##    ##   ## ##    -->
+	<!-- 	 ######   ######     ###     -->
+<!-- 	<bean id="name of document this obf is operating on" class="com.od.eai.framework.dataobfuscator.coreobfuscators.DelimitedDocumentObfuscator"> -->
+<!-- 		<property name="documentHandler"> -->
+<!-- 			<bean class="com.od.eai.framework.utils.dochandlers.DelimitedDocumentHandler"> -->
+<!-- 				<property name="documentConfiguration"> -->
+<!-- 					<bean class="com.od.eai.framework.utils.dochandlers.DelimitedDocumentConfiguration"> -->
+<!-- 						<property name="fieldDelimiter" value=","/> -->
+<!-- 						<property name="fieldLocationMap"> -->
+<!-- 							<map> -->
+<!-- 								<entry key="lvt1" value="12"/> -->
+<!-- 								<entry key="lvt2" value="32"/> -->
+<!-- 							</map> -->
+<!-- 						</property> -->
+<!-- 					</bean> -->
+<!-- 				</property> -->
+<!-- 			</bean> -->
+<!-- 		</property> -->
+<!-- 		<property name="attributesToObfuscate"> -->
+<!-- 			<map> -->
+<!-- 				<entry key="lvt1" value-ref="creditCardObfuscator"/> -->
+<!-- 				<entry key="lvt2" value-ref="creditCardObfuscator"/> -->
+<!-- 			</map> -->
+<!-- 		</property> -->
+<!-- 	</bean> -->
+	
+
+
+</beans>

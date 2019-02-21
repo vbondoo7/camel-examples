@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:sec="http://www.springframework.org/schema/security"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="    http://www.springframework.org/schema/beans      http://www.springframework.org/schema/beans/spring-beans.xsd                   http://camel.apache.org/schema/spring     http://camel.apache.org/schema/spring/camel-spring.xsd           http://www.springframework.org/schema/security   http://www.springframework.org/schema/security/spring-security-4.1.xsd           http://www.springframework.org/schema/context    http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+
+    <!-- ######################### -->
+    <!--    EXTERNALIZED IMPORTS   -->
+    <!-- ######################### -->
+    <import resource="classpath:META-INF/spring/security-config.xml"/>
+    <import resource="classpath:META-INF/spring/framework-config.xml"/>
+    <!-- ################## -->
+    <!--    CAMEL CONTEXT   -->
+    <!-- ################## -->
+    <camelContext id="ctusoapCamelContext" xmlns="http://camel.apache.org/schema/spring">
+    	<jmxAgent id="camelJmxAgent" disabled="true"/>
+    </camelContext>
+    <!-- ################## -->
+    <!--       PROFILES     -->
+    <!-- ################## -->
+    <beans profile="local, default">
+    	<import resource="classpath:properties/local/secrets.xml"/>
+        <bean
+            class="org.apache.camel.spring.spi.BridgePropertyPlaceholderConfigurer" id="properties">
+            <property name="locations">
+                <list>
+                    <value>classpath:application.properties</value>
+                    <value>classpath:properties/local/framework.properties</value>
+                    <value>classpath:properties/local/security.properties</value>
+                    <value>classpath:properties/local/ctusoap-service.properties</value>
+                    <value>classpath:properties/local/hystrix/*</value>
+                </list>
+            </property>
+        </bean>
+    </beans>
+    <beans profile="dev">
+    	<import resource="classpath:META-INF/spring/secrets.xml"/>
+        <bean
+            class="org.apache.camel.spring.spi.BridgePropertyPlaceholderConfigurer" id="properties">
+            <property name="locations">
+                <list>
+                    <value>classpath:application-dev.properties</value>
+                    <value>classpath:properties/dev/framework.properties</value>
+                    <value>classpath:properties/dev/security.properties</value>
+                    <value>classpath:properties/dev/ctusoap-service.properties</value>
+                    <value>classpath:properties/dev/hystrix/*</value>
+                </list>
+            </property>
+        </bean>
+    </beans>
+    <beans profile="preprod">
+    	<import resource="classpath:META-INF/spring/secrets.xml"/>
+        <bean
+            class="org.apache.camel.spring.spi.BridgePropertyPlaceholderConfigurer" id="properties">
+            <property name="locations">
+                <list>
+                    <value>classpath:application-preprod.properties</value>
+                    <value>classpath:properties/preprod/framework.properties</value>
+                    <value>classpath:properties/preprod/security.properties</value>
+                    <value>classpath:properties/preprod/ctusoap-service.properties</value>
+                    <value>classpath:properties/preprod/hystrix/*</value>
+                </list>
+            </property>
+        </bean>
+    </beans>
+    <beans profile="prod">
+    	<import resource="classpath:META-INF/spring/secrets.xml"/>
+        <bean
+            class="org.apache.camel.spring.spi.BridgePropertyPlaceholderConfigurer" id="properties">
+            <property name="locations">
+                <list>
+                    <value>classpath:application-prod.properties</value>
+                    <value>classpath:properties/prod/framework.properties</value>
+                    <value>classpath:properties/prod/security.properties</value>
+                    <value>classpath:properties/prod/ctusoap-service.properties</value>
+                    <value>classpath:properties/prod/hystrix/*</value>
+                 </list>
+            </property>
+        </bean>
+    </beans>
+</beans>

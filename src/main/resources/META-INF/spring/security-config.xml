@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:sec="http://www.springframework.org/schema/security"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="    http://www.springframework.org/schema/beans      http://www.springframework.org/schema/beans/spring-beans.xsd                   http://camel.apache.org/schema/spring     http://camel.apache.org/schema/spring/camel-spring.xsd           http://www.springframework.org/schema/security   http://www.springframework.org/schema/security/spring-security-4.1.xsd           http://www.springframework.org/schema/context    http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	<context:component-scan base-package="com.od.eai.framework.security"/>
+	
+	<bean class="com.od.eai.framework.security.authproviders.AuthenticationEntryPoint" id="authenticationEntryPoint" />
+
+	<bean class="com.od.eai.framework.security.authproviders.CustomPropertyAuthenticationProvider" id="custompropertyauthenticationprovider">
+		<constructor-arg type="java.lang.String" value="${eai.microservices.security.properties.location}" />
+	</bean>
+
+	<bean id="jwtAuthenticationProvider" class="com.od.eai.framework.security.authproviders.JWTAuthenticationProvider">
+		<constructor-arg type="java.lang.String" ref="JWT_SECRET_KEY"/>
+	</bean>
+
+</beans>
