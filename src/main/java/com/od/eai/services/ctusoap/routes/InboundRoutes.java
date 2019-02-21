@@ -25,10 +25,7 @@ public class InboundRoutes extends BaseInboundRouteBuilder {
 	
 	@Override
 	public void configureRoutes() throws Exception {
-		restConfiguration().component("servlet");
-		
-		rest("/").get("/sayhello").consumes("application/json").produces("application/json")
-		.to("direct:sayHelloResponse") ;
+		//restConfiguration().component("servlet");
 		
 		from(translationUtilityLookupcxfURL).id(Configurator.getStepId(traslationUtilityRequest))
 		  .log("******* Received Translation Utility Lookup Request ********")
@@ -39,7 +36,6 @@ public class InboundRoutes extends BaseInboundRouteBuilder {
 	@Override
 	protected void configureExceptions() {
 		// TODO Auto-generated method stub
-		
 
 	}
 

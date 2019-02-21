@@ -32,6 +32,9 @@ public class ServiceApplication extends BaseEAIServiceApplication {
 	@Value("${camel.component.servlet.mapping.context-path}")
 	protected String camelServletContext;
 	
+	@Value("${translationUtility.cxf.url-mappings}")
+	protected String cxfServletMapping;
+	
 	public static void main(String args[]) {
 		runApp(ServiceApplication.class, args);
 	}
@@ -51,7 +54,7 @@ public class ServiceApplication extends BaseEAIServiceApplication {
 	 @Bean
 	    public ServletRegistrationBean cxfServlet() {
 	        org.apache.cxf.transport.servlet.CXFServlet cxfServlet = new org.apache.cxf.transport.servlet.CXFServlet();
-	        ServletRegistrationBean servletDef = new ServletRegistrationBean(cxfServlet, "/eaiapi/*");
+	        ServletRegistrationBean servletDef = new ServletRegistrationBean(cxfServlet, cxfServletMapping);
 	        servletDef.setLoadOnStartup(1);
 	        return servletDef;
 	    }

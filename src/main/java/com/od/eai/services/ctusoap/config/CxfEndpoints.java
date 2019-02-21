@@ -23,14 +23,16 @@ public class CxfEndpoints {
 	@Value("${translation.utility.lookup.url}")
 	private String translationUtilityLookupcxfURL;
 	
+	@Value("${eai.service.name.translationUtility}")
+	private String serviceName;
+	
 	@Bean
 	public CxfEndpoint translationUtilityCxfEndpoint() {
 		CxfEndpoint cxfEndpoint = new CxfEndpoint();
 		cxfEndpoint.setCamelContext(camelContext);
 		cxfEndpoint.setAddress(translationUtilityLookupcxfURL);
 		cxfEndpoint.setPublishedEndpointUrl(translationUtilityLookupcxfURL);
-		//cxfEndpoint.setEndpointUriIfNotSpecified(translationUtilityLookupcxfURL);
-		cxfEndpoint.setServiceNameString(translationUtilityLookupcxfURL);
+		cxfEndpoint.setServiceNameString(serviceName);
 		cxfEndpoint.setServiceClass(TranslationUtilityService.class);
 		cxfEndpoint.setDataFormat(DataFormat.POJO);
 		cxfEndpoint.setBus(cxf);

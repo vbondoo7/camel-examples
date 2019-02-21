@@ -4,7 +4,6 @@
 	xmlns:tns="http://eai.officedepot.com/service/TranslationUtility"
 	elementFormDefault="qualified">
 
-
 <element name="TranslationLookupRequest" type="tns:TranslationLookupRequestType"/>
 <element name="TranslationLookupResponse" type="tns:TranslationLookupResponseType"/>
 <element name="BulkTranslationLookupResponse" type="tns:BulkTranslationLookupResponseType"/>
