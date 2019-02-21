@@ -14,69 +14,56 @@
 	<properties>
 		<eai-springboot-service-boilerplate-version>1.1.4</eai-springboot-service-boilerplate-version>
 		<eai.framework.secuirty.version>1.5.0-WSS</eai.framework.secuirty.version>
+		<eai.framework.core.version>2.2.0</eai.framework.core.version>
+		<eai.framework.base.version>1.0.1</eai.framework.base.version>
 	</properties>
 	
 	<dependencies>
 		<!-- eai framework libs -->
-		<dependency>
-			<groupId>com.od.eai.framework</groupId>
-			<artifactId>eai-fw-core</artifactId>
-			<exclusions>
-				<exclusion>
-					<artifactId>log4j-slf4j-impl</artifactId>
-					<groupId>org.apache.logging.log4j</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>log4j-core</artifactId>
-					<groupId>org.apache.logging.log4j</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>log4j-api</artifactId>
-					<groupId>org.apache.logging.log4j</groupId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>com.od.eai.framework</groupId>
-			<artifactId>eai-fw-data-obfuscator</artifactId>
-			<exclusions>
-				<exclusion>
-					<artifactId>log4j-slf4j-impl</artifactId>
-					<groupId>org.apache.logging.log4j</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>log4j-core</artifactId>
-					<groupId>org.apache.logging.log4j</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>log4j-api</artifactId>
-					<groupId>org.apache.logging.log4j</groupId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>com.od.eai.framework</groupId>
-			<artifactId>eai-fw-custom-auth-providers</artifactId>
-			<version>${eai.framework.secuirty.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.od.eai.framework</groupId>
-			<artifactId>eai-fw-base</artifactId>
-			<exclusions>
-				<exclusion>
-					<artifactId>log4j-slf4j-impl</artifactId>
-					<groupId>org.apache.logging.log4j</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>log4j-core</artifactId>
-					<groupId>org.apache.logging.log4j</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>log4j-api</artifactId>
-					<groupId>org.apache.logging.log4j</groupId>
-				</exclusion>
-			</exclusions>
-		</dependency>
+		<!-- -->
+		<!-- Framework -->
+		<!-- -->
+		<!-- security framework -->
+			<dependency>
+				<groupId>com.od.eai.framework</groupId>
+				<artifactId>eai-fw-custom-auth-providers</artifactId>
+				<version>${eai.framework.secuirty.version}</version>
+			</dependency>
+
+			<!-- obfuscation framework -->
+			<dependency>
+				<groupId>com.od.eai.framework</groupId>
+				<artifactId>eai-fw-data-obfuscator</artifactId>
+				<version>${eai.framework.obfuscator.version}</version>
+			</dependency>
+
+			<!-- EAI framework core -->
+			<dependency>
+				<groupId>com.od.eai.framework</groupId>
+				<artifactId>eai-fw-core</artifactId>
+				<version>${eai.framework.core.version}</version>
+				<exclusions>
+					<exclusion>
+						<artifactId>log4j-slf4j-impl</artifactId>
+						<groupId>org.apache.logging.log4j</groupId>
+					</exclusion>
+					<exclusion>
+						<artifactId>log4j-core</artifactId>
+						<groupId>org.apache.logging.log4j</groupId>
+					</exclusion>
+					<exclusion>
+						<artifactId>log4j-api</artifactId>
+						<groupId>org.apache.logging.log4j</groupId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+
+			<!-- EAI framework base -->
+			<dependency>
+				<groupId>com.od.eai.framework</groupId>
+				<artifactId>eai-fw-base</artifactId>
+				<version>${eai.framework.base.version}</version>
+			</dependency>
 
 		
 		<!--  base boot and camel libs -->
@@ -174,6 +161,28 @@
 		    <artifactId>camel-cxf-transport</artifactId>
 		</dependency>
 		
+		<!--  -->
+    	<!-- CXF -->
+    	<!--  -->
+    	<dependency>
+		    <groupId>org.apache.cxf</groupId>
+		    <artifactId>cxf-rt-ws-security</artifactId>
+		</dependency>
+		<dependency>
+	        <groupId>org.apache.cxf</groupId>
+	        <artifactId>cxf-rt-transports-http-undertow</artifactId>
+	        <version>3.2.4</version>
+	    </dependency>
+		<dependency>
+		    <groupId>org.apache.ws.security</groupId>
+		    <artifactId>wss4j</artifactId>
+		    <version>1.6.9</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.santuario</groupId>
+		    <artifactId>xmlsec</artifactId>
+		    <version>2.1.1</version>
+		</dependency>
 	</dependencies>
 	
 	<build>
