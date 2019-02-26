@@ -1,5 +1,6 @@
 package com.od.eai.services.ctusoap.routes;
 
+import org.apache.camel.LoggingLevel;
 import org.apache.camel.component.cxf.CxfEndpoint;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,7 +36,10 @@ public class InboundRoutes extends BaseInboundRouteBuilder {
 
 	@Override
 	protected void configureExceptions() {
-		// TODO Auto-generated method stub
+		onException(Exception.class)
+			.id(Configurator.getStepId("exceptionInboundRoute"))
+			.log(LoggingLevel.ERROR, "Exception occurred : ${exception.stacktrace}")
+			.handled(true);
 
 	}
 

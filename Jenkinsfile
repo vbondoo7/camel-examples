@@ -24,7 +24,9 @@ buildDeployService {
 	envs = [  
 		'{"secretEnv":{"name": "JWT_SECRET_KEY", "secretKey": "JWT_SECRET_KEY", "secretName": "jwt-secret"}}',
 		'{"secretEnv":{"name": "ERRORANDAUDIT_MESSAGING_PROVIDER_USERNAME", "secretKey": "ERRORANDAUDIT_MESSAGING_PROVIDER_USERNAME", "secretName": "errorandaudit-messaging-provider"}}',
-		'{"secretEnv":{"name": "ERRORANDAUDIT_MESSAGING_PROVIDER_PASSWORD", "secretKey": "ERRORANDAUDIT_MESSAGING_PROVIDER_PASSWORD", "secretName": "errorandaudit-messaging-provider"}}'
+		'{"secretEnv":{"name": "ERRORANDAUDIT_MESSAGING_PROVIDER_PASSWORD", "secretKey": "ERRORANDAUDIT_MESSAGING_PROVIDER_PASSWORD", "secretName": "errorandaudit-messaging-provider"}}',
+		'{"secretEnv":{"name": "EAI_SERVICE_USERNAME_INTERNAL", "secretKey": "EAI_SERVICE_USERNAME_INTERNAL", "secretName": "eai-services-credentials-internal-use-only"}}',
+		'{"secretEnv":{"name": "EAI_SERVICE_PASSWORD_INTERNAL", "secretKey": "EAI_SERVICE_PASSWORD_INTERNAL", "secretName": "eai-services-credentials-internal-use-only"}}'
 	]
     volumes = [
         '{"configPathVolume":{"mountPath": "/eai/security/basicauth", "configName": "basicauth"}}'

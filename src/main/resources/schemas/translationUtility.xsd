@@ -4,14 +4,22 @@
 	xmlns:tns="http://eai.officedepot.com/service/TranslationUtility"
 	elementFormDefault="qualified">
 
-<element name="TranslationLookupRequest" type="tns:TranslationLookupRequestType"/>
-<element name="TranslationLookupResponse" type="tns:TranslationLookupResponseType"/>
-<element name="BulkTranslationLookupResponse" type="tns:BulkTranslationLookupResponseType"/>
-<element name="BulkTranslationLookupRequest" type="tns:BulkTranslationLookupRequestType"/>
-<element name="TranslationDeleteRequest" type="tns:BulkTranslationLookupRequestType"/>
-<element name="BulkTranslationDeleteRequest" type="tns:BulkTranslationLookupRequestType"/>
-<element name="TranslationUpsertRequest" type="tns:BulkTranslationLookupRequestType"/>
-<element name="BulkTranslationUpsertRequest" type="tns:BulkTranslationLookupRequestType"/>
+	<element name="TranslationLookupRequest"
+		type="tns:TranslationLookupRequestType" />
+	<element name="TranslationLookupResponse"
+		type="tns:TranslationLookupResponseType" />
+	<element name="BulkTranslationLookupResponse"
+		type="tns:BulkTranslationLookupResponseType" />
+	<element name="BulkTranslationLookupRequest"
+		type="tns:BulkTranslationLookupRequestType" />
+	<element name="TranslationDeleteRequest"
+		type="tns:BulkTranslationLookupRequestType" />
+	<element name="BulkTranslationDeleteRequest"
+		type="tns:BulkTranslationLookupRequestType" />
+	<element name="TranslationUpsertRequest"
+		type="tns:BulkTranslationLookupRequestType" />
+	<element name="BulkTranslationUpsertRequest"
+		type="tns:BulkTranslationLookupRequestType" />
 
 	<complexType name="TranslationLookupRequestType">
 		<annotation>
@@ -20,12 +28,12 @@
 		<sequence>
 			<element name="header" type="tns:HeaderType" minOccurs="1"
 				maxOccurs="1" />
-			<element name="criteria" type="tns:CriteriaType" minOccurs="1"
-				maxOccurs="1" />
+			<element name="criteria" type="tns:CriteriaType"
+				minOccurs="1" maxOccurs="1" />
 
 		</sequence>
 	</complexType>
-	
+
 	<complexType name="BulkTranslationLookupRequestType">
 		<annotation>
 			<documentation>Translation lookup Request</documentation>
@@ -33,8 +41,8 @@
 		<sequence>
 			<element name="header" type="tns:HeaderType" minOccurs="1"
 				maxOccurs="1" />
-			<element name="criteria" type="tns:CriteriaType" minOccurs="1"
-				maxOccurs="unbounded" />
+			<element name="criteria" type="tns:CriteriaType"
+				minOccurs="1" maxOccurs="unbounded" />
 
 		</sequence>
 	</complexType>
@@ -47,7 +55,7 @@
 				maxOccurs="1" />
 		</sequence>
 	</complexType>
-	
+
 	<complexType name="BulkTranslationLookupResponseType">
 		<annotation>
 			<documentation>Translation lookup Response</documentation>
@@ -87,15 +95,8 @@
 				minOccurs="0" maxOccurs="1" />
 			<element name="translationValue" type="string" minOccurs="0"
 				maxOccurs="1" />
-			<element name="activeTranslationStartDate" type="date"
-				minOccurs="0" maxOccurs="1" nillable="true" />
-			<element name="activeTranslationEndDate" type="date"
-				minOccurs="0" maxOccurs="1"  nillable="true"/>
-			<element name="activeTranslationValueStartDate" type="date"
-				minOccurs="0" maxOccurs="1" nillable="true"/>
-			<element name="activeTranslationValueEndDate" type="date"
-				minOccurs="0" maxOccurs="1" nillable="true"/>
-
+			<element name="translationDate" type="string" minOccurs="0"
+				maxOccurs="1" />
 			<element name="sourceField1" type="string" minOccurs="0"
 				maxOccurs="1" />
 			<element name="sourceField2" type="string" minOccurs="0"
@@ -120,7 +121,7 @@
 		</sequence>
 	</complexType>
 
-	
+
 
 
 	<complexType name="ResultType">
@@ -133,9 +134,9 @@
 				maxOccurs="1" />
 			<element name="status" type="tns:StatusType" minOccurs="1"
 				maxOccurs="1" />
-			<element name="criteria" type="tns:CriteriaType" minOccurs="1"
-				maxOccurs="1" />
-				<element name="header" type="tns:HeaderType" minOccurs="1"
+			<element name="criteria" type="tns:CriteriaType"
+				minOccurs="1" maxOccurs="1" />
+			<element name="header" type="tns:HeaderType" minOccurs="1"
 				maxOccurs="1" />
 		</sequence>
 	</complexType>
@@ -146,7 +147,8 @@
 		</annotation>
 
 		<sequence>
-			<element name="status" type="string" minOccurs="1" maxOccurs="1" />
+			<element name="status" type="string" minOccurs="1"
+				maxOccurs="1" />
 			<element name="statusCode" type="int" minOccurs="0"
 				maxOccurs="1" />
 			<element name="statusDescription" type="string" minOccurs="0"
