@@ -4,6 +4,7 @@ buildDeployService {
 	timeoutSeconds = "5"
 	maxCpu = "500m"
 	maxMemory = "1Gi"
+	healthUrl = "/eaiapi/health"
 	appPort="8085"
 	deployLocations = "aws"
 	buildCommands = [
@@ -33,4 +34,8 @@ buildDeployService {
     ]
 	skipPerformanceTest = "true"
 	skipDeployDev = "false"
+	livenessProbeType = "process-java"
+	readinessProbeType = "process-java"
+	initialDelaySeconds = "30" 
+	skipPerformanceTest = "true"
 }

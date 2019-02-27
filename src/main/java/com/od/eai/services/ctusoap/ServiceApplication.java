@@ -15,48 +15,49 @@ import org.springframework.context.annotation.ImportResource;
 
 import com.od.eai.framework.base.boot.BaseEAIServiceApplication;
 
-
-@SpringBootApplication(exclude = {SecurityAutoConfiguration.class })
-@ImportResource({"classpath:META-INF/spring/application-context.xml"})
-@EnableAutoConfiguration(exclude = { JmxAutoConfiguration.class, JmsAutoConfiguration.class/*, ErrorMvcAutoConfiguration.class*/ })
+@SpringBootApplication(exclude = { SecurityAutoConfiguration.class })
+@ImportResource({ "classpath:META-INF/spring/application-context.xml" })
+@EnableAutoConfiguration(exclude = { JmxAutoConfiguration.class,
+		JmsAutoConfiguration.class/* , ErrorMvcAutoConfiguration.class */ })
 public class ServiceApplication extends BaseEAIServiceApplication {
-	
+
 	public static final Logger log = LoggerFactory.getLogger(ServiceApplication.class);
-	
+
 	@Value("${properties.file.name}")
 	protected String propFile;
-	
+
 	@Value("${camel.component.servlet.mapping.servlet-name}")
 	protected String camelServletName;
-	
+
 	@Value("${camel.component.servlet.mapping.context-path}")
 	protected String camelServletContext;
-	
+
 	@Value("${translationUtility.cxf.url-mappings}")
 	protected String cxfServletMapping;
-	
+
 	public static void main(String args[]) {
 		runApp(ServiceApplication.class, args);
 	}
-	
-//	@Bean
-//	ServletRegistrationBean servletRegistrationBean() {
-//		log.info("Loaded properties from [{}]", propFile);
-//		log.info("Registering camel servlet with (name, context)=(["+camelServletName+"],[" + camelServletContext+"])");
-//		return getCamelServletRegistrationBean(camelServletName, camelServletContext);
-//	}
 
-	 @Bean
-     ServletRegistrationBean hystrixServlet() {
-        return new ServletRegistrationBean(new HystrixEventStreamServlet(), "/eai-odhystrix.stream");
-    }
-	 
-	 @Bean
-	    public ServletRegistrationBean cxfServlet() {
-	        org.apache.cxf.transport.servlet.CXFServlet cxfServlet = new org.apache.cxf.transport.servlet.CXFServlet();
-	        ServletRegistrationBean servletDef = new ServletRegistrationBean(cxfServlet, cxfServletMapping);
-	        servletDef.setLoadOnStartup(1);
-	        return servletDef;
-	    }
+	@Bean
+	ServletRegistrationBean servletRegistrationBean() {
+		log.info("Loaded properties from [{}]", propFile);
+		log.info("Registering camel servlet with (name, context)=([" + camelServletName + "],[" + camelServletContext
+				+ "])");
+		return getCamelServletRegistrationBean(camelServletName, camelServletContext);
+	}
+
+	@Bean
+	ServletRegistrationBean hystrixServlet() {
+		return new ServletRegistrationBean(new HystrixEventStreamServlet(), "/eai-odhystrix.stream");
+	}
+
+	@Bean
+	public ServletRegistrationBean cxfServlet() {
+		org.apache.cxf.transport.servlet.CXFServlet cxfServlet = new org.apache.cxf.transport.servlet.CXFServlet();
+		ServletRegistrationBean servletDef = new ServletRegistrationBean(cxfServlet, cxfServletMapping);
+		servletDef.setLoadOnStartup(1);
+		return servletDef;
+	}
 
 }

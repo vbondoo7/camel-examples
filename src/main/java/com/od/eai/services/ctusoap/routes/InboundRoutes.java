@@ -2,6 +2,7 @@ package com.od.eai.services.ctusoap.routes;
 
 import org.apache.camel.LoggingLevel;
 import org.apache.camel.component.cxf.CxfEndpoint;
+import org.apache.camel.model.rest.RestBindingMode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,11 +23,18 @@ public class InboundRoutes extends BaseInboundRouteBuilder {
 	public static final Logger log = LoggerFactory.getLogger(InboundRoutes.class);
 	
 	@Override
-	protected void preConfigure() {}
+	protected void preConfigure() {
+		restConfiguration().enableCORS(true).corsHeaderProperty("Access-Control-Allow-Origin", "*").corsHeaderProperty(
+				"Access-Control-Allow-Headers",
+				"Origin, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, Authorization")
+				.component("servlet").bindingMode(RestBindingMode.off)
+				.dataFormatProperty("json.in.disableFeatures", "FAIL_ON_UNKNOWN_PROPERTIES")
+				.dataFormatProperty("json.in.enableFeatures", "FAIL_ON_NUMBERS_FOR_ENUMS,USE_BIG_DECIMAL_FOR_FLOATS");
+	}
 	
 	@Override
 	public void configureRoutes() throws Exception {
-		//restConfiguration().component("servlet");
+		restConfiguration().component("servlet");
 		
 		from(translationUtilityLookupcxfURL).id(Configurator.getStepId(traslationUtilityRequest))
 		  .log("******* Received Translation Utility Lookup Request ********")
