@@ -16,12 +16,12 @@
 	<!-- The Factory bean (is must be obfuscatorFactory)  -->
 	<!-- ************************************************ -->
 	<bean id="obfuscatorFactory" class="com.od.eai.framework.dataobfuscator.ObfuscatorFactoryImpl" scope="singleton">
-<!-- 	      <property name="obfuscatorsMap"> -->
-<!-- 	         <map> -->
-<!-- 	            <entry key="eaiaudit_log_elk" value-ref="xmlWithNamespaceObf"/> -->
-<!-- 	            <entry key="eaiaudit_elk_obfus" value-ref="xmlWithNamespaceObf"/> -->
-<!-- 	         </map> -->
-<!-- 	      </property> -->
+		<property name="obfuscatorsMap">
+	         <map>
+	            <!-- <entry key="eaiaudit_log_elk" value-ref="xmlWithNamespaceObf"/>
+	            <entry key="eaiaudit_elk_obfus" value-ref="xmlWithNamespaceObf"/> -->
+	         </map>
+	      </property> 
 	</bean>
 
 

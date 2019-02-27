@@ -1,6 +1,7 @@
 package com.od.eai.services.ctusoap.routes;
 
 import org.apache.camel.LoggingLevel;
+import org.apache.camel.model.dataformat.JsonLibrary;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -10,6 +11,7 @@ import com.od.eai.framework.base.routes.BaseProcessingRouteBuilder;
 import com.od.eai.framework.core.dispatch.Configurator;
 import com.od.eai.services.ctusoap.util.DataFormatUtil;
 import com.officedepot.eai.service.translationutility.TranslationLookupRequestType;
+import com.officedepot.eai.service.translationutility.TranslationLookupResponseType;
 
 @Component("ctusoapProcessingRoutes")
 public class ProcessingRoutes extends BaseProcessingRouteBuilder {
@@ -40,7 +42,8 @@ public class ProcessingRoutes extends BaseProcessingRouteBuilder {
 			.routeDescription("This route converts xml to Json..")
 			.marshal(DataFormatUtil.dataFormatInstance(TranslationLookupRequestType.class))
 			.log(LoggingLevel.INFO, "Body after conversion to Json: ${body}")
-			.to(OutboundRoutes.DIRECT_CTU_LOOKUP_SERVICE);
+			.to(OutboundRoutes.HYSTRIX_ENABLED_CTU_LOOKUP_ENDPOINT)
+			.unmarshal().json(JsonLibrary.Jackson, TranslationLookupResponseType.class);
 
 	}
 
