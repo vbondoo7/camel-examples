@@ -2,6 +2,7 @@ package com.od.eai.services.ctusoap.routes;
 
 import org.apache.camel.LoggingLevel;
 import org.apache.camel.component.cxf.CxfEndpoint;
+import org.apache.camel.component.cxf.common.message.CxfConstants;
 import org.apache.camel.model.rest.RestBindingMode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,7 +39,15 @@ public class InboundRoutes extends BaseInboundRouteBuilder {
 		
 		from(translationUtilityLookupcxfURL).id(Configurator.getStepId(traslationUtilityRequest))
 		  .log("******* Received Translation Utility Lookup Request ********")
-		  .to(ProcessingRoutes.DIRECT_TRANSLATION_UTILITY_PROCESSING_ROUTE);
+		  .choice()
+		  		.when(header(CxfConstants.OPERATION_NAME).isEqualTo("translationLookUpRequest"))
+		  			.to(ProcessingRoutes.DIRECT_TRANSLATION_LOOKUP_REQUEST_PROCESSING_ROUTE)
+		  		.when(header(CxfConstants.OPERATION_NAME).isEqualTo("bulkTranslationLookUpRequest"))
+		  			.to(ProcessingRoutes.DIRECT_BULK_TRANSLATION_LOOKUP_REQUEST_PROCESSING_ROUTE)
+		  		.otherwise() 
+	                 //.to("direct:unsupportedOperation");
+		  			.to(ProcessingRoutes.DIRECT_BULK_TRANSLATION_LOOKUP_REQUEST_PROCESSING_ROUTE);
+		  		
 		
 	}
 

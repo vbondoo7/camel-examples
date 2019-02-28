@@ -1,9 +1,16 @@
 package com.od.eai.services.ctusoap.config;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.apache.camel.CamelContext;
 import org.apache.camel.component.cxf.CxfEndpoint;
 import org.apache.camel.component.cxf.DataFormat;
 import org.apache.cxf.Bus;
+import org.apache.cxf.bus.spring.SpringBus;
+import org.apache.cxf.feature.Feature;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -17,14 +24,19 @@ public class CxfEndpoints {
 	@Autowired
 	private CamelContext camelContext;
 	
-	@Autowired
-	private Bus cxf;
-
 	@Value("${translation.utility.lookup.url}")
 	private String translationUtilityLookupcxfURL;
 	
 	@Value("${eai.service.name.translationUtility}")
 	private String serviceName;
+	
+	@Value("${ctu.service.loggingFeature}")
+	private Boolean ctuLoggingFeature;
+	
+	@Bean
+	public Bus cxf() {
+		return new SpringBus();
+	}
 	
 	@Bean
 	public CxfEndpoint translationUtilityCxfEndpoint() {
@@ -35,7 +47,12 @@ public class CxfEndpoints {
 		cxfEndpoint.setServiceNameString(serviceName);
 		cxfEndpoint.setServiceClass(TranslationUtilityService.class);
 		cxfEndpoint.setDataFormat(DataFormat.POJO);
-		cxfEndpoint.setBus(cxf);
+		Map<String, Object> properties = new HashMap<String, Object>();
+		cxfEndpoint.setProperties(properties);
+		
+		List<Feature> features = new ArrayList<>();
+		cxfEndpoint.setFeatures(features);
+		cxfEndpoint.setLoggingFeatureEnabled(ctuLoggingFeature);
 		return cxfEndpoint;
 	}
 

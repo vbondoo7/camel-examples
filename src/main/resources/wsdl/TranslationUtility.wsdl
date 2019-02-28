@@ -45,6 +45,16 @@
 				<soap:body use="literal" />
 			</wsdl:output>
 		</wsdl:operation>
+		<wsdl:operation name="bulkTranslationLookUpRequest">
+			<soap:operation
+				soapAction="http://eai.officedepot.com/translationUtilityService/bulkTranslationLookUpRequest" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
 	</wsdl:binding>
 	<wsdl:service name="translationUtilityService">
 		<wsdl:port binding="tus:translationUtilityServiceSOAP" name="translationUtilityServiceSOAP">

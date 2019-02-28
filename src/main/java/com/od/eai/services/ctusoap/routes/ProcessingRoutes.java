@@ -10,6 +10,8 @@ import org.springframework.stereotype.Component;
 import com.od.eai.framework.base.routes.BaseProcessingRouteBuilder;
 import com.od.eai.framework.core.dispatch.Configurator;
 import com.od.eai.services.ctusoap.util.DataFormatUtil;
+import com.officedepot.eai.service.translationutility.BulkTranslationLookupRequestType;
+import com.officedepot.eai.service.translationutility.BulkTranslationLookupResponseType;
 import com.officedepot.eai.service.translationutility.TranslationLookupRequestType;
 import com.officedepot.eai.service.translationutility.TranslationLookupResponseType;
 
@@ -17,33 +19,40 @@ import com.officedepot.eai.service.translationutility.TranslationLookupResponseT
 public class ProcessingRoutes extends BaseProcessingRouteBuilder {
 
 	public static final Logger log = LoggerFactory.getLogger(ProcessingRoutes.class);
-	public static final String DIRECT_CONVERT_XML_TO_JSON = "direct:convertXMLToJson";
-	public static final String DIRECT_TRANSLATION_UTILITY_PROCESSING_ROUTE = "direct:translationUtilityProcessingRoute";
+	public static final String DIRECT_TRANSLATION_LOOKUP_REQUEST_PROCESSING_ROUTE = "direct:translationLookupRequestProcessingRoute";
+	public static final String DIRECT_BULK_TRANSLATION_LOOKUP_REQUEST_PROCESSING_ROUTE = "direct:bulkTranslationLookupRequestProcessingRoute";
 	
-	@Value("${ctu.soap.processing.route}")
-	private String ctuSoapProcessingRoute;
+	@Value("${ctu.soap.translation.request.processing.route}")
+	private String ctuSoapProcessingRouteForLookup;
 	
-	@Value("${ctu.soap.to.json.processing.route}")
-	private String ctuSoapToJsonProcessingRoute;
+	@Value("${ctu.soap.bulk.translation.request.processing.route}")
+	private String ctuSoapProcessingRouteForBulkLookup;
 	
 	@Override
 	public void configureRoutes() throws Exception {
-
-		from(DIRECT_TRANSLATION_UTILITY_PROCESSING_ROUTE)
-			.id(Configurator.getStepId(ctuSoapProcessingRoute))
-			.routeDescription("This Receive Request For CTU LookUp Service.")
-			.log(LoggingLevel.INFO, "Processing Started for CXF Endpoint...")
+		//TranslationLookupRequest
+		from(DIRECT_TRANSLATION_LOOKUP_REQUEST_PROCESSING_ROUTE)
+			.id(Configurator.getStepId(ctuSoapProcessingRouteForLookup))
+			.routeDescription("This Receive Translation Lookup Request For CTU LookUp Service.")
+			.log(LoggingLevel.INFO, "Processing Started for Translation Lookup CXF Endpoint...")
 			.convertBodyTo(TranslationLookupRequestType.class)
-			.to(DIRECT_CONVERT_XML_TO_JSON)
-			.log(LoggingLevel.INFO, "Processing For Translation Utility Finished !!!");
-
-		from(DIRECT_CONVERT_XML_TO_JSON)
-			.id(Configurator.getStepId(ctuSoapToJsonProcessingRoute))
-			.routeDescription("This route converts xml to Json..")
-			.marshal(DataFormatUtil.dataFormatInstance(TranslationLookupRequestType.class))
+			.marshal(DataFormatUtil.dataFormatInstance(BulkTranslationLookupRequestType.class))
 			.log(LoggingLevel.INFO, "Body after conversion to Json: ${body}")
-			.to(OutboundRoutes.HYSTRIX_ENABLED_CTU_LOOKUP_ENDPOINT)
-			.unmarshal().json(JsonLibrary.Jackson, TranslationLookupResponseType.class);
+			.to(OutboundRoutes.HYSTRIX_ENABLED_ENDPOINT_FOR_TRANSLATION_LOOKUP)
+			.unmarshal().json(JsonLibrary.Jackson, TranslationLookupResponseType.class)
+			.log(LoggingLevel.INFO, "Processing For Translation Lookup Finished !!!");
+		
+		//BulkTranslationLookupRequest
+		from(DIRECT_BULK_TRANSLATION_LOOKUP_REQUEST_PROCESSING_ROUTE)
+			.id(Configurator.getStepId(ctuSoapProcessingRouteForBulkLookup))
+			.routeDescription("This Receive Bulk Translation Lookup Request For CTU LookUp Service.")
+			.log(LoggingLevel.INFO, "Processing Started for Bulk Translation Lookup CXF Endpoint...")
+			.convertBodyTo(BulkTranslationLookupRequestType.class)
+			.marshal(DataFormatUtil.dataFormatInstance(BulkTranslationLookupRequestType.class))
+			.log(LoggingLevel.INFO, "Body after conversion to Json: ${body}")
+			.to(OutboundRoutes.HYSTRIX_ENABLED_ENDPOINT_FOR_TRANSLATION_LOOKUP)
+			.unmarshal().json(JsonLibrary.Jackson, BulkTranslationLookupResponseType.class)
+			.log(LoggingLevel.INFO, "Processing For Bulk Translation Lookup Finished !!!");
 
 	}
 

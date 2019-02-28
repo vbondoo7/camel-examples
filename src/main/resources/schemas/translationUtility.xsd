@@ -4,22 +4,14 @@
 	xmlns:tns="http://eai.officedepot.com/service/TranslationUtility"
 	elementFormDefault="qualified">
 
-	<element name="TranslationLookupRequest"
-		type="tns:TranslationLookupRequestType" />
-	<element name="TranslationLookupResponse"
-		type="tns:TranslationLookupResponseType" />
-	<element name="BulkTranslationLookupResponse"
-		type="tns:BulkTranslationLookupResponseType" />
-	<element name="BulkTranslationLookupRequest"
-		type="tns:BulkTranslationLookupRequestType" />
-	<element name="TranslationDeleteRequest"
-		type="tns:BulkTranslationLookupRequestType" />
-	<element name="BulkTranslationDeleteRequest"
-		type="tns:BulkTranslationLookupRequestType" />
-	<element name="TranslationUpsertRequest"
-		type="tns:BulkTranslationLookupRequestType" />
-	<element name="BulkTranslationUpsertRequest"
-		type="tns:BulkTranslationLookupRequestType" />
+	<element name="TranslationLookupRequest" type="tns:TranslationLookupRequestType" />
+	<element name="TranslationLookupResponse" type="tns:TranslationLookupResponseType" />
+	<element name="BulkTranslationLookupResponse" type="tns:BulkTranslationLookupResponseType" />
+	<element name="BulkTranslationLookupRequest" type="tns:BulkTranslationLookupRequestType" />
+	<element name="TranslationDeleteRequest" type="tns:BulkTranslationLookupRequestType" />
+	<element name="BulkTranslationDeleteRequest" type="tns:BulkTranslationLookupRequestType" />
+	<element name="TranslationUpsertRequest" type="tns:BulkTranslationLookupRequestType" />
+	<element name="BulkTranslationUpsertRequest" type="tns:BulkTranslationLookupRequestType" />
 
 	<complexType name="TranslationLookupRequestType">
 		<annotation>
