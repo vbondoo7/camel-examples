@@ -45,6 +45,8 @@
 		<sequence>
 			<element name="result" type="tns:ResultType" minOccurs="1"
 				maxOccurs="1" />
+			<element name="header" type="tns:HeaderType" minOccurs="1"
+				maxOccurs="1" />	
 		</sequence>
 	</complexType>
 
@@ -55,6 +57,8 @@
 		<sequence>
 			<element name="results" type="tns:ResultType" minOccurs="1"
 				maxOccurs="unbounded" />
+			<element name="header" type="tns:HeaderType" minOccurs="1"
+				maxOccurs="1" />
 		</sequence>
 	</complexType>
 
@@ -128,8 +132,6 @@
 				maxOccurs="1" />
 			<element name="criteria" type="tns:CriteriaType"
 				minOccurs="1" maxOccurs="1" />
-			<element name="header" type="tns:HeaderType" minOccurs="1"
-				maxOccurs="1" />
 		</sequence>
 	</complexType>
 

@@ -13,7 +13,7 @@ public class ExceptionMessageHandler {
 	public void handleFallback(Exchange exchange) throws Exception {
 		if (exchange.getProperty(Exchange.EXCEPTION_CAUGHT) != null) {
 			Exception exception = exchange.getProperty(Exchange.EXCEPTION_CAUGHT, Exception.class);
-			LOGGER.error("An Exception has been thrown by Exact Target service: {}", exception.getMessage()==null?exception.toString():exception.getMessage());
+			LOGGER.error("An Exception has been thrown by CTU Soap service: {}", exception.getMessage()==null?exception.toString():exception.getMessage());
 			
 			
 		}
