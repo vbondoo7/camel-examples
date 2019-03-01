@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import com.od.eai.framework.base.routes.BaseProcessingRouteBuilder;
 import com.od.eai.framework.core.dispatch.Configurator;
+import com.od.eai.services.ctusoap.exception.handler.ExceptionMessageHandler;
 import com.od.eai.services.ctusoap.util.DataFormatUtil;
 import com.officedepot.eai.service.translationutility.BulkTranslationLookupRequestType;
 import com.officedepot.eai.service.translationutility.BulkTranslationLookupResponseType;
@@ -21,6 +22,7 @@ public class ProcessingRoutes extends BaseProcessingRouteBuilder {
 	public static final Logger log = LoggerFactory.getLogger(ProcessingRoutes.class);
 	public static final String DIRECT_TRANSLATION_LOOKUP_REQUEST_PROCESSING_ROUTE = "direct:translationLookupRequestProcessingRoute";
 	public static final String DIRECT_BULK_TRANSLATION_LOOKUP_REQUEST_PROCESSING_ROUTE = "direct:bulkTranslationLookupRequestProcessingRoute";
+	public static final String DIRECT_UNSUPPORTED_OPERATION = "direct:unsupportedOperation";
 	
 	@Value("${ctu.soap.translation.request.processing.route}")
 	private String ctuSoapProcessingRouteForLookup;
@@ -53,6 +55,11 @@ public class ProcessingRoutes extends BaseProcessingRouteBuilder {
 			.to(OutboundRoutes.HYSTRIX_ENABLED_ENDPOINT_FOR_TRANSLATION_LOOKUP)
 			.unmarshal().json(JsonLibrary.Jackson, BulkTranslationLookupResponseType.class)
 			.log(LoggingLevel.INFO, "Processing For Bulk Translation Lookup Finished !!!");
+		
+		//Unsupported Operation
+		from(DIRECT_UNSUPPORTED_OPERATION)
+			.log("Unsupported Operation")
+			.setFaultBody(constant("Unsupported Operation"));
 
 	}
 
@@ -61,7 +68,7 @@ public class ProcessingRoutes extends BaseProcessingRouteBuilder {
 		onException(Exception.class)
 			.id(Configurator.getStepId("exceptionProcessingRoute"))
 			.log(LoggingLevel.ERROR, "Exception occurred : ${exception.stacktrace}")
-			.handled(true);
+			.bean(ExceptionMessageHandler.class, "handle");
 		
 	}
 

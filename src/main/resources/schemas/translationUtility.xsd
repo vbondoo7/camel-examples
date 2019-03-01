@@ -8,10 +8,6 @@
 	<element name="TranslationLookupResponse" type="tns:TranslationLookupResponseType" />
 	<element name="BulkTranslationLookupResponse" type="tns:BulkTranslationLookupResponseType" />
 	<element name="BulkTranslationLookupRequest" type="tns:BulkTranslationLookupRequestType" />
-	<element name="TranslationDeleteRequest" type="tns:BulkTranslationLookupRequestType" />
-	<element name="BulkTranslationDeleteRequest" type="tns:BulkTranslationLookupRequestType" />
-	<element name="TranslationUpsertRequest" type="tns:BulkTranslationLookupRequestType" />
-	<element name="BulkTranslationUpsertRequest" type="tns:BulkTranslationLookupRequestType" />
 
 	<complexType name="TranslationLookupRequestType">
 		<annotation>
@@ -81,15 +77,7 @@
 		</annotation>
 
 		<sequence>
-			<element name="translationId" type="string" minOccurs="0"
-				maxOccurs="1" />
 			<element name="translationName" type="string" minOccurs="0"
-				maxOccurs="1" />
-			<element name="isTranslationEnabled" type="boolean"
-				minOccurs="0" maxOccurs="1" />
-			<element name="isTranslationValueEnabled" type="boolean"
-				minOccurs="0" maxOccurs="1" />
-			<element name="translationValue" type="string" minOccurs="0"
 				maxOccurs="1" />
 			<element name="translationDate" type="string" minOccurs="0"
 				maxOccurs="1" />

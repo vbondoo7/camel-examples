@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import com.od.eai.framework.base.routes.BaseInboundRouteBuilder;
 import com.od.eai.framework.core.dispatch.Configurator;
+import com.od.eai.services.ctusoap.exception.handler.ExceptionMessageHandler;
 
 @Component("ctusoapInboundRoutes")
 public class InboundRoutes extends BaseInboundRouteBuilder {
@@ -45,8 +46,7 @@ public class InboundRoutes extends BaseInboundRouteBuilder {
 		  		.when(header(CxfConstants.OPERATION_NAME).isEqualTo("bulkTranslationLookUpRequest"))
 		  			.to(ProcessingRoutes.DIRECT_BULK_TRANSLATION_LOOKUP_REQUEST_PROCESSING_ROUTE)
 		  		.otherwise() 
-	                 //.to("direct:unsupportedOperation");
-		  			.to(ProcessingRoutes.DIRECT_BULK_TRANSLATION_LOOKUP_REQUEST_PROCESSING_ROUTE);
+		  			.to(ProcessingRoutes.DIRECT_UNSUPPORTED_OPERATION);
 		  		
 		
 	}
@@ -56,7 +56,7 @@ public class InboundRoutes extends BaseInboundRouteBuilder {
 		onException(Exception.class)
 			.id(Configurator.getStepId("exceptionInboundRoute"))
 			.log(LoggingLevel.ERROR, "Exception occurred : ${exception.stacktrace}")
-			.handled(true);
+			.bean(ExceptionMessageHandler.class, "handle");
 
 	}
 
