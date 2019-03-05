@@ -8,7 +8,7 @@ buildDeployService {
 	appPort="8085"
 	deployLocations = "aws"
 	buildCommands = [
-		"mvn install --settings settings.xml -Dmaven.test.skip=true -B",
+		"mvn install --settings settings.xml -B",
 		"cp ./target/extra-resources/Dockerfile .",
 		"cp ./target/extra-resources/docker/entrypoint.sh ./docker"
 	]

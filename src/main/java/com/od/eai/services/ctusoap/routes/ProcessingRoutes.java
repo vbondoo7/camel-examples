@@ -34,7 +34,7 @@ public class ProcessingRoutes extends BaseProcessingRouteBuilder {
 	public void configureRoutes() throws Exception {
 		//TranslationLookupRequest
 		from(DIRECT_TRANSLATION_LOOKUP_REQUEST_PROCESSING_ROUTE)
-			.id(Configurator.getStepId(ctuSoapProcessingRouteForLookup))
+			.routeId(Configurator.getStepId(ctuSoapProcessingRouteForLookup))
 			.routeDescription("This Receive Translation Lookup Request For CTU LookUp Service.")
 			.log(LoggingLevel.INFO, "Processing Started for Translation Lookup CXF Endpoint...")
 			.convertBodyTo(TranslationLookupRequestType.class)
@@ -46,7 +46,7 @@ public class ProcessingRoutes extends BaseProcessingRouteBuilder {
 		
 		//BulkTranslationLookupRequest
 		from(DIRECT_BULK_TRANSLATION_LOOKUP_REQUEST_PROCESSING_ROUTE)
-			.id(Configurator.getStepId(ctuSoapProcessingRouteForBulkLookup))
+			.routeId(Configurator.getStepId(ctuSoapProcessingRouteForBulkLookup))
 			.routeDescription("This Receive Bulk Translation Lookup Request For CTU LookUp Service.")
 			.log(LoggingLevel.INFO, "Processing Started for Bulk Translation Lookup CXF Endpoint...")
 			.convertBodyTo(BulkTranslationLookupRequestType.class)

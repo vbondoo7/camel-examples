@@ -1,0 +1,58 @@
+{
+    "results": [
+        {
+            "result": {
+                "targetField1": "CN",
+                "targetField2": "",
+                "targetField3": "",
+                "targetField4": "",
+                "targetField5": "",
+                "targetField6": "",
+                "targetField7": "",
+                "targetField8": "",
+                "targetField9": "",
+                "targetField10": "",
+                "targetField11": "",
+                "targetField12": "",
+                "targetField13": "",
+                "targetField14": "",
+                "targetField15": "",
+                "targetField16": "",
+                "targetField17": "",
+                "targetField18": "",
+                "targetField19": "",
+                "targetField20": "",
+                "targetField21": "",
+                "targetField22": "",
+                "targetField23": "",
+                "targetField24": "",
+                "targetField25": "",
+                "targetField26": "",
+                "targetField27": "",
+                "targetField28": "",
+                "targetField29": "",
+                "targetField30": ""
+            },
+            "status": {
+                "status": "success",
+                "statusCode": 0,
+                "statusDescription": "success"
+            },
+            "criteria": {
+                "translationName": "AP_BANK_CODES",
+                "translationDate": "2018-08-01",
+                "sourceField1": "Scotia AP Disbursement (CAD)",
+                "sourceField2": "CHECK",
+                "sourceField3": "OD: CA Long Check Format",
+                "sourceField4": "",
+                "sourceField5": "",
+                "sourceField6": "",
+                "sourceField7": "",
+                "sourceField8": "",
+                "sourceField9": "",
+                "sourceField10": ""
+            },
+            "header": null
+        }
+    ]
+}

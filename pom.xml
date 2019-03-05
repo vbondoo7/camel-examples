@@ -237,6 +237,46 @@
 					</dependency>
 				</dependencies>
 			</plugin>
+			<!-- Jcoco plugin -->
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.8.2</version>
+				<executions>
+					<execution>
+						<id>prepare-agent</id>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+						<configuration>
+							<destFile>${project.build.directory}/code-coverage/jacoco.exec</destFile>
+							<includes>
+								<include>com.od.eai.services.ctusoap.*</include>
+							</includes>
+						</configuration>
+					</execution>
+					<execution>
+						<id>post-unit-test</id>
+						<phase>test</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+						<configuration>
+							<dataFile>${project.build.directory}/code-coverage/jacoco.exec</dataFile>
+							<includes>
+								<include>com/od/eai/services/ctusoap/*.class</include>
+								<include>com/od/eai/services/ctusoap/config/**/*.class</include>
+								<include>com/od/eai/services/ctusoap/routes/**/*.class</include>
+							</includes>
+						</configuration>
+					</execution>
+				</executions>
+				<configuration>
+					<systemPropertyVariables>
+						<jacoco-agent.destfile>target/jacoco.exec</jacoco-agent.destfile>
+					</systemPropertyVariables>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 </project>
