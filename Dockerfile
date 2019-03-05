@@ -15,4 +15,3 @@ RUN update-ca-trust
 USER jboss
 RUN ls
 ENTRYPOINT ["/entrypoint.sh"]
-EXPOSE 8085

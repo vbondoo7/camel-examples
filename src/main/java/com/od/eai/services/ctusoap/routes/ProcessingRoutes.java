@@ -52,7 +52,7 @@ public class ProcessingRoutes extends BaseProcessingRouteBuilder {
 			.convertBodyTo(BulkTranslationLookupRequestType.class)
 			.marshal(DataFormatUtil.dataFormatInstance(BulkTranslationLookupRequestType.class))
 			.log(LoggingLevel.INFO, "Body after conversion to Json: ${body}")
-			.to(OutboundRoutes.HYSTRIX_ENABLED_ENDPOINT_FOR_TRANSLATION_LOOKUP)
+			.to(OutboundRoutes.HYSTRIX_ENABLED_ENDPOINT_FOR_BULK_TRANSLATION_LOOKUP)
 			.unmarshal().json(JsonLibrary.Jackson, BulkTranslationLookupResponseType.class)
 			.log(LoggingLevel.INFO, "Processing For Bulk Translation Lookup Finished !!!");
 		
