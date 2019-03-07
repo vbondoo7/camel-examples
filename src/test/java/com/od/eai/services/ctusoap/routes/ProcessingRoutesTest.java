@@ -68,7 +68,7 @@ public class ProcessingRoutesTest extends CamelTestSupport {
 					public void configure() throws Exception {
 						weaveAddLast().to("mock:end");
 						String elasticResponse = getTestJsonResponse("data/translationLookupResponse.json");
-						interceptSendToEndpoint("direct:hystrixEnabledEndpointForTranslationLookup")
+						interceptSendToEndpoint("direct:hystrixEnabledCTUInternalRoute")
 							.skipSendToOriginalEndpoint().setBody(constant(elasticResponse));
 					}
 				});
@@ -79,7 +79,7 @@ public class ProcessingRoutesTest extends CamelTestSupport {
 					public void configure() throws Exception {
 						weaveAddLast().to("mock:end");
 						String elasticResponse = getTestJsonResponse("data/bulkTranslationLookupResponse.json");
-						interceptSendToEndpoint("direct:hystrixEnabledEndpointForBulkTranslationLookup")
+						interceptSendToEndpoint("direct:hystrixEnabledCTUInternalRoute")
 							.skipSendToOriginalEndpoint().setBody(constant(elasticResponse));
 					}
 				});

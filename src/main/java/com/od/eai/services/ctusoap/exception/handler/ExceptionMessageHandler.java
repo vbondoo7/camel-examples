@@ -26,7 +26,6 @@ public class ExceptionMessageHandler {
 			statusType.setStatusDescription("connection error with CTU Lookup Services");
 			result.setStatus(statusType);
 			translationLookupResponseType.setResult(result);
-			
 		}
 	}
 	
@@ -42,7 +41,6 @@ public class ExceptionMessageHandler {
 			statusType.setStatusDescription(exception.getMessage());
 			result.setStatus(statusType);
 			translationLookupResponseType.setResult(result);
-			
 		}
 	}
 

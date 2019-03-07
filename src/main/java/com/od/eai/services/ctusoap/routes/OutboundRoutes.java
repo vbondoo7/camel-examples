@@ -17,10 +17,8 @@ public class OutboundRoutes extends BaseOutboundRouteBuilder {
 
 	public static final Logger log = LoggerFactory.getLogger(OutboundRoutes.class);
 	public static final String DIRECT_SET_AUTHORIZATION_HEADER = "direct:setAuthorizationHeader";
-	public static final String HYSTRIX_ENABLED_ENDPOINT_FOR_TRANSLATION_LOOKUP = "direct:hystrixEnabledEndpointForTranslationLookup";
-	private static final String HYSTRIX_ENABLED_ENDPOINT_TRANSLATION_LOOKUP_ID = "HYSTRIX_ENABLED_TRANSLATION_ENDPOINT_ROUTE";
-	public static final String HYSTRIX_ENABLED_ENDPOINT_FOR_BULK_TRANSLATION_LOOKUP = "direct:hystrixEnabledEndpointForBulkTranslationLookup";
-	private static final String HYSTRIX_ENABLED_ENDPOINT_BULK_TRANSLATION_LOOKUP_ID = "HYSTRIX_ENABLED_BULK_TRANSLATION_ENDPOINT_ROUTE";
+	public static final String HYSTRIX_ENABLED_CTU_INTERNAL_ROUTE = "direct:hystrixEnabledCTUInternalRoute";
+	private static final String HYSTRIX_ENABLED_CTU_INTERNAL_ROUTE_ID = "HYSTRIX_ENABLED_CTU_INTERNAL_ROUTE";
 	private static final String HYSTRIX_ENABLED_BACKEND_SERVICES_FALLBACK_ROUTE = "hystrixEnabledBackendServicesFallbackRoute";
 	private static final String DIRECT_HANDLE_FALLBACK_ROUTE = "direct:handleFallbackRoute";
 
@@ -29,12 +27,6 @@ public class OutboundRoutes extends BaseOutboundRouteBuilder {
 
 	@Value("${hystrix.circuit-breaker-sleep-window-in-milliseconds}")
 	private int circuitBreakerSleepWindowInMilliseconds;
-
-	@Value("${ctu.lookup.service.url}")
-	private String ctuLookupTranslationReqServiceURL;
-	
-	@Value("${ctu.bulk.lookup.service.url}")
-	private String ctuLookupBulkTranslationReqServiceURL;
 
 	@Autowired
 	private String ctuLookUpServiceUsername;
@@ -46,20 +38,25 @@ public class OutboundRoutes extends BaseOutboundRouteBuilder {
 	public void configureRoutes() throws Exception {
 		
 		//TranslationLookupRequest
-		from(HYSTRIX_ENABLED_ENDPOINT_FOR_TRANSLATION_LOOKUP)
-				.routeId(Configurator.getStepId(HYSTRIX_ENABLED_ENDPOINT_TRANSLATION_LOOKUP_ID)).streamCaching()
-				.log(LoggingLevel.INFO, "Calling started for CTU Lookup Endpoint for TranslationLookupRequest...")
-				.id("eaiaudit_HYSTRIX_ENABLED_CTU_LOOKUP_ENDPOINT_payload").hystrix().hystrixConfiguration()
-				.executionTimeoutInMilliseconds(executionTimeoutInMilliseconds)
-				.circuitBreakerSleepWindowInMilliseconds(circuitBreakerSleepWindowInMilliseconds).end()
-				.log(LoggingLevel.INFO, "Request received for CTU Lookup Service for TranslationLookupRequest --> ${body}")
-				.to(DIRECT_SET_AUTHORIZATION_HEADER)
-				.to(ctuLookupTranslationReqServiceURL).onFallback()
-				.to(DIRECT_HANDLE_FALLBACK_ROUTE).end()
-				.log(LoggingLevel.INFO, "Response Received from CTU Lookup Service for TranslationLookupRequest : ${body}")
-				.log(LoggingLevel.INFO, "Calling finished for CTU Lookup Service for TranslationLookupRequest");
+		from(HYSTRIX_ENABLED_CTU_INTERNAL_ROUTE)
+			.routeId(Configurator.getStepId(HYSTRIX_ENABLED_CTU_INTERNAL_ROUTE_ID)).streamCaching()
+			.log(LoggingLevel.INFO, "Calling started for CTU Internal URL for ${header.operationName}")
+			.log(LoggingLevel.INFO, "Request received for CTU Lookup Service for TranslationLookupRequest --> ${body}")
+			.to(DIRECT_SET_AUTHORIZATION_HEADER)
+			.hystrix()
+				.hystrixConfiguration()
+					.executionTimeoutInMilliseconds(executionTimeoutInMilliseconds)
+					.circuitBreakerSleepWindowInMilliseconds(circuitBreakerSleepWindowInMilliseconds)
+				.end()
+				//.to(ctuLookupTranslationReqServiceURL)
+				.toD("${exchangeProperty.ctuInternalURL}")
+				.onFallback()
+					.to(DIRECT_HANDLE_FALLBACK_ROUTE)
+				.end()
+			.log(LoggingLevel.INFO, "Response Received from CTU Lookup Service for TranslationLookupRequest : ${body}")
+			.log(LoggingLevel.INFO, "Calling finished for CTU Lookup Service for TranslationLookupRequest");
 		
-		//BulkTranslationLookupRequest
+		/*//BulkTranslationLookupRequest
 		from(HYSTRIX_ENABLED_ENDPOINT_FOR_BULK_TRANSLATION_LOOKUP)
 			.routeId(Configurator.getStepId(HYSTRIX_ENABLED_ENDPOINT_BULK_TRANSLATION_LOOKUP_ID)).streamCaching()
 			.log(LoggingLevel.INFO, "Calling started for CTU Lookup Endpoint for BulkTranslationLookupRequest...")
@@ -71,13 +68,13 @@ public class OutboundRoutes extends BaseOutboundRouteBuilder {
 			.to(ctuLookupBulkTranslationReqServiceURL).onFallback()
 			.to(DIRECT_HANDLE_FALLBACK_ROUTE).end()
 			.log(LoggingLevel.INFO, "Response Received from CTU Lookup Service for BulkTranslationLookupRequest : ${body}")
-			.log(LoggingLevel.INFO, "Calling finished for CTU Lookup Service for BulkTranslationLookupRequest");
+			.log(LoggingLevel.INFO, "Calling finished for CTU Lookup Service for BulkTranslationLookupRequest");*/
 
 		// setAuthorizationHeader
 		from(DIRECT_SET_AUTHORIZATION_HEADER).routeId("setAuthorizationHeader")
-				.log(LoggingLevel.INFO, "Setting authorization header for CTU Lookup service..").removeHeaders("*")
-				.setHeader("Authorization", constant(
-						HeaderUtil.buildAuthorizationHeader(ctuLookUpServiceUsername, ctuLookUpServicePassword)));
+			.log(LoggingLevel.INFO, "Setting authorization header for CTU Lookup service..").removeHeaders("*")
+			.setHeader("Authorization", constant(
+					HeaderUtil.buildAuthorizationHeader(ctuLookUpServiceUsername, ctuLookUpServicePassword)));
 	}
 
 	@Override

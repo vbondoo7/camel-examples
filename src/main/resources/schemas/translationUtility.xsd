@@ -8,7 +8,11 @@
 	<element name="TranslationLookupResponse" type="tns:TranslationLookupResponseType" />
 	<element name="BulkTranslationLookupResponse" type="tns:BulkTranslationLookupResponseType" />
 	<element name="BulkTranslationLookupRequest" type="tns:BulkTranslationLookupRequestType" />
-
+	<element name="TranslationUpsertRequest" type="tns:TranslationUpsertRequestType" />
+	<element name="TranslationUpsertResponse" type="tns:TranslationUpsertResponseType" />
+	<element name="BulkTranslationUpsertRequest" type="tns:BulkTranslationUpsertRequestType" />
+	<element name="BulkTranslationUpsertResponse" type="tns:BulkTranslationUpsertResponseType" />
+	
 	<complexType name="TranslationLookupRequestType">
 		<annotation>
 			<documentation>Translation lookup Request</documentation>
@@ -34,6 +38,33 @@
 
 		</sequence>
 	</complexType>
+	
+	<complexType name="TranslationUpsertRequestType">
+		<annotation>
+			<documentation>Translation Upsert Request</documentation>
+		</annotation>
+		<sequence>
+			<element name="upsertHeader" type="tns:UpsertHeaderType" minOccurs="1"
+				maxOccurs="1" />
+			<element name="upsertCriteria" type="tns:UpsertRequestType"
+				minOccurs="1" maxOccurs="1" />
+
+		</sequence>
+	</complexType>
+
+	<complexType name="BulkTranslationUpsertRequestType">
+		<annotation>
+			<documentation>Bulk Translation Upsert Request</documentation>
+		</annotation>
+		<sequence>
+			<element name="header" type="tns:UpsertHeaderType" minOccurs="1"
+				maxOccurs="1" />
+			<element name="criteria" type="tns:UpsertRequestType"
+				minOccurs="1" maxOccurs="unbounded" />
+
+		</sequence>
+	</complexType>
+	
 	<complexType name="TranslationLookupResponseType">
 		<annotation>
 			<documentation>Translation lookup Response</documentation>
@@ -48,7 +79,7 @@
 
 	<complexType name="BulkTranslationLookupResponseType">
 		<annotation>
-			<documentation>Translation lookup Response</documentation>
+			<documentation>BUlk Translation lookup Response</documentation>
 		</annotation>
 		<sequence>
 			<element name="results" type="tns:ResultType" minOccurs="1"
@@ -58,6 +89,30 @@
 		</sequence>
 	</complexType>
 
+	<complexType name="TranslationUpsertResponseType">
+		<annotation>
+			<documentation>Translation Upsert Response</documentation>
+		</annotation>
+		<sequence>
+			<element name="result" type="tns:StatusType" minOccurs="1"
+				maxOccurs="1" />
+			<element name="header" type="tns:HeaderType" minOccurs="1"
+				maxOccurs="1" />	
+		</sequence>
+	</complexType>
+
+	<complexType name="BulkTranslationUpsertResponseType">
+		<annotation>
+			<documentation>Bulk Translation Upsert Response</documentation>
+		</annotation>
+		<sequence>
+			<element name="results" type="tns:StatusType" minOccurs="1"
+				maxOccurs="unbounded" />
+			<element name="header" type="tns:HeaderType" minOccurs="1"
+				maxOccurs="1" />
+		</sequence>
+	</complexType>
+	
 	<complexType name="HeaderType">
 		<annotation>
 			<documentation>Header type</documentation>
@@ -69,6 +124,38 @@
 			<element name="consumer" type="string" maxOccurs="1"
 				minOccurs="0" />
 		</sequence>
+	</complexType>
+	
+	<complexType name="UpsertHeaderType">
+		<annotation>
+			<documentation>Upsert Header type</documentation>
+		</annotation>
+		<complexContent>
+	        <extension base="tns:HeaderType">
+	            <sequence>
+					<element name="translate_value_id" type="string" minOccurs="0"
+						maxOccurs="1" />
+					<element name="obsolete_flag" type="string" minOccurs="0"
+						maxOccurs="1" />
+					<element name="translation_enabled_flag" type="string" minOccurs="0"
+						maxOccurs="1" />
+					<element name="translation_start_date_active" type="string" minOccurs="0"
+						maxOccurs="1" />
+					<element name="translation_end_date_active" type="string" minOccurs="0"
+						maxOccurs="1" />
+					<element name="trans_value_enabled_flag" type="string" minOccurs="0"
+						maxOccurs="1" />
+					<element name="trans_value_start_date_active" type="string" minOccurs="0"
+						maxOccurs="1" />
+					<element name="trans_value_end_date_active" type="string" minOccurs="0"
+						maxOccurs="1" />
+					<element name="created_by" type="string" minOccurs="0"
+						maxOccurs="1" />
+					<element name="creation_date" type="string" minOccurs="0"
+						maxOccurs="1" />
+				</sequence>
+	        </extension>
+    	</complexContent>
 	</complexType>
 
 	<complexType name="CriteriaType">
@@ -105,12 +192,81 @@
 		</sequence>
 	</complexType>
 
-
-
-
+	<complexType name="UpsertRequestType">
+		<annotation>
+			<documentation>Upsert Request type</documentation>
+		</annotation>
+		<complexContent>
+	        <extension base="tns:CriteriaType">
+	            <sequence>
+					<element name="targetField1" type="string" minOccurs="0"
+						maxOccurs="1" />
+					<element name="targetField2" type="string" minOccurs="0"
+						maxOccurs="1" />
+					<element name="targetField3" type="string" minOccurs="0"
+						maxOccurs="1" />
+					<element name="targetField4" type="string" minOccurs="0"
+						maxOccurs="1" />
+					<element name="targetField5" type="string" minOccurs="0"
+						maxOccurs="1" />
+					<element name="targetField6" type="string" minOccurs="0"
+						maxOccurs="1" />
+					<element name="targetField7" type="string" minOccurs="0"
+						maxOccurs="1" />
+					<element name="targetField8" type="string" minOccurs="0"
+						maxOccurs="1" />
+					<element name="targetField9" type="string" minOccurs="0"
+						maxOccurs="1" />
+					<element name="targetField10" type="string" minOccurs="0"
+						maxOccurs="1" />
+					<element name="targetField11" type="string" minOccurs="0"
+						maxOccurs="1" />
+					<element name="targetField12" type="string" minOccurs="0"
+						maxOccurs="1" />
+					<element name="targetField13" type="string" minOccurs="0"
+						maxOccurs="1" />
+					<element name="targetField14" type="string" minOccurs="0"
+						maxOccurs="1" />
+					<element name="targetField15" type="string" minOccurs="0"
+						maxOccurs="1" />
+					<element name="targetField16" type="string" minOccurs="0"
+						maxOccurs="1" />
+					<element name="targetField17" type="string" minOccurs="0"
+						maxOccurs="1" />
+					<element name="targetField18" type="string" minOccurs="0"
+						maxOccurs="1" />
+					<element name="targetField19" type="string" minOccurs="0"
+						maxOccurs="1" />
+					<element name="targetField20" type="string" minOccurs="0"
+						maxOccurs="1" />
+					<element name="targetField21" type="string" minOccurs="0"
+						maxOccurs="1" />
+					<element name="targetField22" type="string" minOccurs="0"
+						maxOccurs="1" />
+					<element name="targetField23" type="string" minOccurs="0"
+						maxOccurs="1" />
+					<element name="targetField24" type="string" minOccurs="0"
+						maxOccurs="1" />
+					<element name="targetField25" type="string" minOccurs="0"
+						maxOccurs="1" />
+					<element name="targetField26" type="string" minOccurs="0"
+						maxOccurs="1" />
+					<element name="targetField27" type="string" minOccurs="0"
+						maxOccurs="1" />
+					<element name="targetField28" type="string" minOccurs="0"
+						maxOccurs="1" />
+					<element name="targetField29" type="string" minOccurs="0"
+						maxOccurs="1" />
+					<element name="targetField30" type="string" minOccurs="0"
+						maxOccurs="1" />
+				</sequence>
+	        </extension>
+    	</complexContent>
+	</complexType>
+	
 	<complexType name="ResultType">
 		<annotation>
-			<documentation>Status type</documentation>
+			<documentation>Result type</documentation>
 		</annotation>
 
 		<sequence>
@@ -137,7 +293,6 @@
 				maxOccurs="1" />
 		</sequence>
 	</complexType>
-
 
 	<complexType name="ResultDocType">
 		<annotation>

@@ -17,10 +17,22 @@
 		<wsdl:part element="xsd1:TranslationLookupResponse" name="parameters" />
 	</wsdl:message>
 	<wsdl:message name="bulkTranslationLookUpRequestRequest">
-		<wsdl:part name="parameters" element="xsd1:BulkTranslationLookupRequest"></wsdl:part>
+		<wsdl:part name="parameters" element="xsd1:BulkTranslationLookupRequest" />
 	</wsdl:message>
 	<wsdl:message name="bulkTranslationLookUpRequestResponse">
-		<wsdl:part name="parameters" element="xsd1:BulkTranslationLookupResponse"></wsdl:part>
+		<wsdl:part name="parameters" element="xsd1:BulkTranslationLookupResponse" />
+	</wsdl:message>
+	<wsdl:message name="translationUpsertRequestRequest">
+		<wsdl:part element="xsd1:TranslationUpsertRequest" name="parameters" />
+	</wsdl:message>
+	<wsdl:message name="translationUpsertRequestResponse">
+		<wsdl:part element="xsd1:TranslationUpsertResponse" name="parameters" />
+	</wsdl:message>
+	<wsdl:message name="bulkTranslationUpsertRequestRequest">
+		<wsdl:part name="parameters" element="xsd1:BulkTranslationUpsertRequest" />
+	</wsdl:message>
+	<wsdl:message name="bulkTranslationUpsertRequestResponse">
+		<wsdl:part name="parameters" element="xsd1:BulkTranslationUpsertResponse" />
 	</wsdl:message>
 	<wsdl:portType name="translationUtilityService">
 		<wsdl:operation name="translationLookUpRequest">
@@ -30,6 +42,14 @@
 		<wsdl:operation name="bulkTranslationLookUpRequest">
 			<wsdl:input message="tus:bulkTranslationLookUpRequestRequest"></wsdl:input>
 			<wsdl:output message="tus:bulkTranslationLookUpRequestResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="translationUpsertRequest">
+			<wsdl:input message="tus:translationUpsertRequestRequest" />
+			<wsdl:output message="tus:translationUpsertRequestResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="bulkTranslationUpsertRequest">
+			<wsdl:input message="tus:bulkTranslationUpsertRequestRequest"></wsdl:input>
+			<wsdl:output message="tus:bulkTranslationUpsertRequestResponse"></wsdl:output>
 		</wsdl:operation>
 	</wsdl:portType>
 	<wsdl:binding name="translationUtilityServiceSOAP" type="tus:translationUtilityService">
@@ -48,6 +68,26 @@
 		<wsdl:operation name="bulkTranslationLookUpRequest">
 			<soap:operation
 				soapAction="http://eai.officedepot.com/translationUtilityService/bulkTranslationLookUpRequest" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="translationUpsertRequest">
+			<soap:operation
+				soapAction="http://eai.officedepot.com/translationUtilityService/translationUpsertRequest" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="bulkTranslationUpsertRequest">
+			<soap:operation
+				soapAction="http://eai.officedepot.com/translationUtilityService/bulkTranslationUpsertRequest" />
 			<wsdl:input>
 				<soap:body use="literal" />
 			</wsdl:input>
