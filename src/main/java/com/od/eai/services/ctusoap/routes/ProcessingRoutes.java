@@ -14,9 +14,11 @@ import com.od.eai.services.ctusoap.util.DataFormatUtil;
 import com.officedepot.eai.service.translationutility.BulkTranslationLookupRequestType;
 import com.officedepot.eai.service.translationutility.BulkTranslationLookupResponseType;
 import com.officedepot.eai.service.translationutility.BulkTranslationUpsertRequestType;
+import com.officedepot.eai.service.translationutility.BulkTranslationUpsertResponseType;
 import com.officedepot.eai.service.translationutility.TranslationLookupRequestType;
 import com.officedepot.eai.service.translationutility.TranslationLookupResponseType;
 import com.officedepot.eai.service.translationutility.TranslationUpsertRequestType;
+import com.officedepot.eai.service.translationutility.TranslationUpsertResponseType;
 
 @Component("ctusoapProcessingRoutes")
 public class ProcessingRoutes extends BaseProcessingRouteBuilder {
@@ -87,7 +89,7 @@ public class ProcessingRoutes extends BaseProcessingRouteBuilder {
 			.log(LoggingLevel.INFO, "Body after conversion to Json: ${body}")
 			.setProperty(CTU_INTERNAL_URL, constant(ctuUpsertUrl))
 			.to(OutboundRoutes.HYSTRIX_ENABLED_CTU_INTERNAL_ROUTE)
-			.unmarshal().json(JsonLibrary.Jackson, BulkTranslationLookupResponseType.class)
+			.unmarshal().json(JsonLibrary.Jackson, TranslationUpsertResponseType.class)
 			.log(LoggingLevel.INFO, "Processing For Translation Upsert Finished !!!");
 				
 		//BulkTranslationUpsertRequest
@@ -100,7 +102,7 @@ public class ProcessingRoutes extends BaseProcessingRouteBuilder {
 			.log(LoggingLevel.INFO, "Body after conversion to Json: ${body}")
 			.setProperty(CTU_INTERNAL_URL, constant(ctuBulkUpsertUrl))
 			.to(OutboundRoutes.HYSTRIX_ENABLED_CTU_INTERNAL_ROUTE)
-			.unmarshal().json(JsonLibrary.Jackson, BulkTranslationLookupResponseType.class)
+			.unmarshal().json(JsonLibrary.Jackson, BulkTranslationUpsertResponseType.class)
 			.log(LoggingLevel.INFO, "Processing For Bulk Translation Upsert Finished !!!");
 				
 	}

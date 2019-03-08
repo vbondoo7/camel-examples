@@ -29,8 +29,10 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
 
 import com.officedepot.eai.service.translationutility.BulkTranslationLookupRequestType;
+import com.officedepot.eai.service.translationutility.BulkTranslationUpsertRequestType;
 import com.officedepot.eai.service.translationutility.ObjectFactory;
 import com.officedepot.eai.service.translationutility.TranslationLookupRequestType;
+import com.officedepot.eai.service.translationutility.TranslationUpsertRequestType;
 
 @RunWith(CamelSpringBootRunner.class)
 @SpringBootTest
@@ -84,6 +86,28 @@ public class ProcessingRoutesTest extends CamelTestSupport {
 					}
 				});
 		
+		context.getRouteDefinition("eaiaudit_TRANSLATION_UPSERT_REQUEST_PROCESSING_ROUTE").adviceWith(context,
+				new AdviceWithRouteBuilder() {
+					@Override
+					public void configure() throws Exception {
+						weaveAddLast().to("mock:end");
+						String elasticResponse = getTestJsonResponse("data/translationUpsertResponse.json");
+						interceptSendToEndpoint("direct:hystrixEnabledCTUInternalRoute")
+							.skipSendToOriginalEndpoint().setBody(constant(elasticResponse));
+					}
+				});
+		
+		context.getRouteDefinition("eaiaudit_BULK_TRANSLATION_UPSERT_REQUEST_PROCESSING_ROUTE").adviceWith(context,
+				new AdviceWithRouteBuilder() {
+					@Override
+					public void configure() throws Exception {
+						weaveAddLast().to("mock:end");
+						String elasticResponse = getTestJsonResponse("data/bulkTranslationUpsertResponse.json");
+						interceptSendToEndpoint("direct:hystrixEnabledCTUInternalRoute")
+							.skipSendToOriginalEndpoint().setBody(constant(elasticResponse));
+					}
+				});
+		
 		context.start();
 	}
 
@@ -121,6 +145,44 @@ public class ProcessingRoutesTest extends CamelTestSupport {
 
 		Map<String, Object> mapHeaders = new HashMap<String, Object>();
 		template.requestBodyAndHeaders("direct:bulkTranslationLookupRequestProcessingRoute", bulkTranslationLookupRequest, mapHeaders);
+		
+		mockEndpoint.assertIsSatisfied();
+	}
+	
+	@Test
+	public void testTranslationUpsertRequestProcessingRoute() throws Exception {
+
+		JAXBContext jc = JAXBContext.newInstance(ObjectFactory.class);
+		InputStream in = getClass().getClassLoader().getResourceAsStream("data/translationUpsertRequest.xml");
+		Unmarshaller unmarshaller = jc.createUnmarshaller();
+		@SuppressWarnings("unchecked")
+		JAXBElement<TranslationUpsertRequestType> translationUpsertRequestTypeJaxbElement = (JAXBElement<TranslationUpsertRequestType>) unmarshaller.unmarshal(in);
+		TranslationUpsertRequestType translationUpsertRequestType = translationUpsertRequestTypeJaxbElement.getValue();
+		
+		MockEndpoint mockEndpoint = getMockEndpoint("mock:end");
+		mockEndpoint.expectedMessageCount(1);
+
+		Map<String, Object> mapHeaders = new HashMap<String, Object>();
+		template.requestBodyAndHeaders("direct:translationUpsertRequestProcessingRoute", translationUpsertRequestType, mapHeaders);
+		
+		mockEndpoint.assertIsSatisfied();
+	}
+	
+	@Test
+	public void testBulkTranslationUpsertRequestProcessingRoute() throws Exception {
+
+		JAXBContext jc = JAXBContext.newInstance(ObjectFactory.class);
+		InputStream in = getClass().getClassLoader().getResourceAsStream("data/bulkTranslationUpsertRequest.xml");
+		Unmarshaller unmarshaller = jc.createUnmarshaller();
+		@SuppressWarnings("unchecked")
+		JAXBElement<BulkTranslationUpsertRequestType> bulkTranslationUpsertRequestTypeJaxbElement = (JAXBElement<BulkTranslationUpsertRequestType>) unmarshaller.unmarshal(in);
+		BulkTranslationUpsertRequestType bulkTranslationUpsertRequest = bulkTranslationUpsertRequestTypeJaxbElement.getValue();
+		
+		MockEndpoint mockEndpoint = getMockEndpoint("mock:end");
+		mockEndpoint.expectedMessageCount(1);
+
+		Map<String, Object> mapHeaders = new HashMap<String, Object>();
+		template.requestBodyAndHeaders("direct:bulkTranslationUpsertRequestProcessingRoute", bulkTranslationUpsertRequest, mapHeaders);
 		
 		mockEndpoint.assertIsSatisfied();
 	}

@@ -44,9 +44,9 @@
 			<documentation>Translation Upsert Request</documentation>
 		</annotation>
 		<sequence>
-			<element name="upsertHeader" type="tns:UpsertHeaderType" minOccurs="1"
-				maxOccurs="1" />
-			<element name="upsertCriteria" type="tns:UpsertRequestType"
+			<!-- <element name="traslationHeaderType" type="tns:TraslationHeaderType" minOccurs="1"
+				maxOccurs="1" /> -->
+			<element name="upsertRequest" type="tns:UpsertRequestType"
 				minOccurs="1" maxOccurs="1" />
 
 		</sequence>
@@ -57,9 +57,9 @@
 			<documentation>Bulk Translation Upsert Request</documentation>
 		</annotation>
 		<sequence>
-			<element name="header" type="tns:UpsertHeaderType" minOccurs="1"
-				maxOccurs="1" />
-			<element name="criteria" type="tns:UpsertRequestType"
+			<!-- <element name="traslationHeaderType" type="tns:TraslationHeaderType" minOccurs="1"
+				maxOccurs="1" /> -->
+			<element name="upsertRequest" type="tns:UpsertRequestType"
 				minOccurs="1" maxOccurs="unbounded" />
 
 		</sequence>
@@ -94,10 +94,8 @@
 			<documentation>Translation Upsert Response</documentation>
 		</annotation>
 		<sequence>
-			<element name="result" type="tns:StatusType" minOccurs="1"
+			<element name="status" type="tns:StatusType" minOccurs="1"
 				maxOccurs="1" />
-			<element name="header" type="tns:HeaderType" minOccurs="1"
-				maxOccurs="1" />	
 		</sequence>
 	</complexType>
 
@@ -106,9 +104,7 @@
 			<documentation>Bulk Translation Upsert Response</documentation>
 		</annotation>
 		<sequence>
-			<element name="results" type="tns:StatusType" minOccurs="1"
-				maxOccurs="unbounded" />
-			<element name="header" type="tns:HeaderType" minOccurs="1"
+			<element name="status" type="tns:StatusType" minOccurs="1"
 				maxOccurs="1" />
 		</sequence>
 	</complexType>
@@ -126,14 +122,14 @@
 		</sequence>
 	</complexType>
 	
-	<complexType name="UpsertHeaderType">
+	<complexType name="TraslationHeaderType">
 		<annotation>
 			<documentation>Upsert Header type</documentation>
 		</annotation>
 		<complexContent>
 	        <extension base="tns:HeaderType">
 	            <sequence>
-					<element name="translate_value_id" type="string" minOccurs="0"
+	            	<element name="translate_value_id" type="string" minOccurs="0"
 						maxOccurs="1" />
 					<element name="obsolete_flag" type="string" minOccurs="0"
 						maxOccurs="1" />
@@ -196,72 +192,95 @@
 		<annotation>
 			<documentation>Upsert Request type</documentation>
 		</annotation>
-		<complexContent>
-	        <extension base="tns:CriteriaType">
-	            <sequence>
-					<element name="targetField1" type="string" minOccurs="0"
-						maxOccurs="1" />
-					<element name="targetField2" type="string" minOccurs="0"
-						maxOccurs="1" />
-					<element name="targetField3" type="string" minOccurs="0"
-						maxOccurs="1" />
-					<element name="targetField4" type="string" minOccurs="0"
-						maxOccurs="1" />
-					<element name="targetField5" type="string" minOccurs="0"
-						maxOccurs="1" />
-					<element name="targetField6" type="string" minOccurs="0"
-						maxOccurs="1" />
-					<element name="targetField7" type="string" minOccurs="0"
-						maxOccurs="1" />
-					<element name="targetField8" type="string" minOccurs="0"
-						maxOccurs="1" />
-					<element name="targetField9" type="string" minOccurs="0"
-						maxOccurs="1" />
-					<element name="targetField10" type="string" minOccurs="0"
-						maxOccurs="1" />
-					<element name="targetField11" type="string" minOccurs="0"
-						maxOccurs="1" />
-					<element name="targetField12" type="string" minOccurs="0"
-						maxOccurs="1" />
-					<element name="targetField13" type="string" minOccurs="0"
-						maxOccurs="1" />
-					<element name="targetField14" type="string" minOccurs="0"
-						maxOccurs="1" />
-					<element name="targetField15" type="string" minOccurs="0"
-						maxOccurs="1" />
-					<element name="targetField16" type="string" minOccurs="0"
-						maxOccurs="1" />
-					<element name="targetField17" type="string" minOccurs="0"
-						maxOccurs="1" />
-					<element name="targetField18" type="string" minOccurs="0"
-						maxOccurs="1" />
-					<element name="targetField19" type="string" minOccurs="0"
-						maxOccurs="1" />
-					<element name="targetField20" type="string" minOccurs="0"
-						maxOccurs="1" />
-					<element name="targetField21" type="string" minOccurs="0"
-						maxOccurs="1" />
-					<element name="targetField22" type="string" minOccurs="0"
-						maxOccurs="1" />
-					<element name="targetField23" type="string" minOccurs="0"
-						maxOccurs="1" />
-					<element name="targetField24" type="string" minOccurs="0"
-						maxOccurs="1" />
-					<element name="targetField25" type="string" minOccurs="0"
-						maxOccurs="1" />
-					<element name="targetField26" type="string" minOccurs="0"
-						maxOccurs="1" />
-					<element name="targetField27" type="string" minOccurs="0"
-						maxOccurs="1" />
-					<element name="targetField28" type="string" minOccurs="0"
-						maxOccurs="1" />
-					<element name="targetField29" type="string" minOccurs="0"
-						maxOccurs="1" />
-					<element name="targetField30" type="string" minOccurs="0"
-						maxOccurs="1" />
-				</sequence>
-	        </extension>
-    	</complexContent>
+		
+        <sequence>
+			<element name="traslationHeaderType" type="tns:TraslationHeaderType" minOccurs="1"
+				maxOccurs="1" />
+			<element name="translationName" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="translationDate" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="sourceField1" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="sourceField2" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="sourceField3" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="sourceField4" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="sourceField5" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="sourceField6" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="sourceField7" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="sourceField8" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="sourceField9" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="sourceField10" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="targetField1" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="targetField2" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="targetField3" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="targetField4" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="targetField5" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="targetField6" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="targetField7" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="targetField8" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="targetField9" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="targetField10" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="targetField11" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="targetField12" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="targetField13" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="targetField14" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="targetField15" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="targetField16" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="targetField17" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="targetField18" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="targetField19" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="targetField20" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="targetField21" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="targetField22" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="targetField23" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="targetField24" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="targetField25" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="targetField26" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="targetField27" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="targetField28" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="targetField29" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="targetField30" type="string" minOccurs="0"
+				maxOccurs="1" />
+		</sequence>
 	</complexType>
 	
 	<complexType name="ResultType">
