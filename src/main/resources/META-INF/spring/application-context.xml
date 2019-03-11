@@ -15,6 +15,11 @@
     <!-- ################## -->
     <camelContext id="ctusoapCamelContext" xmlns="http://camel.apache.org/schema/spring">
     	<jmxAgent id="camelJmxAgent" disabled="true"/>
+    	
+    	<threadPoolProfile id="defaultThreadPoolProfile" defaultProfile="true"
+                       poolSize="15" maxPoolSize="20" maxQueueSize="1000" allowCoreThreadTimeOut="false"
+                       rejectedPolicy="CallerRuns"/>
+    	
     </camelContext>
     <!-- ################## -->
     <!--       PROFILES     -->

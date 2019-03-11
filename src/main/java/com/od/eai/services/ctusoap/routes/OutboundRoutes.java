@@ -43,6 +43,7 @@ public class OutboundRoutes extends BaseOutboundRouteBuilder {
 		from(HYSTRIX_ENABLED_CTU_INTERNAL_ROUTE)
 			.routeId(Configurator.getStepId(HYSTRIX_ENABLED_CTU_INTERNAL_ROUTE_ID)).streamCaching()
 			.log(LoggingLevel.INFO, "Calling started for CTU Internal URL for ${header.operationName}")
+			.setProperty("operationName", header("operationName"))
 			.log(LoggingLevel.INFO, "Request received for CTU Internal URL for ${header.operationName} --> ${body}")
 			.to(DIRECT_SET_AUTHORIZATION_HEADER)
 			.hystrix()
@@ -55,8 +56,8 @@ public class OutboundRoutes extends BaseOutboundRouteBuilder {
 				.onFallback()
 					.to(DIRECT_HANDLE_FALLBACK_ROUTE)
 				.end()
-			.log(LoggingLevel.INFO, "Response Received from CTU Internal URL for ${header.operationName} : ${body}")
-			.log(LoggingLevel.INFO, "Calling finished for CTU Internal URL for ${header.operationName}");
+			.log(LoggingLevel.INFO, "Response Received from CTU Internal URL for ${exchangeProperty.operationName} : ${body}")
+			.log(LoggingLevel.INFO, "Calling finished for CTU Internal URL for ${exchangeProperty.operationName}");
 		
 		// setAuthorizationHeader
 		from(DIRECT_SET_AUTHORIZATION_HEADER).routeId("setAuthorizationHeader")
