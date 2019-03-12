@@ -40,7 +40,7 @@ public class InboundRoutes extends BaseInboundRouteBuilder {
 		//restConfiguration().component("servlet");
 		
 		from(translationUtilityLookupcxfURL).id(Configurator.getStepId(traslationUtilityRequest))
-		  .log(LoggingLevel.INFO,"******* Received Translation Utility Lookup Request ********")
+		  .log(LoggingLevel.INFO,"******* Received Translation Utility Request ********")
 		  .choice()
 		  		.when(header(CxfConstants.OPERATION_NAME).isEqualTo("translationLookUpRequest"))
 		  			.to(ProcessingRoutes.DIRECT_TRANSLATION_LOOKUP_REQUEST_PROCESSING_ROUTE)
