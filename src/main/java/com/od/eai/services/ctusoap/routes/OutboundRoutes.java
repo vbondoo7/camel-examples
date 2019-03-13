@@ -51,7 +51,6 @@ public class OutboundRoutes extends BaseOutboundRouteBuilder {
 					.executionTimeoutInMilliseconds(executionTimeoutInMilliseconds)
 					.circuitBreakerSleepWindowInMilliseconds(circuitBreakerSleepWindowInMilliseconds)
 				.end()
-				//.to(ctuLookupTranslationReqServiceURL)
 				.toD("${exchangeProperty.ctuInternalURL}")
 				.onFallback()
 					.to(DIRECT_HANDLE_FALLBACK_ROUTE)
@@ -61,7 +60,7 @@ public class OutboundRoutes extends BaseOutboundRouteBuilder {
 		
 		// setAuthorizationHeader
 		from(DIRECT_SET_AUTHORIZATION_HEADER).routeId("setAuthorizationHeader")
-			.log(LoggingLevel.INFO, "Setting authorization header for CTU Internal service..").removeHeaders("*")
+			.removeHeaders("*")
 			.setHeader(HttpHeaders.AUTHORIZATION, constant(
 					HeaderUtil.buildAuthorizationHeader(ctuLookUpServiceUsername, ctuLookUpServicePassword)));
 	}

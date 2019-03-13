@@ -3,8 +3,11 @@ package com.od.eai.services.ctusoap.exception.handler;
 import org.apache.camel.Exchange;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.officedepot.eai.service.translationutility.BulkTranslationLookupResponseType;
 import com.officedepot.eai.service.translationutility.BulkTranslationUpsertResponseType;
 import com.officedepot.eai.service.translationutility.ResultType;
 import com.officedepot.eai.service.translationutility.StatusType;
@@ -16,6 +19,9 @@ public class ExceptionMessageHandler {
 	
 	private static final Logger LOGGER 	= LoggerFactory.getLogger(ExceptionMessageHandler.class);
 	
+	@Autowired
+	private ObjectMapper objectMapper;
+	
 	public void handleFallback(Exchange exchange) throws Exception {
 		if (exchange.getProperty(Exchange.EXCEPTION_CAUGHT) != null) {
 			Exception exception = exchange.getProperty(Exchange.EXCEPTION_CAUGHT, Exception.class);
@@ -25,25 +31,33 @@ public class ExceptionMessageHandler {
 				TranslationLookupResponseType translationLookupResponseType = new TranslationLookupResponseType();
 				StatusType statusType = new StatusType();
 				ResultType result = new ResultType();
-				statusType.setStatus("error");
+				statusType.setStatus("ERROR");
 				statusType.setStatusCode(1);
-				statusType.setStatusDescription("connection error with CTU Lookup Services");
+				statusType.setStatusDescription(exception.getMessage());
 				result.setStatus(statusType);
 				translationLookupResponseType.setResult(result);
 				exchange.getOut().setBody(translationLookupResponseType);
 			}
 			else if(operationName.trim().equalsIgnoreCase("bulkTranslationLookUpRequest")) {
-				//TODO
+				BulkTranslationLookupResponseType bulkTranslationLookupResponseType = new BulkTranslationLookupResponseType();
+				StatusType statusType = new StatusType();
+				ResultType result = new ResultType();
+				statusType.setStatus("ERROR");
+				statusType.setStatusCode(1);
+				statusType.setStatusDescription(exception.getMessage());
+				result.setStatus(statusType);
+				bulkTranslationLookupResponseType.getResults().add(result);
+				exchange.getOut().setBody(bulkTranslationLookupResponseType); 
 			}
 			else if(operationName.trim().equalsIgnoreCase("translationUpsertRequest")) {
 				TranslationUpsertResponseType translationUpsertResponse = new TranslationUpsertResponseType();
 				translationUpsertResponse.setStatus(getStatusTypeWithFailure(exception.getMessage()));
-				exchange.getOut().setBody(translationUpsertResponse);
+				exchange.getOut().setBody(objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(translationUpsertResponse));
 			}
 			else if(operationName.trim().equalsIgnoreCase("bulkTranslationUpsertRequest")) {
 				BulkTranslationUpsertResponseType bulkTranslationUpsertResponse = new BulkTranslationUpsertResponseType();
 				bulkTranslationUpsertResponse.setStatus(getStatusTypeWithFailure(exception.getMessage()));
-				exchange.getOut().setBody(bulkTranslationUpsertResponse);
+				exchange.getOut().setBody(objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(bulkTranslationUpsertResponse));
 			}
 			
 			exchange.getOut().setHeader(Exchange.HTTP_RESPONSE_CODE, 500);
@@ -68,7 +82,7 @@ public class ExceptionMessageHandler {
 	private StatusType getStatusTypeWithFailure(String errorMessage) {
 		StatusType statusType = new StatusType();
 		statusType.setStatus("ERROR");
-		statusType.setStatusCode(-1);
+		statusType.setStatusCode(1);
 		statusType.setStatusDescription(errorMessage);
 		return statusType;
 	}
