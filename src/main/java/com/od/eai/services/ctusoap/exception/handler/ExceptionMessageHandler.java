@@ -11,6 +11,7 @@ import com.officedepot.eai.service.translationutility.BulkTranslationLookupRespo
 import com.officedepot.eai.service.translationutility.BulkTranslationUpsertResponseType;
 import com.officedepot.eai.service.translationutility.ResultType;
 import com.officedepot.eai.service.translationutility.StatusType;
+import com.officedepot.eai.service.translationutility.TranslationDeleteResponseType;
 import com.officedepot.eai.service.translationutility.TranslationLookupResponseType;
 import com.officedepot.eai.service.translationutility.TranslationUpsertResponseType;
 
@@ -58,6 +59,11 @@ public class ExceptionMessageHandler {
 				BulkTranslationUpsertResponseType bulkTranslationUpsertResponse = new BulkTranslationUpsertResponseType();
 				bulkTranslationUpsertResponse.setStatus(getStatusTypeWithFailure(exception.getMessage()));
 				exchange.getOut().setBody(objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(bulkTranslationUpsertResponse));
+			}
+			else if(operationName.trim().equalsIgnoreCase("translationDeleteRequest")) {
+				TranslationDeleteResponseType translationDeleteResponse = new TranslationDeleteResponseType();
+				translationDeleteResponse.setStatus(getStatusTypeWithFailure(exception.getMessage()));
+				exchange.getOut().setBody(objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(translationDeleteResponse));
 			}
 			
 			exchange.getOut().setHeader(Exchange.HTTP_RESPONSE_CODE, 500);

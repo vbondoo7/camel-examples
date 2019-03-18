@@ -31,6 +31,7 @@ import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import com.officedepot.eai.service.translationutility.BulkTranslationLookupRequestType;
 import com.officedepot.eai.service.translationutility.BulkTranslationUpsertRequestType;
 import com.officedepot.eai.service.translationutility.ObjectFactory;
+import com.officedepot.eai.service.translationutility.TranslationDeleteRequestType;
 import com.officedepot.eai.service.translationutility.TranslationLookupRequestType;
 import com.officedepot.eai.service.translationutility.TranslationUpsertRequestType;
 
@@ -103,6 +104,17 @@ public class ProcessingRoutesTest extends CamelTestSupport {
 					public void configure() throws Exception {
 						weaveAddLast().to("mock:end");
 						String elasticResponse = getTestJsonResponse("data/bulkTranslationUpsertResponse.json");
+						interceptSendToEndpoint("direct:hystrixEnabledCTUInternalRoute")
+							.skipSendToOriginalEndpoint().setBody(constant(elasticResponse));
+					}
+				});
+		
+		context.getRouteDefinition("eaiaudit_TRANSLATION_DELETE_REQUEST_PROCESSING_ROUTE").adviceWith(context,
+				new AdviceWithRouteBuilder() {
+					@Override
+					public void configure() throws Exception {
+						weaveAddLast().to("mock:end");
+						String elasticResponse = getTestJsonResponse("data/translationDeleteResponse.json");
 						interceptSendToEndpoint("direct:hystrixEnabledCTUInternalRoute")
 							.skipSendToOriginalEndpoint().setBody(constant(elasticResponse));
 					}
@@ -183,6 +195,25 @@ public class ProcessingRoutesTest extends CamelTestSupport {
 
 		Map<String, Object> mapHeaders = new HashMap<String, Object>();
 		template.requestBodyAndHeaders("direct:bulkTranslationUpsertRequestProcessingRoute", bulkTranslationUpsertRequest, mapHeaders);
+		
+		mockEndpoint.assertIsSatisfied();
+	}
+	
+	@Test
+	public void testTranslationDeleteRequestProcessingRoute() throws Exception {
+
+		JAXBContext jc = JAXBContext.newInstance(ObjectFactory.class);
+		InputStream in = getClass().getClassLoader().getResourceAsStream("data/translationDeleteRequest.xml");
+		Unmarshaller unmarshaller = jc.createUnmarshaller();
+		@SuppressWarnings("unchecked")
+		JAXBElement<TranslationDeleteRequestType> translationDeleteRequestTypeJaxbElement = (JAXBElement<TranslationDeleteRequestType>) unmarshaller.unmarshal(in);
+		TranslationDeleteRequestType translationDeleteRequest = translationDeleteRequestTypeJaxbElement.getValue();
+		
+		MockEndpoint mockEndpoint = getMockEndpoint("mock:end");
+		mockEndpoint.expectedMessageCount(1);
+
+		Map<String, Object> mapHeaders = new HashMap<String, Object>();
+		template.requestBodyAndHeaders("direct:translationDeleteRequestProcessingRoute", translationDeleteRequest, mapHeaders);
 		
 		mockEndpoint.assertIsSatisfied();
 	}

@@ -15,6 +15,8 @@ import com.officedepot.eai.service.translationutility.BulkTranslationLookupReque
 import com.officedepot.eai.service.translationutility.BulkTranslationLookupResponseType;
 import com.officedepot.eai.service.translationutility.BulkTranslationUpsertRequestType;
 import com.officedepot.eai.service.translationutility.BulkTranslationUpsertResponseType;
+import com.officedepot.eai.service.translationutility.TranslationDeleteRequestType;
+import com.officedepot.eai.service.translationutility.TranslationDeleteResponseType;
 import com.officedepot.eai.service.translationutility.TranslationLookupRequestType;
 import com.officedepot.eai.service.translationutility.TranslationLookupResponseType;
 import com.officedepot.eai.service.translationutility.TranslationUpsertRequestType;
@@ -32,6 +34,8 @@ public class ProcessingRoutes extends BaseProcessingRouteBuilder {
 	public static final String DIRECT_TRANSLATION_UPSERT_REQUEST_PROCESSING_ROUTE_ID 		= "TRANSLATION_UPSERT_REQUEST_PROCESSING_ROUTE";
 	public static final String DIRECT_BULK_TRANSLATION_UPSERT_REQUEST_PROCESSING_ROUTE 		= "direct:bulkTranslationUpsertRequestProcessingRoute";
 	public static final String DIRECT_BULK_TRANSLATION_UPSERT_REQUEST_PROCESSING_ROUTE_ID 	= "BULK_TRANSLATION_UPSERT_REQUEST_PROCESSING_ROUTE";
+	public static final String DIRECT_TRANSLATION_DELETE_REQUEST_PROCESSING_ROUTE 			= "direct:translationDeleteRequestProcessingRoute";
+	private static final String DIRECT_TRANSLATION_DELETE_REQUEST_PROCESSING_ROUTE_ID 		= "TRANSLATION_DELETE_REQUEST_PROCESSING_ROUTE";
 	
 	@Value("${ctu.soap.translation.request.processing.route}")
 	private String ctuSoapProcessingRouteForLookup;
@@ -50,6 +54,9 @@ public class ProcessingRoutes extends BaseProcessingRouteBuilder {
 	
 	@Value("${ctu.bulk.upsert.service.url}")
 	private String ctuBulkUpsertUrl;
+	
+	@Value("${ctu.delete.service.url}")
+	private String ctuDeleteUrl;
 	
 	@Override
 	public void configureRoutes() throws Exception {
@@ -104,7 +111,19 @@ public class ProcessingRoutes extends BaseProcessingRouteBuilder {
 			.to(OutboundRoutes.HYSTRIX_ENABLED_CTU_INTERNAL_ROUTE)
 			.unmarshal().json(JsonLibrary.Jackson, BulkTranslationUpsertResponseType.class)
 			.log(LoggingLevel.INFO, "Processing For Bulk Translation Upsert Finished !!!");
-				
+			
+		//TranslationDeleteRequest
+		from(DIRECT_TRANSLATION_DELETE_REQUEST_PROCESSING_ROUTE)
+			.routeId(Configurator.getStepId(DIRECT_TRANSLATION_DELETE_REQUEST_PROCESSING_ROUTE_ID))
+			.routeDescription("This Receives Translation Delete Request For CTU Service.")
+			.log(LoggingLevel.INFO, "Processing Started for Translation Delete CXF Endpoint...")
+			.convertBodyTo(TranslationDeleteRequestType.class)
+			.marshal(DataFormatUtil.dataFormatInstance(TranslationDeleteRequestType.class))
+			.log(LoggingLevel.INFO, "Body after conversion to Json: ${body}")
+			.setProperty(CTU_INTERNAL_URL, constant(ctuDeleteUrl))
+			.to(OutboundRoutes.HYSTRIX_ENABLED_CTU_INTERNAL_ROUTE)
+			.unmarshal().json(JsonLibrary.Jackson, TranslationDeleteResponseType.class)
+			.log(LoggingLevel.INFO, "Processing For Translation Delete Finished !!!");
 	}
 
 	@Override
@@ -112,7 +131,7 @@ public class ProcessingRoutes extends BaseProcessingRouteBuilder {
 		onException(Exception.class)
 			.id(Configurator.getStepId("exceptionProcessingRoute"))
 			.log(LoggingLevel.ERROR, "Exception occurred : ${exception.stacktrace}")
-			.bean(ExceptionMessageHandler.class, "handle");
+			.bean(ExceptionMessageHandler.class, "handleFallback");
 		
 	}
 

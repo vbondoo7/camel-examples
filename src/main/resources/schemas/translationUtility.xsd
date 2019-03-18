@@ -12,6 +12,8 @@
 	<element name="TranslationUpsertResponse" type="tns:TranslationUpsertResponseType" />
 	<element name="BulkTranslationUpsertRequest" type="tns:BulkTranslationUpsertRequestType" />
 	<element name="BulkTranslationUpsertResponse" type="tns:BulkTranslationUpsertResponseType" />
+	<element name="TranslationDeleteRequest" type="tns:TranslationDeleteRequestType" />
+	<element name="TranslationDeleteResponse" type="tns:TranslationDeleteResponseType" />
 	
 	<complexType name="TranslationLookupRequestType">
 		<annotation>
@@ -52,6 +54,16 @@
 		</sequence>
 	</complexType>
 
+	<complexType name="TranslationDeleteRequestType">
+		<annotation>
+			<documentation>Translation Delete Request</documentation>
+		</annotation>
+		<sequence>
+			<element name="translate_value_id" type="string" minOccurs="0"
+					maxOccurs="1" />
+		</sequence>
+	</complexType>
+	
 	<complexType name="BulkTranslationUpsertRequestType">
 		<annotation>
 			<documentation>Bulk Translation Upsert Request</documentation>
@@ -99,6 +111,16 @@
 		</sequence>
 	</complexType>
 
+	<complexType name="TranslationDeleteResponseType">
+		<annotation>
+			<documentation>Translation Delete Response</documentation>
+		</annotation>
+		<sequence>
+			<element name="status" type="tns:StatusType" minOccurs="1"
+				maxOccurs="1" />
+		</sequence>
+	</complexType>
+	
 	<complexType name="BulkTranslationUpsertResponseType">
 		<annotation>
 			<documentation>Bulk Translation Upsert Response</documentation>

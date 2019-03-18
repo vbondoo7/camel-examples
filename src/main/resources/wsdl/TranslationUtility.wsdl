@@ -34,6 +34,13 @@
 	<wsdl:message name="bulkTranslationUpsertRequestResponse">
 		<wsdl:part name="parameters" element="xsd1:BulkTranslationUpsertResponse" />
 	</wsdl:message>
+	<wsdl:message name="translationDeleteRequestRequest">
+		<wsdl:part element="xsd1:TranslationDeleteRequest" name="parameters" />
+	</wsdl:message>
+	<wsdl:message name="translationDeleteRequestResponse">
+		<wsdl:part element="xsd1:TranslationDeleteResponse" name="parameters" />
+	</wsdl:message>
+	
 	<wsdl:portType name="translationUtilityService">
 		<wsdl:operation name="translationLookUpRequest">
 			<wsdl:input message="tus:translationLookUpRequestRequest" />
@@ -50,6 +57,10 @@
 		<wsdl:operation name="bulkTranslationUpsertRequest">
 			<wsdl:input message="tus:bulkTranslationUpsertRequestRequest"></wsdl:input>
 			<wsdl:output message="tus:bulkTranslationUpsertRequestResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="translationDeleteRequest">
+			<wsdl:input message="tus:translationDeleteRequestRequest" />
+			<wsdl:output message="tus:translationDeleteRequestResponse" />
 		</wsdl:operation>
 	</wsdl:portType>
 	<wsdl:binding name="translationUtilityServiceSOAP" type="tus:translationUtilityService">
@@ -88,6 +99,16 @@
 		<wsdl:operation name="bulkTranslationUpsertRequest">
 			<soap:operation
 				soapAction="http://eai.officedepot.com/translationUtilityService/bulkTranslationUpsertRequest" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="translationDeleteRequest">
+			<soap:operation
+				soapAction="http://eai.officedepot.com/translationUtilityService/translationUpsertRequest" />
 			<wsdl:input>
 				<soap:body use="literal" />
 			</wsdl:input>
