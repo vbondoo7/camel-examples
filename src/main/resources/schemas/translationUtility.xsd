@@ -4,15 +4,17 @@
 	xmlns:tns="http://eai.officedepot.com/service/TranslationUtility"
 	elementFormDefault="qualified">
 
-	<element name="TranslationLookupRequest"       type="tns:TranslationLookupRequestType" />
-	<element name="TranslationLookupResponse"      type="tns:TranslationLookupResponseType" />
-	<element name="BulkTranslationLookupResponse"  type="tns:BulkTranslationLookupResponseType" />
-	<element name="BulkTranslationLookupRequest"   type="tns:BulkTranslationLookupRequestType" />
-	<element name="TranslationUpsertRequest"       type="tns:TranslationUpsertRequestType" />
-	<element name="TranslationUpsertResponse"      type="tns:TranslationUpsertResponseType" />
-	<element name="BulkTranslationUpsertRequest"   type="tns:BulkTranslationUpsertRequestType" />
-	<element name="BulkTranslationUpsertResponse"  type="tns:BulkTranslationUpsertResponseType" />
-	<!--4 new operations -->
+	<element name="TranslationLookupRequest" type="tns:TranslationLookupRequestType" />
+	<element name="TranslationLookupResponse" type="tns:TranslationLookupResponseType" />
+	<element name="BulkTranslationLookupResponse" type="tns:BulkTranslationLookupResponseType" />
+	<element name="BulkTranslationLookupRequest" type="tns:BulkTranslationLookupRequestType" />
+	<element name="TranslationUpsertRequest" type="tns:TranslationUpsertRequestType" />
+	<element name="TranslationUpsertResponse" type="tns:TranslationUpsertResponseType" />
+	<element name="BulkTranslationUpsertRequest" type="tns:BulkTranslationUpsertRequestType" />
+	<element name="BulkTranslationUpsertResponse" type="tns:BulkTranslationUpsertResponseType" />
+	<element name="TranslationDeleteRequest" type="tns:TranslationDeleteRequestType" />
+	<element name="TranslationDeleteResponse" type="tns:TranslationDeleteResponseType" />
+  <!--4 new operations -->
 	<element name="ODCOATranslationOldToNewLookupRequest"           type="tns:ODCOATranslationOldToNewLookupRequestType" />
 	<element name="ODCOATranslationOldToNewLookupResponse"          type="tns:ODCOATranslationOldToNewLookupResponseType" />
 	<element name="ODCOATranslationNewToOldLookupRequest"           type="tns:ODCOATranslationNewToOldLookupRequestType" />
@@ -225,6 +227,16 @@
 		</sequence>
 	</complexType>
 
+	<complexType name="TranslationDeleteRequestType">
+		<annotation>
+			<documentation>Translation Delete Request</documentation>
+		</annotation>
+		<sequence>
+			<element name="translate_value_id" type="string" minOccurs="0"
+					maxOccurs="1" />
+		</sequence>
+	</complexType>
+	
 	<complexType name="BulkTranslationUpsertRequestType">
 		<annotation>
 			<documentation>Bulk Translation Upsert Request</documentation>
@@ -272,6 +284,16 @@
 		</sequence>
 	</complexType>
 
+	<complexType name="TranslationDeleteResponseType">
+		<annotation>
+			<documentation>Translation Delete Response</documentation>
+		</annotation>
+		<sequence>
+			<element name="status" type="tns:StatusType" minOccurs="1"
+				maxOccurs="1" />
+		</sequence>
+	</complexType>
+	
 	<complexType name="BulkTranslationUpsertResponseType">
 		<annotation>
 			<documentation>Bulk Translation Upsert Response</documentation>
