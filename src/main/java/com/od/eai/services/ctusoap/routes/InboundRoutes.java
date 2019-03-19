@@ -51,6 +51,14 @@ public class InboundRoutes extends BaseInboundRouteBuilder {
 		  			.to(ProcessingRoutes.DIRECT_BULK_TRANSLATION_UPSERT_REQUEST_PROCESSING_ROUTE)
 	  			.when(header(CxfConstants.OPERATION_NAME).isEqualTo("translationDeleteRequest"))
 		  			.to(ProcessingRoutes.DIRECT_TRANSLATION_DELETE_REQUEST_PROCESSING_ROUTE)
+         .when(header(CxfConstants.OPERATION_NAME).isEqualTo("ODCOATranslationOldToNewLookup"))
+		  			.to(ProcessingRoutes.DIRECT_ODCOA_TRANSLATION_OLD_TO_NEW_LOOKUP)
+	  			.when(header(CxfConstants.OPERATION_NAME).isEqualTo("ODCOATranslationNewToOldLookup"))
+		  			.to(ProcessingRoutes.DIRECT_ODCOA_TRANSLATION_NEW_TO_OLD_LOOKUP)
+	  			.when(header(CxfConstants.OPERATION_NAME).isEqualTo("CCCOATranslationOldToNewLookup"))
+		  			.to(ProcessingRoutes.DIRECT_CCCOA_TRANSLATION_OLD_TO_NEW_LOOKUP)
+	  			.when(header(CxfConstants.OPERATION_NAME).isEqualTo("CCCOATranslationNewToOldLookup"))
+		  			.to(ProcessingRoutes.DIRECT_CCCOA_TRANSLATION_NEW_TO_OLD_LOOKUP)
 		  		.otherwise() 
 		  			.throwException(new UnsupportedOperationException());
 	}

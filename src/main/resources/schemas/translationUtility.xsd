@@ -14,7 +14,180 @@
 	<element name="BulkTranslationUpsertResponse" type="tns:BulkTranslationUpsertResponseType" />
 	<element name="TranslationDeleteRequest" type="tns:TranslationDeleteRequestType" />
 	<element name="TranslationDeleteResponse" type="tns:TranslationDeleteResponseType" />
+  <!--4 new operations -->
+	<element name="ODCOATranslationOldToNewLookupRequest"           type="tns:ODCOATranslationOldToNewLookupRequestType" />
+	<element name="ODCOATranslationOldToNewLookupResponse"          type="tns:ODCOATranslationOldToNewLookupResponseType" />
+	<element name="ODCOATranslationNewToOldLookupRequest"           type="tns:ODCOATranslationNewToOldLookupRequestType" />
+	<element name="ODCOATranslationNewToOldLookupResponse"          type="tns:ODCOATranslationNewToOldLookupResponseType" />
+	<element name="CCCOATranslationOldToNewLookupRequest"           type="tns:CCCOATranslationOldToNewLookupRequestType" />
+	<element name="CCCOATranslationOldToNewLookupResponse"          type="tns:CCCOATranslationOldToNewLookupResponseType" />
+	<element name="CCCOATranslationNewToOldLookupRequest"           type="tns:CCCOATranslationNewToOldLookupRequestType" />
+	<element name="CCCOATranslationNewToOldLookupResponse"          type="tns:CCCOATranslationNewToOldLookupResponseType" />
+
+	<complexType name="ODCOATranslationOldToNewLookupRequestType">
+		<annotation>
+			<documentation>OD COA Old To New Request</documentation>
+		</annotation>
+		<sequence>
+			<element name="translate_date" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="company" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="cost_center" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="account" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="location" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="inter_company" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="lob" type="string" minOccurs="0" maxOccurs="1" />
+			<element name="future" type="string" minOccurs="0"
+				maxOccurs="1" />
+		</sequence>
+	</complexType>
 	
+	<complexType name="ODCOATranslationOldToNewLookupResponseType">
+		<annotation>
+			<documentation>OD COA Old To New Request</documentation>
+		</annotation>
+		<sequence>
+			<element name="entity" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="lob" type="string" minOccurs="0" maxOccurs="1" />
+			<element name="cost_center" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="account" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="location" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="inter_company" type="string" minOccurs="0"
+				maxOccurs="1" />
+		</sequence>
+	</complexType>
+	
+	<complexType name="ODCOATranslationNewToOldLookupRequestType">
+		<annotation>
+			<documentation>OD COA New To Old Request</documentation>
+		</annotation>
+		<sequence>
+			<element name="translate_date" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="entity" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="lob" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="cost_center" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="account" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="location" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="inter_company" type="string" minOccurs="0" maxOccurs="1" />
+		</sequence>
+	</complexType>
+	
+	<complexType name="ODCOATranslationNewToOldLookupResponseType">
+		<annotation>
+			<documentation>OD COA New To Old Response</documentation>
+		</annotation>
+		<sequence>
+			<element name="company" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="cost_center" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="account" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="location" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="inter_company" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="lob" type="string" minOccurs="0" maxOccurs="1" />
+			<element name="future" type="string" minOccurs="0"
+				maxOccurs="1" />
+		</sequence>
+	</complexType>
+	
+	<complexType name="CCCOATranslationOldToNewLookupRequestType">
+		<annotation>
+			<documentation>CC COA Old To New Request</documentation>
+		</annotation>
+		<sequence>
+			<element name="translate_date" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="legal_entity" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="lob" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="cost_center" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="geo" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="product" type="string" minOccurs="0"
+				maxOccurs="1" />
+		</sequence>
+	</complexType>
+	
+	<complexType name="CCCOATranslationOldToNewLookupResponseType">
+		<annotation>
+			<documentation>CC COA Old To New Response</documentation>
+		</annotation>
+		<sequence>
+			<element name="entity" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="cost_center" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="account" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="location" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="inter_company" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="lob" type="string" minOccurs="0" maxOccurs="1" />
+		</sequence>
+	</complexType>
+	
+	<complexType name="CCCOATranslationNewToOldLookupRequestType">
+		<annotation>
+			<documentation>CC COA New To Old Request</documentation>
+		</annotation>
+		<sequence>
+			<element name="translate_date" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="legal_entity" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="lob" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="cost_center" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="account" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="geo" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="product" type="string" minOccurs="0"
+				maxOccurs="1" />
+		</sequence>
+	</complexType>
+	
+	<complexType name="CCCOATranslationNewToOldLookupResponseType">
+		<annotation>
+			<documentation>CC COA New To Old Response</documentation>
+		</annotation>
+		<sequence>
+			<element name="entity" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="cost_center" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="account" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="location" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="inter_company" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="lob" type="string" minOccurs="0" maxOccurs="1" />
+		</sequence>
+	</complexType>
+
 	<complexType name="TranslationLookupRequestType">
 		<annotation>
 			<documentation>Translation lookup Request</documentation>
@@ -40,14 +213,14 @@
 
 		</sequence>
 	</complexType>
-	
+
 	<complexType name="TranslationUpsertRequestType">
 		<annotation>
 			<documentation>Translation Upsert Request</documentation>
 		</annotation>
 		<sequence>
-			<!-- <element name="traslationHeaderType" type="tns:TraslationHeaderType" minOccurs="1"
-				maxOccurs="1" /> -->
+			<!-- <element name="traslationHeaderType" type="tns:TraslationHeaderType" 
+				minOccurs="1" maxOccurs="1" /> -->
 			<element name="upsertRequest" type="tns:UpsertRequestType"
 				minOccurs="1" maxOccurs="1" />
 
@@ -69,14 +242,14 @@
 			<documentation>Bulk Translation Upsert Request</documentation>
 		</annotation>
 		<sequence>
-			<!-- <element name="traslationHeaderType" type="tns:TraslationHeaderType" minOccurs="1"
-				maxOccurs="1" /> -->
+			<!-- <element name="traslationHeaderType" type="tns:TraslationHeaderType" 
+				minOccurs="1" maxOccurs="1" /> -->
 			<element name="upsertRequest" type="tns:UpsertRequestType"
 				minOccurs="1" maxOccurs="unbounded" />
 
 		</sequence>
 	</complexType>
-	
+
 	<complexType name="TranslationLookupResponseType">
 		<annotation>
 			<documentation>Translation lookup Response</documentation>
@@ -85,7 +258,7 @@
 			<element name="result" type="tns:ResultType" minOccurs="1"
 				maxOccurs="1" />
 			<element name="header" type="tns:HeaderType" minOccurs="1"
-				maxOccurs="1" />	
+				maxOccurs="1" />
 		</sequence>
 	</complexType>
 
@@ -130,7 +303,7 @@
 				maxOccurs="1" />
 		</sequence>
 	</complexType>
-	
+
 	<complexType name="HeaderType">
 		<annotation>
 			<documentation>Header type</documentation>
@@ -143,37 +316,37 @@
 				minOccurs="0" />
 		</sequence>
 	</complexType>
-	
+
 	<complexType name="TraslationHeaderType">
 		<annotation>
 			<documentation>Upsert Header type</documentation>
 		</annotation>
 		<complexContent>
-	        <extension base="tns:HeaderType">
-	            <sequence>
-	            	<element name="translate_value_id" type="string" minOccurs="0"
-						maxOccurs="1" />
+			<extension base="tns:HeaderType">
+				<sequence>
+					<element name="translate_value_id" type="string"
+						minOccurs="0" maxOccurs="1" />
 					<element name="obsolete_flag" type="string" minOccurs="0"
 						maxOccurs="1" />
-					<element name="translation_enabled_flag" type="string" minOccurs="0"
-						maxOccurs="1" />
-					<element name="translation_start_date_active" type="string" minOccurs="0"
-						maxOccurs="1" />
-					<element name="translation_end_date_active" type="string" minOccurs="0"
-						maxOccurs="1" />
-					<element name="trans_value_enabled_flag" type="string" minOccurs="0"
-						maxOccurs="1" />
-					<element name="trans_value_start_date_active" type="string" minOccurs="0"
-						maxOccurs="1" />
-					<element name="trans_value_end_date_active" type="string" minOccurs="0"
-						maxOccurs="1" />
+					<element name="translation_enabled_flag" type="string"
+						minOccurs="0" maxOccurs="1" />
+					<element name="translation_start_date_active" type="string"
+						minOccurs="0" maxOccurs="1" />
+					<element name="translation_end_date_active" type="string"
+						minOccurs="0" maxOccurs="1" />
+					<element name="trans_value_enabled_flag" type="string"
+						minOccurs="0" maxOccurs="1" />
+					<element name="trans_value_start_date_active" type="string"
+						minOccurs="0" maxOccurs="1" />
+					<element name="trans_value_end_date_active" type="string"
+						minOccurs="0" maxOccurs="1" />
 					<element name="created_by" type="string" minOccurs="0"
 						maxOccurs="1" />
 					<element name="creation_date" type="string" minOccurs="0"
 						maxOccurs="1" />
 				</sequence>
-	        </extension>
-    	</complexContent>
+			</extension>
+		</complexContent>
 	</complexType>
 
 	<complexType name="CriteriaType">
@@ -214,10 +387,10 @@
 		<annotation>
 			<documentation>Upsert Request type</documentation>
 		</annotation>
-		
-        <sequence>
-			<element name="traslationHeaderType" type="tns:TraslationHeaderType" minOccurs="1"
-				maxOccurs="1" />
+
+		<sequence>
+			<element name="traslationHeaderType"
+				type="tns:TraslationHeaderType" minOccurs="1" maxOccurs="1" />
 			<element name="translationName" type="string" minOccurs="0"
 				maxOccurs="1" />
 			<element name="translationDate" type="string" minOccurs="0"
@@ -304,7 +477,7 @@
 				maxOccurs="1" />
 		</sequence>
 	</complexType>
-	
+
 	<complexType name="ResultType">
 		<annotation>
 			<documentation>Result type</documentation>
