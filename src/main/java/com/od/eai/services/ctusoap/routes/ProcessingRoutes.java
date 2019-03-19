@@ -9,12 +9,20 @@ import org.springframework.stereotype.Component;
 
 import com.od.eai.framework.base.routes.BaseProcessingRouteBuilder;
 import com.od.eai.framework.core.dispatch.Configurator;
+import com.od.eai.services.ctusoap.assembler.CCCOATranslationNewToOldLookupAssembler;
+import com.od.eai.services.ctusoap.assembler.CCCOATranslationOldToNewLookupAssembler;
+import com.od.eai.services.ctusoap.assembler.ODCOATranslationNewToOldLookupAssembler;
+import com.od.eai.services.ctusoap.assembler.ODCOATranslationOldToNewLookupAssembler;
 import com.od.eai.services.ctusoap.exception.handler.ExceptionMessageHandler;
 import com.od.eai.services.ctusoap.util.DataFormatUtil;
 import com.officedepot.eai.service.translationutility.BulkTranslationLookupRequestType;
 import com.officedepot.eai.service.translationutility.BulkTranslationLookupResponseType;
 import com.officedepot.eai.service.translationutility.BulkTranslationUpsertRequestType;
 import com.officedepot.eai.service.translationutility.BulkTranslationUpsertResponseType;
+import com.officedepot.eai.service.translationutility.CCCOATranslationNewToOldLookupRequestType;
+import com.officedepot.eai.service.translationutility.CCCOATranslationOldToNewLookupRequestType;
+import com.officedepot.eai.service.translationutility.ODCOATranslationNewToOldLookupRequestType;
+import com.officedepot.eai.service.translationutility.ODCOATranslationOldToNewLookupRequestType;
 import com.officedepot.eai.service.translationutility.TranslationLookupRequestType;
 import com.officedepot.eai.service.translationutility.TranslationLookupResponseType;
 import com.officedepot.eai.service.translationutility.TranslationUpsertRequestType;
@@ -32,6 +40,10 @@ public class ProcessingRoutes extends BaseProcessingRouteBuilder {
 	public static final String DIRECT_TRANSLATION_UPSERT_REQUEST_PROCESSING_ROUTE_ID 		= "TRANSLATION_UPSERT_REQUEST_PROCESSING_ROUTE";
 	public static final String DIRECT_BULK_TRANSLATION_UPSERT_REQUEST_PROCESSING_ROUTE 		= "direct:bulkTranslationUpsertRequestProcessingRoute";
 	public static final String DIRECT_BULK_TRANSLATION_UPSERT_REQUEST_PROCESSING_ROUTE_ID 	= "BULK_TRANSLATION_UPSERT_REQUEST_PROCESSING_ROUTE";
+	public static final String DIRECT_CCCOA_TRANSLATION_NEW_TO_OLD_LOOKUP 					= "direct:CCCOATranslationNewToOldLookup";
+	public static final String DIRECT_CCCOA_TRANSLATION_OLD_TO_NEW_LOOKUP 					= "direct:CCCOATranslationOldToNewLookup";
+	public static final String DIRECT_ODCOA_TRANSLATION_NEW_TO_OLD_LOOKUP 					= "direct:ODCOATranslationNewToOldLookup";
+	public static final String DIRECT_ODCOA_TRANSLATION_OLD_TO_NEW_LOOKUP 					= "direct:ODCOATranslationOldToNewLookup";
 	
 	@Value("${ctu.soap.translation.request.processing.route}")
 	private String ctuSoapProcessingRouteForLookup;
@@ -104,6 +116,43 @@ public class ProcessingRoutes extends BaseProcessingRouteBuilder {
 			.to(OutboundRoutes.HYSTRIX_ENABLED_CTU_INTERNAL_ROUTE)
 			.unmarshal().json(JsonLibrary.Jackson, BulkTranslationUpsertResponseType.class)
 			.log(LoggingLevel.INFO, "Processing For Bulk Translation Upsert Finished !!!");
+		
+		//ODCOATranslationOldToNewLookup
+		from(DIRECT_ODCOA_TRANSLATION_OLD_TO_NEW_LOOKUP)
+			.routeId(Configurator.getStepId("ODCOATranslationOldToNewLookupRoute"))
+			.routeDescription("This Receives TODCOATranslationOldToNewLookup.")
+			.log(LoggingLevel.INFO, "Processing Started for TODCOATranslationOldToNewLookup CXF Endpoint...")
+			.convertBodyTo(ODCOATranslationOldToNewLookupRequestType.class)
+			.bean(ODCOATranslationOldToNewLookupAssembler.class, "assembler")
+			.log(LoggingLevel.INFO, "Processing For ODCOATranslationOldToNewLookupRoute Finished !!!");
+		
+		
+		//ODCOATranslationNewToOldLookup
+		from(DIRECT_ODCOA_TRANSLATION_NEW_TO_OLD_LOOKUP)
+			.routeId(Configurator.getStepId("ODCOATranslationNewToOldLookupRoute"))
+			.routeDescription("This Receives ODCOATranslationNewToOldLookup.")
+			.log(LoggingLevel.INFO, "Processing Started for Translation Lookup CXF Endpoint...")
+			.convertBodyTo(ODCOATranslationNewToOldLookupRequestType.class)
+			.bean(ODCOATranslationNewToOldLookupAssembler.class, "assembler")
+			.log(LoggingLevel.INFO, "Processing For ODCOATranslationNewToOldLookupRoute Finished !!!");
+		
+		//CCCOATranslationOldToNewLookup
+		from(DIRECT_CCCOA_TRANSLATION_OLD_TO_NEW_LOOKUP)
+			.routeId(Configurator.getStepId("CCCOATranslationOldToNewLookupRoute"))
+			.routeDescription("This Receives CCCOATranslationOldToNewLookup.")
+			.log(LoggingLevel.INFO, "Processing Started for Translation Lookup CXF Endpoint...")
+			.convertBodyTo(CCCOATranslationOldToNewLookupRequestType.class)
+			.bean(CCCOATranslationOldToNewLookupAssembler.class, "assembler")
+			.log(LoggingLevel.INFO, "Processing For CCCOATranslationOldToNewLookupRoute Finished !!!");
+		
+		//CCCOATranslationNewToOldLookup
+		from(DIRECT_CCCOA_TRANSLATION_NEW_TO_OLD_LOOKUP)
+			.routeId(Configurator.getStepId("CCCOATranslationNewToOldLookupRoute"))
+			.routeDescription("This Receives CCCOATranslationNewToOldLookup.")
+			.log(LoggingLevel.INFO, "Processing Started for Translation Lookup CXF Endpoint...")
+			.convertBodyTo(CCCOATranslationNewToOldLookupRequestType.class)
+			.bean(CCCOATranslationNewToOldLookupAssembler.class, "assembler")
+			.log(LoggingLevel.INFO, "Processing For CCCOATranslationOldToNewLookupRoute Finished !!!");
 				
 	}
 
