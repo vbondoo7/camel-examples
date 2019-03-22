@@ -21,6 +21,7 @@ import com.officedepot.eai.service.translationutility.BulkTranslationUpsertReque
 import com.officedepot.eai.service.translationutility.BulkTranslationUpsertResponseType;
 import com.officedepot.eai.service.translationutility.CCCOATranslationNewToOldLookupRequestType;
 import com.officedepot.eai.service.translationutility.CCCOATranslationOldToNewLookupRequestType;
+import com.officedepot.eai.service.translationutility.CCCOATranslationOldToNewLookupResponseType;
 import com.officedepot.eai.service.translationutility.ODCOATranslationNewToOldLookupRequestType;
 import com.officedepot.eai.service.translationutility.ODCOATranslationOldToNewLookupRequestType;
 import com.officedepot.eai.service.translationutility.TranslationDeleteRequestType;
@@ -44,7 +45,7 @@ public class ProcessingRoutes extends BaseProcessingRouteBuilder {
 	public static final String DIRECT_BULK_TRANSLATION_UPSERT_REQUEST_PROCESSING_ROUTE_ID 	= "BULK_TRANSLATION_UPSERT_REQUEST_PROCESSING_ROUTE";
 	public static final String DIRECT_TRANSLATION_DELETE_REQUEST_PROCESSING_ROUTE 			= "direct:translationDeleteRequestProcessingRoute";
 	private static final String DIRECT_TRANSLATION_DELETE_REQUEST_PROCESSING_ROUTE_ID 		= "TRANSLATION_DELETE_REQUEST_PROCESSING_ROUTE";
-  public static final String DIRECT_CCCOA_TRANSLATION_NEW_TO_OLD_LOOKUP 					= "direct:CCCOATranslationNewToOldLookup";
+	public static final String DIRECT_CCCOA_TRANSLATION_NEW_TO_OLD_LOOKUP 					= "direct:CCCOATranslationNewToOldLookup";
 	public static final String DIRECT_CCCOA_TRANSLATION_OLD_TO_NEW_LOOKUP 					= "direct:CCCOATranslationOldToNewLookup";
 	public static final String DIRECT_ODCOA_TRANSLATION_NEW_TO_OLD_LOOKUP 					= "direct:ODCOATranslationNewToOldLookup";
 	public static final String DIRECT_ODCOA_TRANSLATION_OLD_TO_NEW_LOOKUP 					= "direct:ODCOATranslationOldToNewLookup";
@@ -70,6 +71,9 @@ public class ProcessingRoutes extends BaseProcessingRouteBuilder {
 	@Value("${ctu.delete.service.url}")
 	private String ctuDeleteUrl;
 	
+	@Value("${ctu.ccCOAOldToNew.translation.lookup.url}")
+	private String ccCOAOldToNewLookupUrl;
+	
 	@Override
 	public void configureRoutes() throws Exception {
 		//TranslationLookupRequest
@@ -79,7 +83,7 @@ public class ProcessingRoutes extends BaseProcessingRouteBuilder {
 			.log(LoggingLevel.INFO, "Processing Started for Translation Lookup CXF Endpoint...")
 			.convertBodyTo(TranslationLookupRequestType.class)
 			.marshal(DataFormatUtil.dataFormatInstance(BulkTranslationLookupRequestType.class))
-			.log(LoggingLevel.INFO, "Body after conversion to Json: ${body}")
+			.log(LoggingLevel.INFO, "TranslationLookupRequestTypeBody after conversion to Json: ${body}")
 			.setProperty(CTU_INTERNAL_URL, constant(ctuLookupTranslationReqServiceURL))
 			.to(OutboundRoutes.HYSTRIX_ENABLED_CTU_INTERNAL_ROUTE)
 			.unmarshal().json(JsonLibrary.Jackson, TranslationLookupResponseType.class)
@@ -92,7 +96,7 @@ public class ProcessingRoutes extends BaseProcessingRouteBuilder {
 			.log(LoggingLevel.INFO, "Processing Started for Bulk Translation Lookup CXF Endpoint...")
 			.convertBodyTo(BulkTranslationLookupRequestType.class)
 			.marshal(DataFormatUtil.dataFormatInstance(BulkTranslationLookupRequestType.class))
-			.log(LoggingLevel.INFO, "Body after conversion to Json: ${body}")
+			.log(LoggingLevel.INFO, "BulkTranslationLookupRequestType Body after conversion to Json: ${body}")
 			.setProperty(CTU_INTERNAL_URL, constant(ctuLookupBulkTranslationReqServiceURL))
 			.to(OutboundRoutes.HYSTRIX_ENABLED_CTU_INTERNAL_ROUTE)
 			.unmarshal().json(JsonLibrary.Jackson, BulkTranslationLookupResponseType.class)
@@ -105,7 +109,7 @@ public class ProcessingRoutes extends BaseProcessingRouteBuilder {
 			.log(LoggingLevel.INFO, "Processing Started for Translation Upsert CXF Endpoint...")
 			.convertBodyTo(TranslationUpsertRequestType.class)
 			.marshal(DataFormatUtil.dataFormatInstance(TranslationUpsertRequestType.class))
-			.log(LoggingLevel.INFO, "Body after conversion to Json: ${body}")
+			.log(LoggingLevel.INFO, "TranslationUpsertRequestType Body after conversion to Json: ${body}")
 			.setProperty(CTU_INTERNAL_URL, constant(ctuUpsertUrl))
 			.to(OutboundRoutes.HYSTRIX_ENABLED_CTU_INTERNAL_ROUTE)
 			.unmarshal().json(JsonLibrary.Jackson, TranslationUpsertResponseType.class)
@@ -118,7 +122,7 @@ public class ProcessingRoutes extends BaseProcessingRouteBuilder {
 			.log(LoggingLevel.INFO, "Processing Started for Bulk Translation Upsert CXF Endpoint...")
 			.convertBodyTo(BulkTranslationUpsertRequestType.class)
 			.marshal(DataFormatUtil.dataFormatInstance(BulkTranslationUpsertRequestType.class))
-			.log(LoggingLevel.INFO, "Body after conversion to Json: ${body}")
+			.log(LoggingLevel.INFO, "BulkTranslationUpsertRequestType Body after conversion to Json: ${body}")
 			.setProperty(CTU_INTERNAL_URL, constant(ctuBulkUpsertUrl))
 			.to(OutboundRoutes.HYSTRIX_ENABLED_CTU_INTERNAL_ROUTE)
 			.unmarshal().json(JsonLibrary.Jackson, BulkTranslationUpsertResponseType.class)
@@ -131,27 +135,26 @@ public class ProcessingRoutes extends BaseProcessingRouteBuilder {
 			.log(LoggingLevel.INFO, "Processing Started for Translation Delete CXF Endpoint...")
 			.convertBodyTo(TranslationDeleteRequestType.class)
 			.marshal(DataFormatUtil.dataFormatInstance(TranslationDeleteRequestType.class))
-			.log(LoggingLevel.INFO, "Body after conversion to Json: ${body}")
+			.log(LoggingLevel.INFO, "TranslationDeleteRequestType Body after conversion to Json: ${body}")
 			.setProperty(CTU_INTERNAL_URL, constant(ctuDeleteUrl))
 			.to(OutboundRoutes.HYSTRIX_ENABLED_CTU_INTERNAL_ROUTE)
 			.unmarshal().json(JsonLibrary.Jackson, TranslationDeleteResponseType.class)
 			.log(LoggingLevel.INFO, "Processing For Translation Delete Finished !!!");
     
-    //ODCOATranslationOldToNewLookup
+		//ODCOATranslationOldToNewLookup
 		from(DIRECT_ODCOA_TRANSLATION_OLD_TO_NEW_LOOKUP)
 			.routeId(Configurator.getStepId("ODCOATranslationOldToNewLookupRoute"))
 			.routeDescription("This Receives TODCOATranslationOldToNewLookup.")
-			.log(LoggingLevel.INFO, "Processing Started for TODCOATranslationOldToNewLookup CXF Endpoint...")
+			.log(LoggingLevel.INFO, "Processing Started for ODCOATranslationOldToNewLookup CXF Endpoint...")
 			.convertBodyTo(ODCOATranslationOldToNewLookupRequestType.class)
 			.bean(ODCOATranslationOldToNewLookupAssembler.class, "assembler")
 			.log(LoggingLevel.INFO, "Processing For ODCOATranslationOldToNewLookupRoute Finished !!!");
-		
 		
 		//ODCOATranslationNewToOldLookup
 		from(DIRECT_ODCOA_TRANSLATION_NEW_TO_OLD_LOOKUP)
 			.routeId(Configurator.getStepId("ODCOATranslationNewToOldLookupRoute"))
 			.routeDescription("This Receives ODCOATranslationNewToOldLookup.")
-			.log(LoggingLevel.INFO, "Processing Started for Translation Lookup CXF Endpoint...")
+			.log(LoggingLevel.INFO, "Processing Started for ODCOATranslationNewToOldLookup Lookup CXF Endpoint...")
 			.convertBodyTo(ODCOATranslationNewToOldLookupRequestType.class)
 			.bean(ODCOATranslationNewToOldLookupAssembler.class, "assembler")
 			.log(LoggingLevel.INFO, "Processing For ODCOATranslationNewToOldLookupRoute Finished !!!");
@@ -160,19 +163,24 @@ public class ProcessingRoutes extends BaseProcessingRouteBuilder {
 		from(DIRECT_CCCOA_TRANSLATION_OLD_TO_NEW_LOOKUP)
 			.routeId(Configurator.getStepId("CCCOATranslationOldToNewLookupRoute"))
 			.routeDescription("This Receives CCCOATranslationOldToNewLookup.")
-			.log(LoggingLevel.INFO, "Processing Started for Translation Lookup CXF Endpoint...")
+			.log(LoggingLevel.INFO, "Processing Started for CCCOATranslationOldToNewLookup Lookup CXF Endpoint...")
 			.convertBodyTo(CCCOATranslationOldToNewLookupRequestType.class)
-			.bean(CCCOATranslationOldToNewLookupAssembler.class, "assembler")
+			//.bean(CCCOATranslationOldToNewLookupAssembler.class, "assembler")
+			.marshal(DataFormatUtil.dataFormatInstance(CCCOATranslationOldToNewLookupRequestType.class))
+			.log(LoggingLevel.INFO, "CCCOATranslationOldToNewLookupRequestType Body after conversion to Json: ${body}")
+			.setProperty(CTU_INTERNAL_URL, constant(ccCOAOldToNewLookupUrl))
+			.to(OutboundRoutes.HYSTRIX_ENABLED_CTU_INTERNAL_ROUTE)
+			.unmarshal().json(JsonLibrary.Jackson, CCCOATranslationOldToNewLookupResponseType.class)
 			.log(LoggingLevel.INFO, "Processing For CCCOATranslationOldToNewLookupRoute Finished !!!");
 		
 		//CCCOATranslationNewToOldLookup
 		from(DIRECT_CCCOA_TRANSLATION_NEW_TO_OLD_LOOKUP)
 			.routeId(Configurator.getStepId("CCCOATranslationNewToOldLookupRoute"))
 			.routeDescription("This Receives CCCOATranslationNewToOldLookup.")
-			.log(LoggingLevel.INFO, "Processing Started for Translation Lookup CXF Endpoint...")
+			.log(LoggingLevel.INFO, "Processing Started for CCCOATranslationNewToOldLookup Lookup CXF Endpoint...")
 			.convertBodyTo(CCCOATranslationNewToOldLookupRequestType.class)
 			.bean(CCCOATranslationNewToOldLookupAssembler.class, "assembler")
-			.log(LoggingLevel.INFO, "Processing For CCCOATranslationOldToNewLookupRoute Finished !!!");
+			.log(LoggingLevel.INFO, "Processing For CCCOATranslationNewToOldLookupRoute Finished !!!");
 	}
 
 	@Override
@@ -181,7 +189,6 @@ public class ProcessingRoutes extends BaseProcessingRouteBuilder {
 			.id(Configurator.getStepId("exceptionProcessingRoute"))
 			.log(LoggingLevel.ERROR, "Exception occurred : ${exception.stacktrace}")
 			.bean(ExceptionMessageHandler.class, "handleFallback");
-		
 	}
 
 }

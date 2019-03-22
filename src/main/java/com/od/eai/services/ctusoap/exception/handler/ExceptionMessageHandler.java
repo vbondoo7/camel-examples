@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.od.eai.services.ctusoap.util.FaultUtil;
 import com.officedepot.eai.service.translationutility.BulkTranslationLookupResponseType;
 import com.officedepot.eai.service.translationutility.BulkTranslationUpsertResponseType;
 import com.officedepot.eai.service.translationutility.ResultType;
@@ -64,6 +65,10 @@ public class ExceptionMessageHandler {
 				TranslationDeleteResponseType translationDeleteResponse = new TranslationDeleteResponseType();
 				translationDeleteResponse.setStatus(getStatusTypeWithFailure(exception.getMessage()));
 				exchange.getOut().setBody(objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(translationDeleteResponse));
+			}
+			else { //if(operationName.trim().equalsIgnoreCase("CCCOATranslationOldToNewLookup")) {
+				exchange.getOut().setFault(true);
+				exchange.getOut().setBody(FaultUtil.createServerFault("ERROR", exception.getMessage()));
 			}
 			
 			exchange.getOut().setHeader(Exchange.HTTP_RESPONSE_CODE, 500);
