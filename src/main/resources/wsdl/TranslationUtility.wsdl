@@ -17,10 +17,10 @@
 		<wsdl:part element="xsd1:TranslationLookupResponse" name="parameters" />
 	</wsdl:message>
 	<wsdl:message name="bulkTranslationLookUpRequestRequest">
-		<wsdl:part name="parameters" element="xsd1:BulkTranslationLookupRequest" />
+		<wsdl:part name="parameters" element="xsd1:bulkTranslationLookupRequest" />
 	</wsdl:message>
 	<wsdl:message name="bulkTranslationLookUpRequestResponse">
-		<wsdl:part name="parameters" element="xsd1:BulkTranslationLookupResponse" />
+		<wsdl:part name="parameters" element="xsd1:bulkTranslationLookupResponse" />
 	</wsdl:message>
 	<wsdl:message name="translationUpsertRequestRequest">
 		<wsdl:part element="xsd1:TranslationUpsertRequest" name="parameters" />
@@ -29,10 +29,10 @@
 		<wsdl:part element="xsd1:TranslationUpsertResponse" name="parameters" />
 	</wsdl:message>
 	<wsdl:message name="bulkTranslationUpsertRequestRequest">
-		<wsdl:part name="parameters" element="xsd1:BulkTranslationUpsertRequest" />
+		<wsdl:part name="parameters" element="xsd1:bulkTranslationUpsertRequest" />
 	</wsdl:message>
 	<wsdl:message name="bulkTranslationUpsertRequestResponse">
-		<wsdl:part name="parameters" element="xsd1:BulkTranslationUpsertResponse" />
+		<wsdl:part name="parameters" element="xsd1:bulkTranslationUpsertResponse" />
 	</wsdl:message>
 
   <wsdl:message name="translationDeleteRequestRequest">
@@ -43,32 +43,32 @@
   </wsdl:message>
   
   <wsdl:message name="ODCOATranslationOldToNewLookupRequest">
-		<wsdl:part name="parameters" element="xsd1:ODCOATranslationOldToNewLookupRequest" />
+		<wsdl:part name="parameters" element="xsd1:odcoaTranslationOldToNewLookupRequest" />
 	</wsdl:message>
   
 	<wsdl:message name="ODCOATranslationOldToNewLookupResponse">
-		<wsdl:part name="parameters" element="xsd1:ODCOATranslationOldToNewLookupResponse" />
+		<wsdl:part name="parameters" element="xsd1:odcoaTranslationOldToNewLookupResponse" />
 	</wsdl:message>
 	
 	<wsdl:message name="ODCOATranslationNewToOldLookupRequest">
-		<wsdl:part name="parameters" element="xsd1:ODCOATranslationNewToOldLookupRequest" />
+		<wsdl:part name="parameters" element="xsd1:odcoaTranslationNewToOldLookupRequest" />
 	</wsdl:message>
 	<wsdl:message name="ODCOATranslationNewToOldLookupResponse">
-		<wsdl:part name="parameters" element="xsd1:ODCOATranslationNewToOldLookupResponse" />
+		<wsdl:part name="parameters" element="xsd1:odcoaTranslationNewToOldLookupResponse" />
 	</wsdl:message>
 	
 	<wsdl:message name="CCCOATranslationOldToNewLookupRequest">
-		<wsdl:part name="parameters" element="xsd1:CCCOATranslationOldToNewLookupRequest" />
+		<wsdl:part name="parameters" element="xsd1:cccoaTranslationOldToNewLookupRequest" />
 	</wsdl:message>
 	<wsdl:message name="CCCOATranslationOldToNewLookupResponse">
-		<wsdl:part name="parameters" element="xsd1:CCCOATranslationOldToNewLookupResponse" />
+		<wsdl:part name="parameters" element="xsd1:cccoaTranslationOldToNewLookupResponse" />
 	</wsdl:message>
 	
 	<wsdl:message name="CCCOATranslationNewToOldLookupRequest">
-		<wsdl:part name="parameters" element="xsd1:CCCOATranslationNewToOldLookupRequest" />
+		<wsdl:part name="parameters" element="xsd1:cccoaTranslationNewToOldLookupRequest" />
 	</wsdl:message>
 	<wsdl:message name="CCCOATranslationNewToOldLookupResponse">
-		<wsdl:part name="parameters" element="xsd1:CCCOATranslationNewToOldLookupResponse" />
+		<wsdl:part name="parameters" element="xsd1:cccoaTranslationNewToOldLookupResponse" />
 	</wsdl:message>
 	
 	<wsdl:portType name="translationUtilityService">

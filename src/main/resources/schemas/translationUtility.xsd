@@ -6,23 +6,23 @@
 
 	<element name="TranslationLookupRequest" type="tns:TranslationLookupRequestType" />
 	<element name="TranslationLookupResponse" type="tns:TranslationLookupResponseType" />
-	<element name="BulkTranslationLookupResponse" type="tns:BulkTranslationLookupResponseType" />
-	<element name="BulkTranslationLookupRequest" type="tns:BulkTranslationLookupRequestType" />
+	<element name="bulkTranslationLookupResponse" type="tns:BulkTranslationLookupResponseType" />
+	<element name="bulkTranslationLookupRequest" type="tns:BulkTranslationLookupRequestType" />
 	<element name="TranslationUpsertRequest" type="tns:TranslationUpsertRequestType" />
 	<element name="TranslationUpsertResponse" type="tns:TranslationUpsertResponseType" />
-	<element name="BulkTranslationUpsertRequest" type="tns:BulkTranslationUpsertRequestType" />
-	<element name="BulkTranslationUpsertResponse" type="tns:BulkTranslationUpsertResponseType" />
+	<element name="bulkTranslationUpsertRequest" type="tns:BulkTranslationUpsertRequestType" />
+	<element name="bulkTranslationUpsertResponse" type="tns:BulkTranslationUpsertResponseType" />
 	<element name="TranslationDeleteRequest" type="tns:TranslationDeleteRequestType" />
 	<element name="TranslationDeleteResponse" type="tns:TranslationDeleteResponseType" />
   <!--4 new operations -->
-	<element name="ODCOATranslationOldToNewLookupRequest"           type="tns:ODCOATranslationOldToNewLookupRequestType" />
-	<element name="ODCOATranslationOldToNewLookupResponse"          type="tns:ODCOATranslationOldToNewLookupResponseType" />
-	<element name="ODCOATranslationNewToOldLookupRequest"           type="tns:ODCOATranslationNewToOldLookupRequestType" />
-	<element name="ODCOATranslationNewToOldLookupResponse"          type="tns:ODCOATranslationNewToOldLookupResponseType" />
-	<element name="CCCOATranslationOldToNewLookupRequest"           type="tns:CCCOATranslationOldToNewLookupRequestType" />
-	<element name="CCCOATranslationOldToNewLookupResponse"          type="tns:CCCOATranslationOldToNewLookupResponseType" />
-	<element name="CCCOATranslationNewToOldLookupRequest"           type="tns:CCCOATranslationNewToOldLookupRequestType" />
-	<element name="CCCOATranslationNewToOldLookupResponse"          type="tns:CCCOATranslationNewToOldLookupResponseType" />
+	<element name="odcoaTranslationOldToNewLookupRequest"           type="tns:ODCOATranslationOldToNewLookupRequestType" />
+	<element name="odcoaTranslationOldToNewLookupResponse"          type="tns:ODCOATranslationOldToNewLookupResponseType" />
+	<element name="odcoaTranslationNewToOldLookupRequest"           type="tns:ODCOATranslationNewToOldLookupRequestType" />
+	<element name="odcoaTranslationNewToOldLookupResponse"          type="tns:ODCOATranslationNewToOldLookupResponseType" />
+	<element name="cccoaTranslationOldToNewLookupRequest"           type="tns:CCCOATranslationOldToNewLookupRequestType" />
+	<element name="cccoaTranslationOldToNewLookupResponse"          type="tns:CCCOATranslationOldToNewLookupResponseType" />
+	<element name="cccoaTranslationNewToOldLookupRequest"           type="tns:CCCOATranslationNewToOldLookupRequestType" />
+	<element name="cccoaTranslationNewToOldLookupResponse"          type="tns:CCCOATranslationNewToOldLookupResponseType" />
 
 	<complexType name="ODCOATranslationOldToNewLookupRequestType">
 		<annotation>
