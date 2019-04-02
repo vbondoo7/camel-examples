@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 import com.od.eai.framework.base.routes.BaseInboundRouteBuilder;
 import com.od.eai.framework.core.dispatch.Configurator;
 import com.od.eai.services.ctusoap.exception.handler.ExceptionMessageHandler;
+import com.od.eai.services.ctusoap.util.FaultUtil;
 
 @Component("ctusoapInboundRoutes")
 public class InboundRoutes extends BaseInboundRouteBuilder {
@@ -65,10 +66,10 @@ public class InboundRoutes extends BaseInboundRouteBuilder {
 
 	@Override
 	protected void configureExceptions() {
-		/*onException(Exception.class)
+		onException(Exception.class)
 			.id(Configurator.getStepId("exceptionInboundRoute"))
 			.log(LoggingLevel.ERROR, "Exception occurred : ${exception.stacktrace}")
-			.bean(ExceptionMessageHandler.class, "handle");*/
+			.setFaultBody(simple("${exception.message}"));
 	}
 
 }
