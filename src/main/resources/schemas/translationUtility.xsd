@@ -121,6 +121,8 @@
 				maxOccurs="1" />
 			<element name="cost_center" type="string" minOccurs="0"
 				maxOccurs="1" />
+			<element name="account" type="string" minOccurs="0"
+				maxOccurs="1" />
 			<element name="geo" type="string" minOccurs="0"
 				maxOccurs="1" />
 			<element name="product" type="string" minOccurs="0"
@@ -135,6 +137,7 @@
 		<sequence>
 			<element name="entity" type="string" minOccurs="0"
 				maxOccurs="1" />
+			<element name="lob" type="string" minOccurs="0" maxOccurs="1" />
 			<element name="cost_center" type="string" minOccurs="0"
 				maxOccurs="1" />
 			<element name="account" type="string" minOccurs="0"
@@ -143,7 +146,6 @@
 				maxOccurs="1" />
 			<element name="inter_company" type="string" minOccurs="0"
 				maxOccurs="1" />
-			<element name="lob" type="string" minOccurs="0" maxOccurs="1" />
 		</sequence>
 	</complexType>
 	
