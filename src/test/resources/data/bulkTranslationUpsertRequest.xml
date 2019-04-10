@@ -1,4 +1,4 @@
-<tran:BulkTranslationUpsertRequest xmlns:tran="http://eai.officedepot.com/service/TranslationUtility">
+<tran:bulkTranslationUpsertRequest xmlns:tran="http://eai.officedepot.com/service/TranslationUtility">
    <!--1 or more repetitions:-->
    <tran:upsertRequest>
       <tran:traslationHeaderType>
@@ -222,4 +222,4 @@
       <!--Optional:-->
       <tran:targetField30>?</tran:targetField30>
    </tran:upsertRequest>
-</tran:BulkTranslationUpsertRequest>
+</tran:bulkTranslationUpsertRequest>

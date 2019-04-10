@@ -4,31 +4,33 @@
 	xmlns:tns="http://eai.officedepot.com/service/TranslationUtility"
 	elementFormDefault="qualified">
 
-	<element name="TranslationLookupRequest" type="tns:TranslationLookupRequestType" />
-	<element name="TranslationLookupResponse" type="tns:TranslationLookupResponseType" />
-	<element name="BulkTranslationLookupResponse" type="tns:BulkTranslationLookupResponseType" />
-	<element name="BulkTranslationLookupRequest" type="tns:BulkTranslationLookupRequestType" />
-	<element name="TranslationUpsertRequest" type="tns:TranslationUpsertRequestType" />
-	<element name="TranslationUpsertResponse" type="tns:TranslationUpsertResponseType" />
-	<element name="BulkTranslationUpsertRequest" type="tns:BulkTranslationUpsertRequestType" />
-	<element name="BulkTranslationUpsertResponse" type="tns:BulkTranslationUpsertResponseType" />
-	<element name="TranslationDeleteRequest" type="tns:TranslationDeleteRequestType" />
-	<element name="TranslationDeleteResponse" type="tns:TranslationDeleteResponseType" />
+	<element name="translationLookupRequest" type="tns:TranslationLookupRequestType" />
+	<element name="translationLookupResponse" type="tns:TranslationLookupResponseType" />
+	<element name="bulkTranslationLookupResponse" type="tns:BulkTranslationLookupResponseType" />
+	<element name="bulkTranslationLookupRequest" type="tns:BulkTranslationLookupRequestType" />
+	<element name="translationUpsertRequest" type="tns:TranslationUpsertRequestType" />
+	<element name="translationUpsertResponse" type="tns:TranslationUpsertResponseType" />
+	<element name="bulkTranslationUpsertRequest" type="tns:BulkTranslationUpsertRequestType" />
+	<element name="bulkTranslationUpsertResponse" type="tns:BulkTranslationUpsertResponseType" />
+	<element name="translationDeleteRequest" type="tns:TranslationDeleteRequestType" />
+	<element name="translationDeleteResponse" type="tns:TranslationDeleteResponseType" />
   <!--4 new operations -->
-	<element name="ODCOATranslationOldToNewLookupRequest"           type="tns:ODCOATranslationOldToNewLookupRequestType" />
-	<element name="ODCOATranslationOldToNewLookupResponse"          type="tns:ODCOATranslationOldToNewLookupResponseType" />
-	<element name="ODCOATranslationNewToOldLookupRequest"           type="tns:ODCOATranslationNewToOldLookupRequestType" />
-	<element name="ODCOATranslationNewToOldLookupResponse"          type="tns:ODCOATranslationNewToOldLookupResponseType" />
-	<element name="CCCOATranslationOldToNewLookupRequest"           type="tns:CCCOATranslationOldToNewLookupRequestType" />
-	<element name="CCCOATranslationOldToNewLookupResponse"          type="tns:CCCOATranslationOldToNewLookupResponseType" />
-	<element name="CCCOATranslationNewToOldLookupRequest"           type="tns:CCCOATranslationNewToOldLookupRequestType" />
-	<element name="CCCOATranslationNewToOldLookupResponse"          type="tns:CCCOATranslationNewToOldLookupResponseType" />
+	<element name="oDCOATranslationOldToNewLookupRequest"           type="tns:ODCOATranslationOldToNewLookupRequestType" />
+	<element name="oDCOATranslationOldToNewLookupResponse"          type="tns:ODCOATranslationOldToNewLookupResponseType" />
+	<element name="oDCOATranslationNewToOldLookupRequest"           type="tns:ODCOATranslationNewToOldLookupRequestType" />
+	<element name="oDCOATranslationNewToOldLookupResponse"          type="tns:ODCOATranslationNewToOldLookupResponseType" />
+	<element name="cCCOATranslationOldToNewLookupRequest"           type="tns:CCCOATranslationOldToNewLookupRequestType" />
+	<element name="cCCOATranslationOldToNewLookupResponse"          type="tns:CCCOATranslationOldToNewLookupResponseType" />
+	<element name="cCCOATranslationNewToOldLookupRequest"           type="tns:CCCOATranslationNewToOldLookupRequestType" />
+	<element name="cCCOATranslationNewToOldLookupResponse"          type="tns:CCCOATranslationNewToOldLookupResponseType" />
 
 	<complexType name="ODCOATranslationOldToNewLookupRequestType">
 		<annotation>
 			<documentation>OD COA Old To New Request</documentation>
 		</annotation>
 		<sequence>
+			<element name="header" type="tns:HeaderType" minOccurs="1"
+				maxOccurs="1" />
 			<element name="translate_date" type="string" minOccurs="0"
 				maxOccurs="1" />
 			<element name="company" type="string" minOccurs="0"
@@ -52,6 +54,8 @@
 			<documentation>OD COA Old To New Request</documentation>
 		</annotation>
 		<sequence>
+			<element name="header" type="tns:HeaderType" minOccurs="1"
+				maxOccurs="1" />
 			<element name="entity" type="string" minOccurs="0"
 				maxOccurs="1" />
 			<element name="lob" type="string" minOccurs="0" maxOccurs="1" />
@@ -71,6 +75,8 @@
 			<documentation>OD COA New To Old Request</documentation>
 		</annotation>
 		<sequence>
+			<element name="header" type="tns:HeaderType" minOccurs="1"
+				maxOccurs="1" />
 			<element name="translate_date" type="string" minOccurs="0"
 				maxOccurs="1" />
 			<element name="entity" type="string" minOccurs="0"
@@ -92,6 +98,8 @@
 			<documentation>OD COA New To Old Response</documentation>
 		</annotation>
 		<sequence>
+			<element name="header" type="tns:HeaderType" minOccurs="1"
+				maxOccurs="1" />
 			<element name="company" type="string" minOccurs="0"
 				maxOccurs="1" />
 			<element name="cost_center" type="string" minOccurs="0"
@@ -113,6 +121,8 @@
 			<documentation>CC COA Old To New Request</documentation>
 		</annotation>
 		<sequence>
+			<element name="header" type="tns:HeaderType" minOccurs="1"
+				maxOccurs="1" />
 			<element name="translate_date" type="string" minOccurs="0"
 				maxOccurs="1" />
 			<element name="legal_entity" type="string" minOccurs="0"
@@ -135,6 +145,8 @@
 			<documentation>CC COA Old To New Response</documentation>
 		</annotation>
 		<sequence>
+			<element name="header" type="tns:HeaderType" minOccurs="1"
+				maxOccurs="1" />
 			<element name="entity" type="string" minOccurs="0"
 				maxOccurs="1" />
 			<element name="lob" type="string" minOccurs="0" maxOccurs="1" />
@@ -154,6 +166,8 @@
 			<documentation>CC COA New To Old Request</documentation>
 		</annotation>
 		<sequence>
+			<element name="header" type="tns:HeaderType" minOccurs="1"
+				maxOccurs="1" />
 			<element name="translate_date" type="string" minOccurs="0"
 				maxOccurs="1" />
 			<element name="legal_entity" type="string" minOccurs="0"
@@ -176,6 +190,8 @@
 			<documentation>CC COA New To Old Response</documentation>
 		</annotation>
 		<sequence>
+			<element name="header" type="tns:HeaderType" minOccurs="1"
+				maxOccurs="1" />
 			<element name="entity" type="string" minOccurs="0"
 				maxOccurs="1" />
 			<element name="cost_center" type="string" minOccurs="0"
@@ -234,6 +250,8 @@
 			<documentation>Translation Delete Request</documentation>
 		</annotation>
 		<sequence>
+			<!-- <element name="header" type="tns:HeaderType" minOccurs="1"
+				maxOccurs="1" /> -->
 			<element name="translate_value_id" type="string" minOccurs="0"
 					maxOccurs="1" />
 		</sequence>

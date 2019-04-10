@@ -11,64 +11,64 @@
 		</xsd:schema>
 	</wsdl:types>
 	<wsdl:message name="translationLookUpRequestRequest">
-		<wsdl:part element="xsd1:TranslationLookupRequest" name="parameters" />
+		<wsdl:part element="xsd1:translationLookupRequest" name="parameters" />
 	</wsdl:message>
 	<wsdl:message name="translationLookUpRequestResponse">
-		<wsdl:part element="xsd1:TranslationLookupResponse" name="parameters" />
+		<wsdl:part element="xsd1:translationLookupResponse" name="parameters" />
 	</wsdl:message>
 	<wsdl:message name="bulkTranslationLookUpRequestRequest">
-		<wsdl:part name="parameters" element="xsd1:BulkTranslationLookupRequest" />
+		<wsdl:part name="parameters" element="xsd1:bulkTranslationLookupRequest" />
 	</wsdl:message>
 	<wsdl:message name="bulkTranslationLookUpRequestResponse">
-		<wsdl:part name="parameters" element="xsd1:BulkTranslationLookupResponse" />
+		<wsdl:part name="parameters" element="xsd1:bulkTranslationLookupResponse" />
 	</wsdl:message>
 	<wsdl:message name="translationUpsertRequestRequest">
-		<wsdl:part element="xsd1:TranslationUpsertRequest" name="parameters" />
+		<wsdl:part element="xsd1:translationUpsertRequest" name="parameters" />
 	</wsdl:message>
 	<wsdl:message name="translationUpsertRequestResponse">
-		<wsdl:part element="xsd1:TranslationUpsertResponse" name="parameters" />
+		<wsdl:part element="xsd1:translationUpsertResponse" name="parameters" />
 	</wsdl:message>
 	<wsdl:message name="bulkTranslationUpsertRequestRequest">
-		<wsdl:part name="parameters" element="xsd1:BulkTranslationUpsertRequest" />
+		<wsdl:part name="parameters" element="xsd1:bulkTranslationUpsertRequest" />
 	</wsdl:message>
 	<wsdl:message name="bulkTranslationUpsertRequestResponse">
-		<wsdl:part name="parameters" element="xsd1:BulkTranslationUpsertResponse" />
+		<wsdl:part name="parameters" element="xsd1:bulkTranslationUpsertResponse" />
 	</wsdl:message>
 
   <wsdl:message name="translationDeleteRequestRequest">
-		<wsdl:part element="xsd1:TranslationDeleteRequest" name="parameters" />
+		<wsdl:part element="xsd1:translationDeleteRequest" name="parameters" />
 	</wsdl:message>
 	<wsdl:message name="translationDeleteRequestResponse">
-		<wsdl:part element="xsd1:TranslationDeleteResponse" name="parameters" />
+		<wsdl:part element="xsd1:translationDeleteResponse" name="parameters" />
   </wsdl:message>
   
-  <wsdl:message name="ODCOATranslationOldToNewLookupRequest">
-		<wsdl:part name="parameters" element="xsd1:ODCOATranslationOldToNewLookupRequest" />
+  <wsdl:message name="oDCOATranslationOldToNewLookupRequest">
+		<wsdl:part name="parameters" element="xsd1:oDCOATranslationOldToNewLookupRequest" />
 	</wsdl:message>
   
-	<wsdl:message name="ODCOATranslationOldToNewLookupResponse">
-		<wsdl:part name="parameters" element="xsd1:ODCOATranslationOldToNewLookupResponse" />
+	<wsdl:message name="oDCOATranslationOldToNewLookupResponse">
+		<wsdl:part name="parameters" element="xsd1:oDCOATranslationOldToNewLookupResponse" />
 	</wsdl:message>
 	
-	<wsdl:message name="ODCOATranslationNewToOldLookupRequest">
-		<wsdl:part name="parameters" element="xsd1:ODCOATranslationNewToOldLookupRequest" />
+	<wsdl:message name="oDCOATranslationNewToOldLookupRequest">
+		<wsdl:part name="parameters" element="xsd1:oDCOATranslationNewToOldLookupRequest" />
 	</wsdl:message>
-	<wsdl:message name="ODCOATranslationNewToOldLookupResponse">
-		<wsdl:part name="parameters" element="xsd1:ODCOATranslationNewToOldLookupResponse" />
-	</wsdl:message>
-	
-	<wsdl:message name="CCCOATranslationOldToNewLookupRequest">
-		<wsdl:part name="parameters" element="xsd1:CCCOATranslationOldToNewLookupRequest" />
-	</wsdl:message>
-	<wsdl:message name="CCCOATranslationOldToNewLookupResponse">
-		<wsdl:part name="parameters" element="xsd1:CCCOATranslationOldToNewLookupResponse" />
+	<wsdl:message name="oDCOATranslationNewToOldLookupResponse">
+		<wsdl:part name="parameters" element="xsd1:oDCOATranslationNewToOldLookupResponse" />
 	</wsdl:message>
 	
-	<wsdl:message name="CCCOATranslationNewToOldLookupRequest">
-		<wsdl:part name="parameters" element="xsd1:CCCOATranslationNewToOldLookupRequest" />
+	<wsdl:message name="cCCOATranslationOldToNewLookupRequest">
+		<wsdl:part name="parameters" element="xsd1:cCCOATranslationOldToNewLookupRequest" />
 	</wsdl:message>
-	<wsdl:message name="CCCOATranslationNewToOldLookupResponse">
-		<wsdl:part name="parameters" element="xsd1:CCCOATranslationNewToOldLookupResponse" />
+	<wsdl:message name="cCCOATranslationOldToNewLookupResponse">
+		<wsdl:part name="parameters" element="xsd1:cCCOATranslationOldToNewLookupResponse" />
+	</wsdl:message>
+	
+	<wsdl:message name="cCCOATranslationNewToOldLookupRequest">
+		<wsdl:part name="parameters" element="xsd1:cCCOATranslationNewToOldLookupRequest" />
+	</wsdl:message>
+	<wsdl:message name="cCCOATranslationNewToOldLookupResponse">
+		<wsdl:part name="parameters" element="xsd1:cCCOATranslationNewToOldLookupResponse" />
 	</wsdl:message>
 	
 	<wsdl:portType name="translationUtilityService">
@@ -80,35 +80,35 @@
 			<wsdl:input message="tus:bulkTranslationLookUpRequestRequest"></wsdl:input>
 			<wsdl:output message="tus:bulkTranslationLookUpRequestResponse"></wsdl:output>
 		</wsdl:operation>
-		<wsdl:operation name="translationUpsertRequest">
+		<wsdl:operation name="translationUpsertReq">
 			<wsdl:input message="tus:translationUpsertRequestRequest" />
 			<wsdl:output message="tus:translationUpsertRequestResponse" />
 		</wsdl:operation>
-		<wsdl:operation name="bulkTranslationUpsertRequest">
+		<wsdl:operation name="bulkTranslationUpsertReq">
 			<wsdl:input message="tus:bulkTranslationUpsertRequestRequest"></wsdl:input>
 			<wsdl:output message="tus:bulkTranslationUpsertRequestResponse"></wsdl:output>
 		</wsdl:operation>
 
-    <wsdl:operation name="translationDeleteRequest">
+    <wsdl:operation name="translationDeleteReq">
 			<wsdl:input message="tus:translationDeleteRequestRequest" />
 			<wsdl:output message="tus:translationDeleteRequestResponse" />
     </wsdl:operation>
     <!--New 4 operations  -->
-		<wsdl:operation name="ODCOATranslationOldToNewLookup">
-			<wsdl:input message="tus:ODCOATranslationOldToNewLookupRequest"></wsdl:input>
-			<wsdl:output message="tus:ODCOATranslationOldToNewLookupResponse"></wsdl:output>
+		<wsdl:operation name="oDCOATranslationOldToNewLookupReq">
+			<wsdl:input message="tus:oDCOATranslationOldToNewLookupRequest"></wsdl:input>
+			<wsdl:output message="tus:oDCOATranslationOldToNewLookupResponse"></wsdl:output>
 		</wsdl:operation>
-		<wsdl:operation name="ODCOATranslationNewToOldLookup">
-			<wsdl:input message="tus:ODCOATranslationNewToOldLookupRequest"></wsdl:input>
-			<wsdl:output message="tus:ODCOATranslationNewToOldLookupResponse"></wsdl:output>
+		<wsdl:operation name="oDCOATranslationNewToOldLookupReq">
+			<wsdl:input message="tus:oDCOATranslationNewToOldLookupRequest"></wsdl:input>
+			<wsdl:output message="tus:oDCOATranslationNewToOldLookupResponse"></wsdl:output>
 		</wsdl:operation>
-		<wsdl:operation name="CCCOATranslationOldToNewLookup">
-			<wsdl:input message="tus:CCCOATranslationOldToNewLookupRequest"></wsdl:input>
-			<wsdl:output message="tus:CCCOATranslationOldToNewLookupResponse"></wsdl:output>
+		<wsdl:operation name="cCCOATranslationOldToNewLookupReq">
+			<wsdl:input message="tus:cCCOATranslationOldToNewLookupRequest"></wsdl:input>
+			<wsdl:output message="tus:cCCOATranslationOldToNewLookupResponse"></wsdl:output>
 		</wsdl:operation>
-		<wsdl:operation name="CCCOATranslationNewToOldLookup">
-			<wsdl:input message="tus:CCCOATranslationNewToOldLookupRequest"></wsdl:input>
-			<wsdl:output message="tus:CCCOATranslationNewToOldLookupResponse"></wsdl:output>
+		<wsdl:operation name="cCCOATranslationNewToOldLookupReq">
+			<wsdl:input message="tus:cCCOATranslationNewToOldLookupRequest"></wsdl:input>
+			<wsdl:output message="tus:cCCOATranslationNewToOldLookupResponse"></wsdl:output>
 		</wsdl:operation>
 	</wsdl:portType>
 	<wsdl:binding name="translationUtilityServiceSOAP" type="tus:translationUtilityService">
@@ -134,7 +134,7 @@
 				<soap:body use="literal" />
 			</wsdl:output>
 		</wsdl:operation>
-		<wsdl:operation name="translationUpsertRequest">
+		<wsdl:operation name="translationUpsertReq">
 			<soap:operation
 				soapAction="http://eai.officedepot.com/translationUtilityService/translationUpsertRequest" />
 			<wsdl:input>
@@ -144,7 +144,7 @@
 				<soap:body use="literal" />
 			</wsdl:output>
 		</wsdl:operation>
-		<wsdl:operation name="bulkTranslationUpsertRequest">
+		<wsdl:operation name="bulkTranslationUpsertReq">
 			<soap:operation
 				soapAction="http://eai.officedepot.com/translationUtilityService/bulkTranslationUpsertRequest" />
 			<wsdl:input>
@@ -154,9 +154,9 @@
 				<soap:body use="literal" />
 			</wsdl:output>
 		</wsdl:operation>
-		<wsdl:operation name="translationDeleteRequest">
+		<wsdl:operation name="translationDeleteReq">
 			<soap:operation
-				soapAction="http://eai.officedepot.com/translationUtilityService/translationUpsertRequest" />
+				soapAction="http://eai.officedepot.com/translationUtilityService/translationDeleteRequest" />
       <wsdl:input>
 				<soap:body use="literal" />
 			</wsdl:input>
@@ -165,9 +165,9 @@
 			</wsdl:output>
 		</wsdl:operation>
     <!--4 new operations -->
-		<wsdl:operation name="ODCOATranslationOldToNewLookup">
+		<wsdl:operation name="oDCOATranslationOldToNewLookupReq">
 			<soap:operation
-				soapAction="http://eai.officedepot.com/translationUtilityService/ODCOATranslationOldToNewLookup" />
+				soapAction="http://eai.officedepot.com/translationUtilityService/oDCOATranslationOldToNewLookup" />
 			<wsdl:input>
 				<soap:body use="literal" />
 			</wsdl:input>
@@ -175,9 +175,9 @@
 				<soap:body use="literal" />
 			</wsdl:output>
 		</wsdl:operation>
-		<wsdl:operation name="ODCOATranslationNewToOldLookup">
+		<wsdl:operation name="oDCOATranslationNewToOldLookupReq">
 			<soap:operation
-				soapAction="http://eai.officedepot.com/translationUtilityService/ODCOATranslationNewToOldLookup" />
+				soapAction="http://eai.officedepot.com/translationUtilityService/oDCOATranslationNewToOldLookup" />
 			<wsdl:input>
 				<soap:body use="literal" />
 			</wsdl:input>
@@ -185,9 +185,9 @@
 				<soap:body use="literal" />
 			</wsdl:output>
 		</wsdl:operation>
-		<wsdl:operation name="CCCOATranslationOldToNewLookup">
+		<wsdl:operation name="cCCOATranslationOldToNewLookupReq">
 			<soap:operation
-				soapAction="http://eai.officedepot.com/translationUtilityService/CCCOATranslationOldToNewLookup" />
+				soapAction="http://eai.officedepot.com/translationUtilityService/cCCOATranslationOldToNewLookup" />
 			<wsdl:input>
 				<soap:body use="literal" />
 			</wsdl:input>
@@ -195,9 +195,9 @@
 				<soap:body use="literal" />
 			</wsdl:output>
 		</wsdl:operation>
-		<wsdl:operation name="CCCOATranslationNewToOldLookup">
+		<wsdl:operation name="cCCOATranslationNewToOldLookupReq">
 			<soap:operation
-				soapAction="http://eai.officedepot.com/translationUtilityService/CCCOATranslationNewToOldLookup" />
+				soapAction="http://eai.officedepot.com/translationUtilityService/cCCOATranslationNewToOldLookup" />
 			<wsdl:input>
 				<soap:body use="literal" />
 			</wsdl:input>

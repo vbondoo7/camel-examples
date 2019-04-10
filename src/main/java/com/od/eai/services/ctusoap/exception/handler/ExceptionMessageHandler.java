@@ -54,7 +54,7 @@ public class ExceptionMessageHandler {
 				statusType.setStatusDescription(exception.getMessage());
 				result.setStatus(statusType);
 				translationLookupResponseType.setResult(result);
-				exchange.getOut().setBody(translationLookupResponseType);
+				exchange.getOut().setBody(objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(translationLookupResponseType));
 			}
 			else if(operationName.trim().equalsIgnoreCase("bulkTranslationLookUpRequest")) {
 				BulkTranslationLookupResponseType bulkTranslationLookupResponseType = new BulkTranslationLookupResponseType();
@@ -65,7 +65,7 @@ public class ExceptionMessageHandler {
 				statusType.setStatusDescription(exception.getMessage());
 				result.setStatus(statusType);
 				bulkTranslationLookupResponseType.getResults().add(result);
-				exchange.getOut().setBody(bulkTranslationLookupResponseType); 
+				exchange.getOut().setBody(objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(bulkTranslationLookupResponseType)); 
 			}
 			else if(operationName.trim().equalsIgnoreCase("translationUpsertRequest")) {
 				TranslationUpsertResponseType translationUpsertResponse = new TranslationUpsertResponseType();

@@ -1,4 +1,4 @@
-<tran:TranslationLookupRequest xmlns:tran="http://eai.officedepot.com/service/TranslationUtility">
+<tran:translationLookupRequest xmlns:tran="http://eai.officedepot.com/service/TranslationUtility">
    <tran:header>
       <tran:transactionId></tran:transactionId>
       <!--Optional:-->
@@ -30,4 +30,4 @@
       <!--Optional:-->
       <tran:sourceField10></tran:sourceField10>
    </tran:criteria>
-</tran:TranslationLookupRequest>
+</tran:translationLookupRequest>

@@ -12,8 +12,6 @@ import org.springframework.stereotype.Component;
 
 import com.od.eai.framework.base.routes.BaseInboundRouteBuilder;
 import com.od.eai.framework.core.dispatch.Configurator;
-import com.od.eai.services.ctusoap.exception.handler.ExceptionMessageHandler;
-import com.od.eai.services.ctusoap.util.FaultUtil;
 
 @Component("ctusoapInboundRoutes")
 public class InboundRoutes extends BaseInboundRouteBuilder {
@@ -40,25 +38,25 @@ public class InboundRoutes extends BaseInboundRouteBuilder {
 	public void configureRoutes() throws Exception {
 		
 		from(translationUtilityLookupcxfURL).id(Configurator.getStepId(traslationUtilityRequest))
-		  .log(LoggingLevel.INFO,"******* Received Translation Utility Request ********")
+		  .log(LoggingLevel.INFO,"******* Received Translation Utility Request ******** ${header.operationName}")
 		  .choice()
 		  		.when(header(CxfConstants.OPERATION_NAME).isEqualTo("translationLookUpRequest"))
 		  			.to(ProcessingRoutes.DIRECT_TRANSLATION_LOOKUP_REQUEST_PROCESSING_ROUTE)
 		  		.when(header(CxfConstants.OPERATION_NAME).isEqualTo("bulkTranslationLookUpRequest"))
 		  			.to(ProcessingRoutes.DIRECT_BULK_TRANSLATION_LOOKUP_REQUEST_PROCESSING_ROUTE)
-	  			.when(header(CxfConstants.OPERATION_NAME).isEqualTo("translationUpsertRequest"))
+	  			.when(header(CxfConstants.OPERATION_NAME).isEqualTo("translationUpsertReq"))
 		  			.to(ProcessingRoutes.DIRECT_TRANSLATION_UPSERT_REQUEST_PROCESSING_ROUTE)
-	  			.when(header(CxfConstants.OPERATION_NAME).isEqualTo("bulkTranslationUpsertRequest"))
+	  			.when(header(CxfConstants.OPERATION_NAME).isEqualTo("bulkTranslationUpsertReq"))
 		  			.to(ProcessingRoutes.DIRECT_BULK_TRANSLATION_UPSERT_REQUEST_PROCESSING_ROUTE)
-	  			.when(header(CxfConstants.OPERATION_NAME).isEqualTo("translationDeleteRequest"))
+	  			.when(header(CxfConstants.OPERATION_NAME).isEqualTo("translationDeleteReq"))
 		  			.to(ProcessingRoutes.DIRECT_TRANSLATION_DELETE_REQUEST_PROCESSING_ROUTE)
-  				.when(header(CxfConstants.OPERATION_NAME).isEqualTo("ODCOATranslationOldToNewLookup"))
+  				.when(header(CxfConstants.OPERATION_NAME).isEqualTo("oDCOATranslationOldToNewLookupReq"))
 		  			.to(ProcessingRoutes.DIRECT_ODCOA_TRANSLATION_OLD_TO_NEW_LOOKUP)
-	  			.when(header(CxfConstants.OPERATION_NAME).isEqualTo("ODCOATranslationNewToOldLookup"))
+	  			.when(header(CxfConstants.OPERATION_NAME).isEqualTo("oDCOATranslationNewToOldLookupReq"))
 		  			.to(ProcessingRoutes.DIRECT_ODCOA_TRANSLATION_NEW_TO_OLD_LOOKUP)
-	  			.when(header(CxfConstants.OPERATION_NAME).isEqualTo("CCCOATranslationOldToNewLookup"))
+	  			.when(header(CxfConstants.OPERATION_NAME).isEqualTo("cCCOATranslationOldToNewLookupReq"))
 		  			.to(ProcessingRoutes.DIRECT_CCCOA_TRANSLATION_OLD_TO_NEW_LOOKUP)
-	  			.when(header(CxfConstants.OPERATION_NAME).isEqualTo("CCCOATranslationNewToOldLookup"))
+	  			.when(header(CxfConstants.OPERATION_NAME).isEqualTo("cCCOATranslationNewToOldLookupReq"))
 		  			.to(ProcessingRoutes.DIRECT_CCCOA_TRANSLATION_NEW_TO_OLD_LOOKUP)
 		  		.otherwise() 
 		  			.throwException(new UnsupportedOperationException());

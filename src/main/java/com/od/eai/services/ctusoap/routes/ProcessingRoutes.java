@@ -1,6 +1,8 @@
 package com.od.eai.services.ctusoap.routes;
 
+import org.apache.camel.Exchange;
 import org.apache.camel.LoggingLevel;
+import org.apache.camel.Processor;
 import org.apache.camel.model.dataformat.JsonLibrary;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,9 +12,7 @@ import org.springframework.stereotype.Component;
 import com.od.eai.framework.base.routes.BaseProcessingRouteBuilder;
 import com.od.eai.framework.core.dispatch.Configurator;
 import com.od.eai.services.ctusoap.assembler.CCCOATranslationNewToOldLookupAssembler;
-import com.od.eai.services.ctusoap.assembler.CCCOATranslationOldToNewLookupAssembler;
 import com.od.eai.services.ctusoap.assembler.ODCOATranslationNewToOldLookupAssembler;
-import com.od.eai.services.ctusoap.assembler.ODCOATranslationOldToNewLookupAssembler;
 import com.od.eai.services.ctusoap.exception.handler.ExceptionMessageHandler;
 import com.od.eai.services.ctusoap.util.DataFormatUtil;
 import com.officedepot.eai.service.translationutility.BulkTranslationLookupRequestType;
@@ -24,6 +24,7 @@ import com.officedepot.eai.service.translationutility.CCCOATranslationOldToNewLo
 import com.officedepot.eai.service.translationutility.CCCOATranslationOldToNewLookupResponseType;
 import com.officedepot.eai.service.translationutility.ODCOATranslationNewToOldLookupRequestType;
 import com.officedepot.eai.service.translationutility.ODCOATranslationOldToNewLookupRequestType;
+import com.officedepot.eai.service.translationutility.ODCOATranslationOldToNewLookupResponseType;
 import com.officedepot.eai.service.translationutility.TranslationDeleteRequestType;
 import com.officedepot.eai.service.translationutility.TranslationDeleteResponseType;
 import com.officedepot.eai.service.translationutility.TranslationLookupRequestType;
@@ -73,6 +74,9 @@ public class ProcessingRoutes extends BaseProcessingRouteBuilder {
 	
 	@Value("${ctu.ccCOAOldToNew.translation.lookup.url}")
 	private String ccCOAOldToNewLookupUrl;
+	
+	@Value("${ctu.odCOAOldToNew.translation.lookup.url}")
+	private String odCOAOldToNewLookupUrl;
 	
 	@Override
 	public void configureRoutes() throws Exception {
@@ -144,10 +148,21 @@ public class ProcessingRoutes extends BaseProcessingRouteBuilder {
 		//ODCOATranslationOldToNewLookup
 		from(DIRECT_ODCOA_TRANSLATION_OLD_TO_NEW_LOOKUP)
 			.routeId(Configurator.getStepId("ODCOATranslationOldToNewLookupRoute"))
-			.routeDescription("This Receives TODCOATranslationOldToNewLookup.")
+			.routeDescription("This Receives ODCOATranslationOldToNewLookup.")
 			.log(LoggingLevel.INFO, "Processing Started for ODCOATranslationOldToNewLookup CXF Endpoint...")
 			.convertBodyTo(ODCOATranslationOldToNewLookupRequestType.class)
-			.bean(ODCOATranslationOldToNewLookupAssembler.class, "assembler")
+			//.bean(ODCOATranslationOldToNewLookupAssembler.class, "assembler")
+			.marshal(DataFormatUtil.dataFormatInstance(ODCOATranslationOldToNewLookupRequestType.class))
+			.log(LoggingLevel.INFO, "ODCOATranslationOldToNewLookup Body after conversion to Json: ${body}")
+			.setProperty(CTU_INTERNAL_URL, constant(odCOAOldToNewLookupUrl))
+			.to(OutboundRoutes.HYSTRIX_ENABLED_CTU_INTERNAL_ROUTE)
+			.convertBodyTo(String.class)
+			.choice()
+				.when(body().contains("\"ERROR\""))
+					.bean(ExceptionMessageHandler.class, "handleFallback")
+				.otherwise()
+					.unmarshal().json(JsonLibrary.Jackson, ODCOATranslationOldToNewLookupResponseType.class)
+				.end()
 			.log(LoggingLevel.INFO, "Processing For ODCOATranslationOldToNewLookupRoute Finished !!!");
 		
 		//ODCOATranslationNewToOldLookup

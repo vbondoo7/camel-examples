@@ -1,4 +1,4 @@
-<tran:TranslationUpsertRequest xmlns:tran="http://eai.officedepot.com/service/TranslationUtility">
+<tran:translationUpsertRequest xmlns:tran="http://eai.officedepot.com/service/TranslationUtility">
       <tran:upsertRequest>
          <tran:traslationHeaderType>
             <tran:transactionId>13143</tran:transactionId>
@@ -9,4 +9,4 @@
          <tran:sourceField7>NEW7</tran:sourceField7>
          <tran:targetField6>NEW6</tran:targetField6>
       </tran:upsertRequest>
-   </tran:TranslationUpsertRequest>
+   </tran:translationUpsertRequest>
