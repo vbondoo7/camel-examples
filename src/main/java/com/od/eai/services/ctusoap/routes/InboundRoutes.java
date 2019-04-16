@@ -51,13 +51,19 @@ public class InboundRoutes extends BaseInboundRouteBuilder {
 	  			.when(header(CxfConstants.OPERATION_NAME).isEqualTo("translationDeleteReq"))
 		  			.to(ProcessingRoutes.DIRECT_TRANSLATION_DELETE_REQUEST_PROCESSING_ROUTE)
   				.when(header(CxfConstants.OPERATION_NAME).isEqualTo("oDCOATranslationOldToNewLookupReq"))
-		  			.to(ProcessingRoutes.DIRECT_ODCOA_TRANSLATION_OLD_TO_NEW_LOOKUP)
+		  			.to(ODCOAProcessingRoutes.DIRECT_ODCOA_TRANSLATION_OLD_TO_NEW_LOOKUP)
+	  			/*.when(header(CxfConstants.OPERATION_NAME).isEqualTo("bulkODCOATranslationOldToNewLookupReq"))
+		  			.to(ODCOAProcessingRoutes.DIRECT_BULK_ODCOA_TRANSLATION_OLD_TO_NEW_LOOKUP)
 	  			.when(header(CxfConstants.OPERATION_NAME).isEqualTo("oDCOATranslationNewToOldLookupReq"))
-		  			.to(ProcessingRoutes.DIRECT_ODCOA_TRANSLATION_NEW_TO_OLD_LOOKUP)
+		  			.to(ODCOAProcessingRoutes.DIRECT_ODCOA_TRANSLATION_NEW_TO_OLD_LOOKUP)
+	  			.when(header(CxfConstants.OPERATION_NAME).isEqualTo("bulkODCOATranslationNewToOldLookupReq"))
+		  			.to(ODCOAProcessingRoutes.DIRECT_BULK_ODCOA_TRANSLATION_NEW_TO_OLD_LOOKUP)*/
 	  			.when(header(CxfConstants.OPERATION_NAME).isEqualTo("cCCOATranslationOldToNewLookupReq"))
-		  			.to(ProcessingRoutes.DIRECT_CCCOA_TRANSLATION_OLD_TO_NEW_LOOKUP)
+		  			.to(CCCOAProcessingRoutes.DIRECT_CCCOA_TRANSLATION_OLD_TO_NEW_LOOKUP)
+	  			.when(header(CxfConstants.OPERATION_NAME).isEqualTo("bulkCCCOATranslationOldToNewLookupReq"))
+		  			.to(CCCOAProcessingRoutes.DIRECT_BULK_CCCOA_TRANSLATION_OLD_TO_NEW_LOOKUP)
 	  			.when(header(CxfConstants.OPERATION_NAME).isEqualTo("cCCOATranslationNewToOldLookupReq"))
-		  			.to(ProcessingRoutes.DIRECT_CCCOA_TRANSLATION_NEW_TO_OLD_LOOKUP)
+		  			.to(CCCOAProcessingRoutes.DIRECT_CCCOA_TRANSLATION_NEW_TO_OLD_LOOKUP)
 		  		.otherwise() 
 		  			.throwException(new UnsupportedOperationException());
 	}

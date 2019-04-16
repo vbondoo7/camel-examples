@@ -15,15 +15,25 @@
 	<element name="translationDeleteRequest" type="tns:TranslationDeleteRequestType" />
 	<element name="translationDeleteResponse" type="tns:TranslationDeleteResponseType" />
   <!--4 new operations -->
-	<element name="oDCOATranslationOldToNewLookupRequest"           type="tns:ODCOATranslationOldToNewLookupRequestType" />
-	<element name="oDCOATranslationOldToNewLookupResponse"          type="tns:ODCOATranslationOldToNewLookupResponseType" />
-	<element name="oDCOATranslationNewToOldLookupRequest"           type="tns:ODCOATranslationNewToOldLookupRequestType" />
-	<element name="oDCOATranslationNewToOldLookupResponse"          type="tns:ODCOATranslationNewToOldLookupResponseType" />
-	<element name="cCCOATranslationOldToNewLookupRequest"           type="tns:CCCOATranslationOldToNewLookupRequestType" />
-	<element name="cCCOATranslationOldToNewLookupResponse"          type="tns:CCCOATranslationOldToNewLookupResponseType" />
-	<element name="cCCOATranslationNewToOldLookupRequest"           type="tns:CCCOATranslationNewToOldLookupRequestType" />
-	<element name="cCCOATranslationNewToOldLookupResponse"          type="tns:CCCOATranslationNewToOldLookupResponseType" />
+	<element name="oDCOATranslationOldToNewLookupRequest"   type="tns:ODCOATranslationOldToNewLookupRequestType" />
+	<element name="oDCOATranslationOldToNewLookupResponse"  type="tns:ODCOATranslationOldToNewLookupResponseType" />
+	<element name="oDCOATranslationNewToOldLookupRequest"   type="tns:ODCOATranslationNewToOldLookupRequestType" />
+	<element name="oDCOATranslationNewToOldLookupResponse"  type="tns:ODCOATranslationNewToOldLookupResponseType" />
+	<element name="cCCOATranslationOldToNewLookupRequest"   type="tns:CCCOATranslationOldToNewLookupRequestType" />
+	<element name="cCCOATranslationOldToNewLookupResponse"  type="tns:CCCOATranslationOldToNewLookupResponseType" />
+	<element name="cCCOATranslationNewToOldLookupRequest"   type="tns:CCCOATranslationNewToOldLookupRequestType" />
+	<element name="cCCOATranslationNewToOldLookupResponse"  type="tns:CCCOATranslationNewToOldLookupResponseType" />
 
+  <!--4 new bulk operations -->
+    <element name="bulkCCCCOATranslationOldToNewLookupRequest"  type="tns:BulkCCCOATranslationOldToNewLookupRequestType" />
+	<element name="bulkCCCCOATranslationOldToNewLookupResponse" type="tns:BulkCCCOATranslationOldToNewLookupResponseType" />
+	<element name="bulkCCCOATranslationNewToOldLookupRequest"  type="tns:BulkCCCOATranslationNewToOldLookupRequestType" />
+	<element name="bulkCCCOATranslationNewToOldLookupResponse" type="tns:BulkCCCOATranslationNewToOldLookupResponseType" />
+	<element name="bulkODCOATranslationOldToNewLookupRequest"  type="tns:BulkODCOATranslationOldToNewLookupRequestType" />
+	<element name="bulkODCOATranslationOldToNewLookupResponse" type="tns:BulkODCOATranslationOldToNewLookupResponseType" />
+	<element name="bulkODCOATranslationNewToOldLookupRequest"  type="tns:BulkODCOATranslationNewToOldLookupRequestType" />
+	<element name="bulkODCOATranslationNewToOldLookupResponse" type="tns:BulkODCOATranslationNewToOldLookupResponseType" />
+   
 	<complexType name="ODCOATranslationOldToNewLookupRequestType">
 		<annotation>
 			<documentation>OD COA Old To New Request</documentation>
@@ -206,6 +216,102 @@
 		</sequence>
 	</complexType>
 
+	<complexType name="BulkCCCOATranslationOldToNewLookupRequestType">
+		<annotation>
+			<documentation>Bulk CC COA Old To New Lookup Request</documentation>
+		</annotation>
+		<sequence>
+			<element name="header" type="tns:HeaderType" minOccurs="1"
+				maxOccurs="1" />
+			<element name="criteria" type="tns:CcCoaOldToNewCriteriaType"
+				minOccurs="1" maxOccurs="unbounded" />
+		</sequence>
+	</complexType>
+	
+	<complexType name="BulkCCCOATranslationOldToNewLookupResponseType">
+		<annotation>
+			<documentation>Bulk CC COA Old To New Lookup Response</documentation>
+		</annotation>
+		<sequence>
+			<element name="results" type="tns:CcCoaOldToNewResultType" minOccurs="1"
+				maxOccurs="unbounded" />
+			<element name="header" type="tns:HeaderType" minOccurs="1"
+				maxOccurs="1" />
+		</sequence>
+	</complexType>
+	
+	<complexType name="BulkCCCOATranslationNewToOldLookupRequestType">
+		<annotation>
+			<documentation>Bulk CC COA New To Old Lookup Request</documentation>
+		</annotation>
+		<sequence>
+			<element name="header" type="tns:HeaderType" minOccurs="1"
+				maxOccurs="1" />
+			<element name="criteria" type="tns:CcCoaNewToOldCriteriaType"
+				minOccurs="1" maxOccurs="unbounded" />
+		</sequence>
+	</complexType>
+	
+	<complexType name="BulkCCCOATranslationNewToOldLookupResponseType">
+		<annotation>
+			<documentation>Bulk CC COA New To Old Lookup Response</documentation>
+		</annotation>
+		<sequence>
+			<element name="results" type="tns:CcCoaNewToOldResultType" minOccurs="1"
+				maxOccurs="unbounded" />
+			<element name="header" type="tns:HeaderType" minOccurs="1"
+				maxOccurs="1" />
+		</sequence>
+	</complexType>
+	
+	<complexType name="BulkODCOATranslationOldToNewLookupRequestType">
+		<annotation>
+			<documentation>Bulk OD COA Old To New Lookup Request</documentation>
+		</annotation>
+		<sequence>
+			<element name="header" type="tns:HeaderType" minOccurs="1"
+				maxOccurs="1" />
+			<element name="criteria" type="tns:OdCoaOldToNewCriteriaType"
+				minOccurs="1" maxOccurs="unbounded" />
+		</sequence>
+	</complexType>
+	
+	<complexType name="BulkODCOATranslationOldToNewLookupResponseType">
+		<annotation>
+			<documentation>Bulk OD COA Old To New Lookup Response</documentation>
+		</annotation>
+		<sequence>
+			<element name="results" type="tns:OdCoaOldToNewResultType" minOccurs="1"
+				maxOccurs="unbounded" />
+			<element name="header" type="tns:HeaderType" minOccurs="1"
+				maxOccurs="1" />
+		</sequence>
+	</complexType>
+	
+	<complexType name="BulkODCOATranslationNewToOldLookupRequestType">
+		<annotation>
+			<documentation>Bulk OD COA New To Old Lookup Request</documentation>
+		</annotation>
+		<sequence>
+			<element name="header" type="tns:HeaderType" minOccurs="1"
+				maxOccurs="1" />
+			<element name="criteria" type="tns:OdCoaNewToOldCriteriaType"
+				minOccurs="1" maxOccurs="unbounded" />
+		</sequence>
+	</complexType>
+	
+	<complexType name="BulkODCOATranslationNewToOldLookupResponseType">
+		<annotation>
+			<documentation>Bulk OD COA New To Old Lookup Response</documentation>
+		</annotation>
+		<sequence>
+			<element name="results" type="tns:OdCoaNewToOldResultType" minOccurs="1"
+				maxOccurs="unbounded" />
+			<element name="header" type="tns:HeaderType" minOccurs="1"
+				maxOccurs="1" />
+		</sequence>
+	</complexType>
+	
 	<complexType name="TranslationLookupRequestType">
 		<annotation>
 			<documentation>Translation lookup Request</documentation>
@@ -403,6 +509,98 @@
 		</sequence>
 	</complexType>
 
+	<complexType name="CcCoaOldToNewCriteriaType">
+		<annotation>
+			<documentation>CcCoaOldToNew Criteria type</documentation>
+		</annotation>
+
+		<sequence>
+			<element name="translate_date" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="legal_entity" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="lob" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="cost_center" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="account" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="geo" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="product" type="string" minOccurs="0"
+				maxOccurs="1" />
+		</sequence>
+	</complexType>
+	
+	<complexType name="CcCoaNewToOldCriteriaType">
+		<annotation>
+			<documentation>CcCoaNewToOld Criteria type</documentation>
+		</annotation>
+
+		<sequence>
+			<element name="translate_date" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="legal_entity" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="lob" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="cost_center" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="account" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="geo" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="product" type="string" minOccurs="0"
+				maxOccurs="1" />
+		</sequence>
+	</complexType>
+	
+	<complexType name="OdCoaOldToNewCriteriaType">
+		<annotation>
+			<documentation>OdCoaOldToNew Criteria type</documentation>
+		</annotation>
+
+		<sequence>
+			<element name="translate_date" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="company" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="cost_center" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="account" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="location" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="inter_company" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="lob" type="string" minOccurs="0" maxOccurs="1" />
+			<element name="future" type="string" minOccurs="0"
+				maxOccurs="1" />
+		</sequence>
+	</complexType>
+	
+	<complexType name="OdCoaNewToOldCriteriaType">
+		<annotation>
+			<documentation>OdCoaNewToOld Criteria type</documentation>
+		</annotation>
+
+		<sequence>
+			<element name="translate_date" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="entity" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="lob" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="cost_center" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="account" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="location" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="inter_company" type="string" minOccurs="0" maxOccurs="1" />
+		</sequence>
+	</complexType>
+	
 	<complexType name="UpsertRequestType">
 		<annotation>
 			<documentation>Upsert Request type</documentation>
@@ -512,7 +710,67 @@
 				minOccurs="1" maxOccurs="1" />
 		</sequence>
 	</complexType>
+	
+	<complexType name="CcCoaOldToNewResultType">
+		<annotation>
+			<documentation>CC COA Old To New Result type</documentation>
+		</annotation>
 
+		<sequence>
+			<element name="status" type="tns:COAStatusType" minOccurs="1"
+				maxOccurs="1" />
+			<element name="criteria" type="tns:CcCoaOldToNewCriteriaType"
+				minOccurs="1" maxOccurs="1" />
+			<element name="result" type="tns:CcCoaOldToNewResultDocType" minOccurs="0"
+				maxOccurs="1" />
+		</sequence>
+	</complexType>
+
+	<complexType name="CcCoaNewToOldResultType">
+		<annotation>
+			<documentation>CC COA New To Old Result type</documentation>
+		</annotation>
+
+		<sequence>
+			<element name="status" type="tns:COAStatusType" minOccurs="1"
+				maxOccurs="1" />
+			<element name="criteria" type="tns:CcCoaNewToOldCriteriaType"
+				minOccurs="1" maxOccurs="1" />
+			<element name="result" type="tns:CcCoaNewToOldResultDocType" minOccurs="0"
+				maxOccurs="1" />
+		</sequence>
+	</complexType>
+	
+	<complexType name="OdCoaOldToNewResultType">
+		<annotation>
+			<documentation>CC COA Old To New Result type</documentation>
+		</annotation>
+
+		<sequence>
+			<element name="status" type="tns:COAStatusType" minOccurs="1"
+				maxOccurs="1" />
+			<element name="criteria" type="tns:OdCoaOldToNewCriteriaType"
+				minOccurs="1" maxOccurs="1" />
+			<element name="result" type="tns:OdCoaOldToNewResultDocType" minOccurs="0"
+				maxOccurs="1" />
+		</sequence>
+	</complexType>
+
+	<complexType name="OdCoaNewToOldResultType">
+		<annotation>
+			<documentation>CC COA New To Old Result type</documentation>
+		</annotation>
+
+		<sequence>
+			<element name="status" type="tns:COAStatusType" minOccurs="1"
+				maxOccurs="1" />
+			<element name="criteria" type="tns:OdCoaNewToOldCriteriaType"
+				minOccurs="1" maxOccurs="1" />
+			<element name="result" type="tns:OdCoaNewToOldResultDocType" minOccurs="0"
+				maxOccurs="1" />
+		</sequence>
+	</complexType>
+	
 	<complexType name="StatusType">
 		<annotation>
 			<documentation>Status type</documentation>
@@ -528,9 +786,22 @@
 		</sequence>
 	</complexType>
 
+	<complexType name="COAStatusType">
+		<annotation>
+			<documentation>COA Status type</documentation>
+		</annotation>
+
+		<sequence>
+			<element name="status" type="string" minOccurs="1"
+				maxOccurs="1" />
+			<element name="statusCode" type="int" minOccurs="0"
+				maxOccurs="1" />
+		</sequence>
+	</complexType>
+	
 	<complexType name="ResultDocType">
 		<annotation>
-			<documentation>Results type</documentation>
+			<documentation>Result Doc type</documentation>
 		</annotation>
 
 		<sequence>
@@ -596,5 +867,86 @@
 				maxOccurs="1" />
 		</sequence>
 	</complexType>
+	
+	<complexType name="CcCoaOldToNewResultDocType">
+		<annotation>
+			<documentation>CC COA Old To New ResultDoc type</documentation>
+		</annotation>
 
+		<sequence>
+			<element name="entity" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="lob" type="string" minOccurs="0" maxOccurs="1" />
+			<element name="cost_center" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="account" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="location" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="inter_company" type="string" minOccurs="0"
+				maxOccurs="1" />
+		</sequence>
+	</complexType>
+	
+	<complexType name="CcCoaNewToOldResultDocType">
+		<annotation>
+			<documentation>CC COA New To Old ResultDoc type</documentation>
+		</annotation>
+
+		<sequence>
+			<element name="entity" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="lob" type="string" minOccurs="0" maxOccurs="1" />
+			<element name="cost_center" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="account" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="location" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="inter_company" type="string" minOccurs="0"
+				maxOccurs="1" />
+		</sequence>
+	</complexType>
+	
+	<complexType name="OdCoaOldToNewResultDocType">
+		<annotation>
+			<documentation>OD COA Old To New ResultDoc type</documentation>
+		</annotation>
+
+		<sequence>
+			<element name="entity" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="lob" type="string" minOccurs="0" maxOccurs="1" />
+			<element name="cost_center" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="account" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="location" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="inter_company" type="string" minOccurs="0"
+				maxOccurs="1" />
+		</sequence>
+	</complexType>
+	
+	<complexType name="OdCoaNewToOldResultDocType">
+		<annotation>
+			<documentation>OD COA New To Old ResultDoc type</documentation>
+		</annotation>
+
+		<sequence>
+			<element name="company" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="cost_center" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="account" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="location" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="inter_company" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="lob" type="string" minOccurs="0" maxOccurs="1" />
+			<element name="future" type="string" minOccurs="0"
+				maxOccurs="1" />
+		</sequence>
+	</complexType>
 </schema>

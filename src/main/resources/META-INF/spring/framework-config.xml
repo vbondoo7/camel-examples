@@ -10,8 +10,8 @@
 	<!-- THREAD POOL FOR INTERECEPTOR -->
 	<bean id="interceptorPool"
 		class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
-		<property name="corePoolSize" value="${eai.framework.core.interceptor.threadpool.corePoolSize:5}" />
-		<property name="maxPoolSize" value="${eai.framework.core.interceptor.threadpool.maxPoolSize:25}" />
+		<property name="corePoolSize" value="${eai.framework.core.interceptor.threadpool.corePoolSize:20}" />
+		<property name="maxPoolSize" value="${eai.framework.core.interceptor.threadpool.maxPoolSize:50}" />
 		<property name="queueCapacity" value="${eai.framework.core.interceptor.threadpool.queueCapacity:1000}" />
 		<property name="WaitForTasksToCompleteOnShutdown" value="${eai.framework.core.interceptor.threadpool.gracefullShutdown:true}" />
 	</bean>
