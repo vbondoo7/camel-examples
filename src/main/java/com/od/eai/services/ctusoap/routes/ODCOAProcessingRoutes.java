@@ -64,6 +64,62 @@ public class ODCOAProcessingRoutes extends BaseProcessingRouteBuilder {
 				.end()
 			.log(LoggingLevel.INFO, "Processing For ODCOATranslationOldToNewLookupRoute Finished !!!");
 		
+		//Bulk ODCOATranslationOldToNewLookup
+		from(DIRECT_BULK_ODCOA_TRANSLATION_OLD_TO_NEW_LOOKUP)
+			.routeId(Configurator.getStepId("BulkODCOATranslationOldToNewLookupRoute"))
+			.routeDescription("This Receives BulkODCOATranslationOldToNewLookup.")
+			.log(LoggingLevel.INFO, "Processing Started for BulkODCOATranslationOldToNewLookup CXF Endpoint...")
+			.convertBodyTo(BulkODCOATranslationOldToNewLookupRequestType.class)
+			.marshal(DataFormatUtil.dataFormatInstance(BulkODCOATranslationOldToNewLookupRequestType.class))
+			.log(LoggingLevel.INFO, "BulkODCOATranslationOldToNewLookupRequestType Body after conversion to Json: ${body}")
+			.setProperty(CTU_INTERNAL_URL, constant(bulkOdCOAOldToNewLookupUrl))
+			.to(OutboundRoutes.HYSTRIX_ENABLED_CTU_INTERNAL_ROUTE)
+			.convertBodyTo(String.class)
+			.choice()
+				.when(body().contains("\"ERROR\""))
+					.bean(ExceptionMessageHandler.class, "handleFallback")
+				.otherwise()
+					.unmarshal().json(JsonLibrary.Jackson, BulkODCOATranslationOldToNewLookupResponseType.class)
+				.end()
+			.log(LoggingLevel.INFO, "Processing For BulkODCOATranslationOldToNewLookup Finished !!!");
+				
+		//ODCOATranslationNewToOldLookup
+		from(DIRECT_ODCOA_TRANSLATION_NEW_TO_OLD_LOOKUP)
+			.routeId(Configurator.getStepId("ODCOATranslationNewToOldLookupRoute"))
+			.routeDescription("This Receives ODCOATranslationNewToOldLookup.")
+			.log(LoggingLevel.INFO, "Processing Started for ODCOATranslationNewToOldLookup CXF Endpoint...")
+			.convertBodyTo(ODCOATranslationNewToOldLookupRequestType.class)
+			.marshal(DataFormatUtil.dataFormatInstance(ODCOATranslationNewToOldLookupRequestType.class))
+			.log(LoggingLevel.INFO, "ODCOATranslationNewToOldLookup Body after conversion to Json: ${body}")
+			.setProperty(CTU_INTERNAL_URL, constant(odCOANewToOldLookupUrl))
+			.to(OutboundRoutes.HYSTRIX_ENABLED_CTU_INTERNAL_ROUTE)
+			.convertBodyTo(String.class)
+			.choice()
+				.when(body().contains("\"ERROR\""))
+					.bean(ExceptionMessageHandler.class, "handleFallback")
+				.otherwise()
+					.unmarshal().json(JsonLibrary.Jackson, ODCOATranslationNewToOldLookupResponseType.class)
+				.end()
+			.log(LoggingLevel.INFO, "Processing For ODCOATranslationNewToOldLookupRoute Finished !!!");
+		
+		//Bulk ODCOATranslationNewToOldLookup
+		from(DIRECT_BULK_ODCOA_TRANSLATION_NEW_TO_OLD_LOOKUP)
+			.routeId(Configurator.getStepId("BulkODCOATranslationNewToOldLookupRoute"))
+			.routeDescription("This Receives BulkODCOATranslationNewToOldLookup.")
+			.log(LoggingLevel.INFO, "Processing Started for BulkODCOATranslationNewToOldLookup CXF Endpoint...")
+			.convertBodyTo(BulkODCOATranslationNewToOldLookupRequestType.class)
+			.marshal(DataFormatUtil.dataFormatInstance(BulkODCOATranslationNewToOldLookupRequestType.class))
+			.log(LoggingLevel.INFO, "BulkODCOATranslationNewToOldLookupRequestType Body after conversion to Json: ${body}")
+			.setProperty(CTU_INTERNAL_URL, constant(bulkOdCOANewToOldLookupUrl))
+			.to(OutboundRoutes.HYSTRIX_ENABLED_CTU_INTERNAL_ROUTE)
+			.convertBodyTo(String.class)
+			.choice()
+				.when(body().contains("\"ERROR\""))
+					.bean(ExceptionMessageHandler.class, "handleFallback")
+				.otherwise()
+					.unmarshal().json(JsonLibrary.Jackson, BulkODCOATranslationNewToOldLookupResponseType.class)
+				.end()
+			.log(LoggingLevel.INFO, "Processing For BulkODCOATranslationNewToOldLookup Finished !!!");
 	}
 
 	@Override
