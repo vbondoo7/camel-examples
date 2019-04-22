@@ -1,24 +1,15 @@
 <tran:bulkODCOATranslationNewToOldLookupRequest xmlns:tran="http://eai.officedepot.com/service/TranslationUtility">
    <tran:header>
       <tran:transactionId>123</tran:transactionId>
-      <!--Optional:-->
       <tran:consumer>X</tran:consumer>
    </tran:header>
-   <!--1 or more repetitions:-->
    <tran:criteria>
-      <!--Optional:-->
-      <tran:translate_date>?</tran:translate_date>
-      <!--Optional:-->
-      <tran:entity>?</tran:entity>
-      <!--Optional:-->
+      <tran:translate_date></tran:translate_date>
+      <tran:entity></tran:entity>
       <tran:lob>9</tran:lob>
-      <!--Optional:-->
       <tran:cost_center>7004</tran:cost_center>
-      <!--Optional:-->
-      <tran:account>?</tran:account>
-      <!--Optional:-->
-      <tran:location>?</tran:location>
-      <!--Optional:-->
-      <tran:inter_company>?</tran:inter_company>
+      <tran:account></tran:account>
+      <tran:location></tran:location>
+      <tran:inter_company></tran:inter_company>
    </tran:criteria>
 </tran:bulkODCOATranslationNewToOldLookupRequest>
