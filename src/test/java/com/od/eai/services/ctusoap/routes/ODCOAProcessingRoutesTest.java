@@ -30,11 +30,14 @@ import org.springframework.test.annotation.DirtiesContext.ClassMode;
 
 import com.officedepot.eai.service.translationutility.BulkODCOATranslationNewToOldLookupRequestType;
 import com.officedepot.eai.service.translationutility.BulkODCOATranslationOldToNewLookupRequestType;
+import com.officedepot.eai.service.translationutility.HeaderType;
 import com.officedepot.eai.service.translationutility.ODCOATranslationNewToOldLookupRequestType;
 import com.officedepot.eai.service.translationutility.ODCOATranslationNewToOldLookupResponseType;
 import com.officedepot.eai.service.translationutility.ODCOATranslationOldToNewLookupRequestType;
 import com.officedepot.eai.service.translationutility.ODCOATranslationOldToNewLookupResponseType;
 import com.officedepot.eai.service.translationutility.ObjectFactory;
+import com.officedepot.eai.service.translationutility.OdCoaNewToOldCriteriaType;
+import com.officedepot.eai.service.translationutility.OdCoaOldToNewCriteriaType;
 
 @RunWith(CamelSpringBootRunner.class)
 @SpringBootTest
@@ -143,12 +146,42 @@ public class ODCOAProcessingRoutesTest extends CamelTestSupport {
 	@Test
 	public void testBulkODCOATranslationOldToNewLookupRoute() throws Exception {
 
-		JAXBContext jc = JAXBContext.newInstance(ObjectFactory.class);
+		/*JAXBContext jc = JAXBContext.newInstance(ObjectFactory.class);
 		InputStream in = getClass().getClassLoader().getResourceAsStream("data/bulkOdCoaOldToNewLookupRequest.xml");
 		Unmarshaller unmarshaller = jc.createUnmarshaller();
 		@SuppressWarnings("unchecked")
 		JAXBElement<BulkODCOATranslationOldToNewLookupRequestType> bulkODCOATranslationOldToNewLookupRequestJaxbElement = (JAXBElement<BulkODCOATranslationOldToNewLookupRequestType>) unmarshaller.unmarshal(in);
-		BulkODCOATranslationOldToNewLookupRequestType bulkODCOATranslationOldToNewLookupRequest = bulkODCOATranslationOldToNewLookupRequestJaxbElement.getValue();
+		BulkODCOATranslationOldToNewLookupRequestType bulkODCOATranslationOldToNewLookupRequest = bulkODCOATranslationOldToNewLookupRequestJaxbElement.getValue();*/
+		
+		BulkODCOATranslationOldToNewLookupRequestType bulkODCOATranslationOldToNewLookupRequest = new BulkODCOATranslationOldToNewLookupRequestType();
+		HeaderType headerType = new HeaderType();
+		headerType.setTransactionId("13321");
+		headerType.setConsumer("211");
+		bulkODCOATranslationOldToNewLookupRequest.setHeader(headerType);
+		
+		OdCoaOldToNewCriteriaType criteria1 = new OdCoaOldToNewCriteriaType();
+		OdCoaOldToNewCriteriaType criteria2 = new OdCoaOldToNewCriteriaType();
+		
+		criteria1.setAccount("");
+		criteria1.setCompany("");
+		criteria1.setCostCenter("7004");
+		criteria1.setTranslateDate("");
+		criteria1.setFuture("");
+		criteria1.setInterCompany("");
+		criteria1.setLocation("");
+		criteria1.setLob("9");
+		
+		criteria2.setAccount("");
+		criteria2.setCompany("");
+		criteria2.setCostCenter("7006");
+		criteria2.setTranslateDate("");
+		criteria2.setFuture("");
+		criteria2.setInterCompany("");
+		criteria2.setLocation("");
+		criteria2.setLob("2");
+		
+		bulkODCOATranslationOldToNewLookupRequest.getCriteria().add(criteria1);
+		bulkODCOATranslationOldToNewLookupRequest.getCriteria().add(criteria2);
 		
 		MockEndpoint mockEndpoint = getMockEndpoint("mock:end");
 		mockEndpoint.expectedMessageCount(1);
@@ -187,16 +220,32 @@ public class ODCOAProcessingRoutesTest extends CamelTestSupport {
 	@Test
 	public void testBulkODCOATranslationNewToOldLookupRoute() throws Exception {
 
-		JAXBContext jc = JAXBContext.newInstance(ObjectFactory.class);
+		/*JAXBContext jc = JAXBContext.newInstance(ObjectFactory.class);
 		InputStream in = getClass().getClassLoader().getResourceAsStream("data/bulkOdCoaNewToOldLookupRequest.xml");
 		Unmarshaller unmarshaller = jc.createUnmarshaller();
 		@SuppressWarnings("unchecked")
 		JAXBElement<BulkODCOATranslationNewToOldLookupRequestType> bulkODCOATranslationNewToOldLookupRequestTypeJaxbElement = (JAXBElement<BulkODCOATranslationNewToOldLookupRequestType>) unmarshaller.unmarshal(in);
-		BulkODCOATranslationNewToOldLookupRequestType bulkODCOATranslationNewToOldLookupRequest = bulkODCOATranslationNewToOldLookupRequestTypeJaxbElement.getValue();
+		BulkODCOATranslationNewToOldLookupRequestType bulkODCOATranslationNewToOldLookupRequest = bulkODCOATranslationNewToOldLookupRequestTypeJaxbElement.getValue();*/
+		
+		BulkODCOATranslationNewToOldLookupRequestType bulkODCOATranslationNewToOldLookupRequest = new BulkODCOATranslationNewToOldLookupRequestType();
+		HeaderType headerType = new HeaderType();
+		headerType.setTransactionId("123");
+		headerType.setConsumer("X");
+		bulkODCOATranslationNewToOldLookupRequest.setHeader(headerType);
+		
+		OdCoaNewToOldCriteriaType criteria1 = new OdCoaNewToOldCriteriaType();
+		
+		criteria1.setAccount("");
+		criteria1.setEntity("");
+		criteria1.setCostCenter("7004");
+		criteria1.setTranslateDate("");
+		criteria1.setInterCompany("");
+		criteria1.setLocation("");
+		criteria1.setLob("9");
 		
 		MockEndpoint mockEndpoint = getMockEndpoint("mock:end");
 		mockEndpoint.expectedMessageCount(1);
-
+		bulkODCOATranslationNewToOldLookupRequest.getCriteria().add(criteria1);
 		Map<String, Object> mapHeaders = new HashMap<String, Object>();
 		template.requestBodyAndHeaders("direct:BulkODCOATranslationNewToOldLookup", bulkODCOATranslationNewToOldLookupRequest, mapHeaders);
 		
