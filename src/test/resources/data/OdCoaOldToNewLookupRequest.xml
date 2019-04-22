@@ -1,0 +1,23 @@
+      <tran:oDCOATranslationOldToNewLookupRequest xmlns:tran="http://eai.officedepot.com/service/TranslationUtility">
+         <tran:header>
+            <tran:transactionId>123</tran:transactionId>
+            <!--Optional:-->
+            <tran:consumer>X</tran:consumer>
+         </tran:header>
+         <!--Optional:-->
+         <tran:translate_date>?</tran:translate_date>
+         <!--Optional:-->
+         <tran:company>?</tran:company>
+         <!--Optional:-->
+         <tran:cost_center>7004</tran:cost_center>
+         <!--Optional:-->
+         <tran:account>123</tran:account>
+         <!--Optional:-->
+         <tran:location>333</tran:location>
+         <!--Optional:-->
+         <tran:inter_company>?</tran:inter_company>
+         <!--Optional:-->
+         <tran:lob>1</tran:lob>
+         <!--Optional:-->
+         <tran:future>?</tran:future>
+      </tran:oDCOATranslationOldToNewLookupRequest>

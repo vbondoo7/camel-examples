@@ -1,0 +1,54 @@
+{
+	"results": [
+		{
+			"status": {
+				"status": "success",
+				"statusCode": 200
+			},
+			"criteria": {
+				"translate_date": null,
+				"legal_entity": "1000US",
+				"lob": "92",
+				"cost_center": "7028",
+				"account": "520001001362",
+				"geo": "",
+				"product": ""
+			},
+			"result": {
+				"entity": "P510",
+				"lob": "",
+				"cost_center": "36002",
+				"account": "412050",
+				"location": "",
+				"inter_company": ""
+			}
+		},
+		{
+			"status": {
+				"status": "success",
+				"statusCode": 200
+			},
+			"criteria": {
+				"translate_date": null,
+				"legal_entity": "1000US",
+				"lob": "1",
+				"cost_center": "7004",
+				"account": "520001001362",
+				"geo": "",
+				"product": ""
+			},
+			"result": {
+				"entity": "P510",
+				"lob": "24",
+				"cost_center": "36002",
+				"account": "412050",
+				"location": "",
+				"inter_company": ""
+			}
+		}
+	],
+	"header": {
+		"transactionId": "123",
+		"consumer": "V"
+	}
+}

@@ -1,0 +1,12 @@
+{
+	"header": {
+		"transactionId": "123",
+		"consumer": "X"
+	},
+	"entity": "",
+	"lob": "21",
+	"cost_center": "",
+	"account": "",
+	"location": "06704,06705,06706,06707,06708,06709,06710,06711,06712,06713",
+	"inter_company": ""
+}

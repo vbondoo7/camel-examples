@@ -1,0 +1,32 @@
+{
+	"results": [
+		{
+			"status": {
+				"status": "success",
+				"statusCode": 200
+			},
+			"criteria": {
+				"translate_date": "?",
+				"entity": "?",
+				"lob": "9",
+				"cost_center": "7004",
+				"account": "?",
+				"location": "?",
+				"inter_company": "?"
+			},
+			"result": {
+				"company": "",
+				"cost_center": "",
+				"account": "",
+				"location": "",
+				"inter_company": "",
+				"lob": "23",
+				"future": "000000"
+			}
+		}
+	],
+	"header": {
+		"transactionId": "123",
+		"consumer": "X"
+	}
+}

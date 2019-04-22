@@ -277,6 +277,7 @@
 								<include>com/od/eai/services/ctusoap/*.class</include>
 								<include>com/od/eai/services/ctusoap/config/**/*.class</include>
 								<include>com/od/eai/services/ctusoap/routes/**/*.class</include>
+								<include>com/od/eai/services/ctusoap/util/**/*.class</include>
 							</includes>
 						</configuration>
 					</execution>
