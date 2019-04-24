@@ -42,17 +42,12 @@ public class CCCOAProcessingRoutes extends BaseProcessingRouteBuilder {
 			.routeDescription("This Receives CCCOATranslationOldToNewLookup.")
 			.log(LoggingLevel.INFO, "Processing Started for CCCOATranslationOldToNewLookup CXF Endpoint...")
 			.convertBodyTo(CCCOATranslationOldToNewLookupRequestType.class)
+			.setProperty("originalPayload", body())
 			.marshal(DataFormatUtil.dataFormatInstance(CCCOATranslationOldToNewLookupRequestType.class))
 			.log(LoggingLevel.INFO, "CCCOATranslationOldToNewLookupRequestType Body after conversion to Json: ${body}")
 			.setProperty(CTU_INTERNAL_URL, constant(ccCOAOldToNewLookupUrl))
 			.to(OutboundRoutes.HYSTRIX_ENABLED_CTU_INTERNAL_ROUTE)
-			.convertBodyTo(String.class)
-			.choice()
-				.when(body().contains("\"ERROR\""))
-					.bean(ExceptionMessageHandler.class, "handleFallback")
-				.otherwise()
-					.unmarshal().json(JsonLibrary.Jackson, CCCOATranslationOldToNewLookupResponseType.class)
-				.end()
+			.unmarshal().json(JsonLibrary.Jackson, CCCOATranslationOldToNewLookupResponseType.class)
 			.log(LoggingLevel.INFO, "Processing For CCCOATranslationOldToNewLookupRoute Finished !!!");
 		
 		//Bulk CCCOATranslationOldToNewLookup
@@ -61,17 +56,12 @@ public class CCCOAProcessingRoutes extends BaseProcessingRouteBuilder {
 			.routeDescription("This Receives BulkCCCOATranslationOldToNewLookup.")
 			.log(LoggingLevel.INFO, "Processing Started for BulkCCCOATranslationOldToNewLookup CXF Endpoint...")
 			.convertBodyTo(BulkCCCOATranslationOldToNewLookupRequestType.class)
+			.setProperty("originalPayload", body())
 			.marshal(DataFormatUtil.dataFormatInstance(BulkCCCOATranslationOldToNewLookupRequestType.class))
 			.log(LoggingLevel.INFO, "BulkCCCOATranslationOldToNewLookupRequestType Body after conversion to Json: ${body}")
 			.setProperty(CTU_INTERNAL_URL, constant(bulkCcCOAOldToNewLookupUrl))
 			.to(OutboundRoutes.HYSTRIX_ENABLED_CTU_INTERNAL_ROUTE)
-			.convertBodyTo(String.class)
-			.choice()
-				.when(body().contains("\"ERROR\""))
-					.bean(ExceptionMessageHandler.class, "handleFallback")
-				.otherwise()
-					.unmarshal().json(JsonLibrary.Jackson, BulkCCCOATranslationOldToNewLookupResponseType.class)
-				.end()
+			.unmarshal().json(JsonLibrary.Jackson, BulkCCCOATranslationOldToNewLookupResponseType.class)
 			.log(LoggingLevel.INFO, "Processing For BulkCCCOATranslationOldToNewLookup Finished !!!");
 		
 		//CCCOATranslationNewToOldLookup
@@ -80,8 +70,10 @@ public class CCCOAProcessingRoutes extends BaseProcessingRouteBuilder {
 			.routeDescription("This Receives CCCOATranslationNewToOldLookup.")
 			.log(LoggingLevel.INFO, "Processing Started for CCCOATranslationNewToOldLookup CXF Endpoint...")
 			.convertBodyTo(CCCOATranslationNewToOldLookupRequestType.class)
+			.setProperty("originalPayload", body())
 			.bean(CCCOATranslationNewToOldLookupAssembler.class, "assembler")
-			.log(LoggingLevel.INFO, "Processing For CCCOATranslationNewToOldLookupRoute Finished !!!");
+			.log(LoggingLevel.INFO, "Processing For CCCOATranslationNewToOldLookupRoute Finished !!!")
+			.removeProperties("*");
 	}
 
 	@Override

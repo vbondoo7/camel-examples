@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import com.od.eai.framework.base.routes.BaseInboundRouteBuilder;
 import com.od.eai.framework.core.dispatch.Configurator;
+import com.od.eai.services.ctusoap.exception.handler.ExceptionMessageHandler;
 
 @Component("ctusoapInboundRoutes")
 public class InboundRoutes extends BaseInboundRouteBuilder {
@@ -74,6 +75,7 @@ public class InboundRoutes extends BaseInboundRouteBuilder {
 			.id(Configurator.getStepId("exceptionInboundRoute"))
 			.log(LoggingLevel.ERROR, "Exception occurred : ${exception.stacktrace}")
 			.setFaultBody(simple("${exception.message}"));
+			//.bean(ExceptionMessageHandler.class, "handleFallback");
 	}
 
 }
