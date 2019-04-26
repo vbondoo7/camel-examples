@@ -3,7 +3,7 @@ buildDeployService {
 	namespace = "eai"
 	timeoutSeconds = "5"
 	maxCpu = "2000m"
-	maxMemory = "4Gi"
+	maxMemory = "6Gi"
 	healthUrl = "/eaiapi/health"
 	appPort="8085"
 	deployLocations = "aws"
