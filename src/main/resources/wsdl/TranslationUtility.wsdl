@@ -64,12 +64,12 @@
 		<wsdl:part name="parameters" element="xsd1:cCCOATranslationOldToNewLookupResponse" />
 	</wsdl:message>
 	
-	<wsdl:message name="cCCOATranslationNewToOldLookupRequest">
+	<!-- <wsdl:message name="cCCOATranslationNewToOldLookupRequest">
 		<wsdl:part name="parameters" element="xsd1:cCCOATranslationNewToOldLookupRequest" />
 	</wsdl:message>
 	<wsdl:message name="cCCOATranslationNewToOldLookupResponse">
 		<wsdl:part name="parameters" element="xsd1:cCCOATranslationNewToOldLookupResponse" />
-	</wsdl:message>
+	</wsdl:message> -->
 	
 	<!-- 4 new Bulk operations for OD/CC COA OTN -->
 	<wsdl:message name="bulkCCCOATranslationOldToNewLookupRequest">
@@ -126,10 +126,10 @@
 			<wsdl:input message="tus:cCCOATranslationOldToNewLookupRequest"></wsdl:input>
 			<wsdl:output message="tus:cCCOATranslationOldToNewLookupResponse"></wsdl:output>
 		</wsdl:operation>
-		<wsdl:operation name="cCCOATranslationNewToOldLookupReq">
+		<!-- <wsdl:operation name="cCCOATranslationNewToOldLookupReq">
 			<wsdl:input message="tus:cCCOATranslationNewToOldLookupRequest"></wsdl:input>
 			<wsdl:output message="tus:cCCOATranslationNewToOldLookupResponse"></wsdl:output>
-		</wsdl:operation>
+		</wsdl:operation> -->
 		
 	<!-- New 4 bulk operations -->
 		<wsdl:operation name="bulkCCCOATranslationOldToNewLookupReq">
@@ -231,7 +231,7 @@
 				<soap:body use="literal" />
 			</wsdl:output>
 		</wsdl:operation>
-		<wsdl:operation name="cCCOATranslationNewToOldLookupReq">
+		<!-- <wsdl:operation name="cCCOATranslationNewToOldLookupReq">
 			<soap:operation
 				soapAction="http://eai.officedepot.com/translationUtilityService/cCCOATranslationNewToOldLookup" />
 			<wsdl:input>
@@ -240,7 +240,7 @@
 			<wsdl:output>
 				<soap:body use="literal" />
 			</wsdl:output>
-		</wsdl:operation>
+		</wsdl:operation> -->
 		<wsdl:operation name="bulkCCCOATranslationOldToNewLookupReq">
 			<soap:operation
 				soapAction="http://eai.officedepot.com/translationUtilityService/bulkCCCOATranslationOldToNewLookup" />
@@ -274,8 +274,7 @@
 	</wsdl:binding>
 	<wsdl:service name="translationUtilityService">
 		<wsdl:port binding="tus:translationUtilityServiceSOAP" name="translationUtilityServiceSOAP">
-			<soap:address
-				location="https://dev-internal.odplabs.com/services/dev-translation-utility-service/eaiapi/translationUtility" />
+			<soap:address location="/eai/translationUtility" />
 		</wsdl:port>
 	</wsdl:service>
 </wsdl:definitions>

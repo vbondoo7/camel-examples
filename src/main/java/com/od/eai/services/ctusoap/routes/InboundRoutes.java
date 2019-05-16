@@ -63,8 +63,15 @@ public class InboundRoutes extends BaseInboundRouteBuilder {
 		  			.to(CCCOAProcessingRoutes.DIRECT_CCCOA_TRANSLATION_OLD_TO_NEW_LOOKUP)
 	  			.when(header(CxfConstants.OPERATION_NAME).isEqualTo("bulkCCCOATranslationOldToNewLookupReq"))
 		  			.to(CCCOAProcessingRoutes.DIRECT_BULK_CCCOA_TRANSLATION_OLD_TO_NEW_LOOKUP)
-	  			.when(header(CxfConstants.OPERATION_NAME).isEqualTo("cCCOATranslationNewToOldLookupReq"))
-		  			.to(CCCOAProcessingRoutes.DIRECT_CCCOA_TRANSLATION_NEW_TO_OLD_LOOKUP)
+		  			//commenting out below operations as implementation logic not provided yet
+				/*
+				 * .when(header(CxfConstants.OPERATION_NAME).isEqualTo(
+				 * "cCCOATranslationNewToOldLookupReq"))
+				 * .to(CCCOAProcessingRoutes.DIRECT_CCCOA_TRANSLATION_NEW_TO_OLD_LOOKUP)
+				 * .when(header(CxfConstants.OPERATION_NAME).isEqualTo(
+				 * "bulkCCCOATranslationNewToOldLookupReq"))
+				 * .to(CCCOAProcessingRoutes.DIRECT_BULK_CCCOA_TRANSLATION_NEW_TO_OLD_LOOKUP)
+				 */
 		  		.otherwise() 
 		  			.throwException(new UnsupportedOperationException());
 	}

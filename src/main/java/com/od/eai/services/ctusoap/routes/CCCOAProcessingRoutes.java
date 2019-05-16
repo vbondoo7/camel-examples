@@ -12,6 +12,8 @@ import com.od.eai.framework.core.dispatch.Configurator;
 import com.od.eai.services.ctusoap.assembler.CCCOATranslationNewToOldLookupAssembler;
 import com.od.eai.services.ctusoap.exception.handler.ExceptionMessageHandler;
 import com.od.eai.services.ctusoap.util.DataFormatUtil;
+import com.officedepot.eai.service.translationutility.BulkCCCOATranslationNewToOldLookupRequestType;
+import com.officedepot.eai.service.translationutility.BulkCCCOATranslationNewToOldLookupResponseType;
 import com.officedepot.eai.service.translationutility.BulkCCCOATranslationOldToNewLookupRequestType;
 import com.officedepot.eai.service.translationutility.BulkCCCOATranslationOldToNewLookupResponseType;
 import com.officedepot.eai.service.translationutility.CCCOATranslationNewToOldLookupRequestType;
@@ -26,12 +28,19 @@ public class CCCOAProcessingRoutes extends BaseProcessingRouteBuilder {
 	public static final String DIRECT_CCCOA_TRANSLATION_NEW_TO_OLD_LOOKUP 					= "direct:CCCOATranslationNewToOldLookup";
 	public static final String DIRECT_CCCOA_TRANSLATION_OLD_TO_NEW_LOOKUP 					= "direct:CCCOATranslationOldToNewLookup";
 	public static final String DIRECT_BULK_CCCOA_TRANSLATION_OLD_TO_NEW_LOOKUP 				= "direct:bulkCCCOATranslationOldToNewLookup";
+	public static final String DIRECT_BULK_CCCOA_TRANSLATION_NEW_TO_OLD_LOOKUP 				= "direct:bulkCCCOATranslationNewToOldLookup";
 	
 	@Value("${ctu.ccCOAOldToNew.translation.lookup.url}")
 	private String ccCOAOldToNewLookupUrl;
 	
 	@Value("${ctu.bulkCcCOAOldToNew.translation.lookup.url}")
 	private String bulkCcCOAOldToNewLookupUrl;
+	
+	@Value("${ctu.ccCOANewToOld.translation.lookup.url}")
+	private String ccCOANewToOldLookupUrl;
+	
+	@Value("${ctu.bulkCcCOANewToOld.translation.lookup.url}")
+	private String bulkCcCOANewToOldLookupUrl;
 	
 	@Override
 	public void configureRoutes() throws Exception {
@@ -74,6 +83,20 @@ public class CCCOAProcessingRoutes extends BaseProcessingRouteBuilder {
 			.bean(CCCOATranslationNewToOldLookupAssembler.class, "assembler")
 			.log(LoggingLevel.INFO, "Processing For CCCOATranslationNewToOldLookupRoute Finished !!!")
 			.removeProperties("*");
+		
+		//Bulk CCCOATranslationNewToOldLookup
+		from(DIRECT_BULK_CCCOA_TRANSLATION_NEW_TO_OLD_LOOKUP)
+			.routeId(Configurator.getStepId("BulkCCCOATranslationNewToOldLookupRoute"))
+			.routeDescription("This Receives BulkCCCOATranslationNewToOldLookup.")
+			.log(LoggingLevel.INFO, "Processing Started for BulkCCCOATranslationNewToOldLookup CXF Endpoint...")
+			.convertBodyTo(BulkCCCOATranslationNewToOldLookupRequestType.class)
+			.setProperty("originalPayload", body())
+			.marshal(DataFormatUtil.dataFormatInstance(BulkCCCOATranslationNewToOldLookupRequestType.class))
+			.log(LoggingLevel.INFO, "BulkCCCOATranslationNewToOldLookupRequestType Body after conversion to Json: ${body}")
+			.setProperty(CTU_INTERNAL_URL, constant(bulkCcCOANewToOldLookupUrl))
+			.to(OutboundRoutes.HYSTRIX_ENABLED_CTU_INTERNAL_ROUTE)
+			.unmarshal().json(JsonLibrary.Jackson, BulkCCCOATranslationNewToOldLookupResponseType.class)
+			.log(LoggingLevel.INFO, "Processing For BulkCCCOATranslationNewToOldLookup Finished !!!");
 	}
 
 	@Override
