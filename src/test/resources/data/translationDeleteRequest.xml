@@ -1,9 +1,0 @@
-<tran:translationDeleteRequest xmlns:tran="http://eai.officedepot.com/service/TranslationUtility">
-     <!-- <tran:header>
-            <tran:transactionId></tran:transactionId>
-            Optional:
-            <tran:consumer></tran:consumer>
-         </tran:header> -->
-     <!--Optional:-->
-     <tran:translate_value_id>123</tran:translate_value_id>
-</tran:translationDeleteRequest>

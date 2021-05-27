@@ -2,76 +2,49 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<groupId>com.od.eai.framework</groupId>
-		<artifactId>eai-parent</artifactId>
-		<version>1.1.4</version>
-	</parent>
 
-	<groupId>com.od.eai</groupId>
-	<artifactId>ctusoap</artifactId>
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.example.integration</groupId>
+	<artifactId>camel-examples</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 
 	<properties>
-		<eai-springboot-service-boilerplate-version>1.1.4</eai-springboot-service-boilerplate-version>
-		<eai.framework.secuirty.version>1.5.0-WSS</eai.framework.secuirty.version>
-		<eai.framework.core.version>2.2.0</eai.framework.core.version>
-		<eai.framework.base.version>1.0.1</eai.framework.base.version>
+		<java.version>11</java.version>
+		<qpid.jms.version>0.58.0</qpid.jms.version>
+		<artemis.version>2.17.0</artemis.version>
+		<oracle-scm-cloud-client.version>1.1.0</oracle-scm-cloud-client.version>
+		<maven-compiler-plugin.version>3.6.1</maven-compiler-plugin.version>
+		<maven-surefire-plugin.version>3.1.0</maven-surefire-plugin.version>
+		<maven.compiler.target>11</maven.compiler.target>
+		<maven.compiler.source>11</maven.compiler.source>
+		<camel.version>3.7.4</camel.version>
 	</properties>
 
+	<dependencyManagement>
+		<dependencies>
+			<!-- Camel BOM -->
+			<dependency>
+				<groupId>org.apache.camel.springboot</groupId>
+				<artifactId>camel-spring-boot-bom</artifactId>
+				<version>3.7.4</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<!-- Spring Boot BOM -->
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-dependencies</artifactId>
+				<version>2.4.3</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
 	<dependencies>
-		<!-- eai framework libs -->
-		<!-- -->
-		<!-- Framework -->
-		<!-- -->
-		<!-- security framework -->
 		<dependency>
-			<groupId>com.od.eai.framework</groupId>
-			<artifactId>eai-fw-custom-auth-providers</artifactId>
-			<version>${eai.framework.secuirty.version}</version>
-		</dependency>
-
-		<!-- obfuscation framework -->
-		<dependency>
-			<groupId>com.od.eai.framework</groupId>
-			<artifactId>eai-fw-data-obfuscator</artifactId>
-			<version>${eai.framework.obfuscator.version}</version>
-		</dependency>
-
-		<!-- EAI framework core -->
-		<dependency>
-			<groupId>com.od.eai.framework</groupId>
-			<artifactId>eai-fw-core</artifactId>
-			<version>${eai.framework.core.version}</version>
-			<exclusions>
-				<exclusion>
-					<artifactId>log4j-slf4j-impl</artifactId>
-					<groupId>org.apache.logging.log4j</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>log4j-core</artifactId>
-					<groupId>org.apache.logging.log4j</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>log4j-api</artifactId>
-					<groupId>org.apache.logging.log4j</groupId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-
-		<!-- EAI framework base -->
-		<dependency>
-			<groupId>com.od.eai.framework</groupId>
-			<artifactId>eai-fw-base</artifactId>
-			<version>${eai.framework.base.version}</version>
-		</dependency>
-
-
-		<!-- base boot and camel libs -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter</artifactId>
+			<groupId>org.apache.camel.springboot</groupId>
+			<artifactId>camel-spring-boot-starter</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -92,20 +65,30 @@
 			<artifactId>javax.servlet-api</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-spring-boot-starter</artifactId>
+			<groupId>org.apache.camel.springboot</groupId>
+			<artifactId>camel-undertow-starter</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.camel.springboot</groupId>
+			<artifactId>camel-servlet-starter</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-undertow</artifactId>
+			<artifactId>camel-endpointdsl</artifactId>
 		</dependency>
-
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-componentdsl</artifactId>
+		</dependency>
 		<!-- needed for hystrix at runtime -->
+		<!-- <dependency>
+			<groupId>org.apache.camel.springboot</groupId>
+			<artifactId>camel-hystrix-starter</artifactId>
+		</dependency> -->
 		<dependency>
 			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-hystrix-starter</artifactId>
+			<artifactId>camel-resilience4j</artifactId>
 		</dependency>
-
 		<!-- the actuator is here -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -114,12 +97,12 @@
 
 		<!-- actuator needs saxon but doesn't include it -->
 		<dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-saxon</artifactId>
+			<groupId>org.apache.camel.springboot</groupId>
+			<artifactId>camel-xslt-saxon-starter</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-jsonpath</artifactId>
+			<groupId>org.apache.camel.springboot</groupId>
+			<artifactId>camel-jsonpath-starter</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.json</groupId>
@@ -130,20 +113,20 @@
 		<dependency>
 			<groupId>org.apache.qpid</groupId>
 			<artifactId>qpid-jms-client</artifactId>
+			<version>${qpid.jms.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.activemq</groupId>
 			<artifactId>activemq-jms-pool</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-jms</artifactId>
+			<groupId>org.apache.camel.springboot</groupId>
+			<artifactId>camel-jms-starter</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-http4</artifactId>
+			<groupId>org.apache.camel.springboot</groupId>
+			<artifactId>camel-http-starter</artifactId>
 		</dependency>
-
 
 		<!-- testing dependencies -->
 		<dependency>
@@ -167,7 +150,7 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.apache.camel</groupId>
+			<groupId>org.apache.camel.springboot</groupId>
 			<artifactId>camel-cxf-starter</artifactId>
 		</dependency>
 		<dependency>
@@ -178,24 +161,27 @@
 		<!-- -->
 		<!-- CXF -->
 		<!-- -->
-		<dependency>
-			<groupId>org.apache.cxf</groupId>
-			<artifactId>cxf-rt-ws-security</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.cxf</groupId>
-			<artifactId>cxf-rt-transports-http-undertow</artifactId>
-			<version>3.2.4</version>
-		</dependency>
+		<!-- <dependency> <groupId>org.apache.cxf</groupId> <artifactId>cxf-rt-ws-security</artifactId> 
+			</dependency> <dependency> <groupId>org.apache.cxf</groupId> <artifactId>cxf-rt-transports-http-undertow</artifactId> 
+			<version>3.4.3</version> </dependency> -->
 		<dependency>
 			<groupId>org.apache.ws.security</groupId>
 			<artifactId>wss4j</artifactId>
-			<version>1.6.9</version>
+			<version>1.6.19</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.santuario</groupId>
 			<artifactId>xmlsec</artifactId>
-			<version>2.1.1</version>
+			<version>2.2.2</version>
+		</dependency>
+
+		<!-- -->
+		<!-- Misc -->
+		<!-- -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
 		</dependency>
 	</dependencies>
 
@@ -227,7 +213,25 @@
 							<sourceRoot>target/generated-sources/</sourceRoot>
 							<wsdlOptions>
 								<wsdlOption>
-									<wsdl>${basedir}/src/main/resources/wsdl/TranslationUtility.wsdl</wsdl>
+									<wsdl>${basedir}/src/main/resources/wsdl/CalcUtility.wsdl</wsdl>
+									<extraargs>
+										<extraarg>-verbose</extraarg>
+									</extraargs>
+								</wsdlOption>
+							</wsdlOptions>
+						</configuration>
+						<goals>
+							<goal>wsdl2java</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>generate-sources-calc</id>
+						<phase>generate-sources</phase>
+						<configuration>
+							<sourceRoot>target/generated-sources/</sourceRoot>
+							<wsdlOptions>
+								<wsdlOption>
+									<wsdl>${basedir}/src/main/resources/wsdl/dneonline_calculator.wsdl</wsdl>
 									<extraargs>
 										<extraarg>-verbose</extraarg>
 									</extraargs>
@@ -247,11 +251,12 @@
 					</dependency>
 				</dependencies>
 			</plugin>
+
 			<!-- Jcoco plugin -->
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>0.8.2</version>
+				<version>0.8.7</version>
 				<executions>
 					<execution>
 						<id>prepare-agent</id>
@@ -261,7 +266,7 @@
 						<configuration>
 							<destFile>${project.build.directory}/code-coverage/jacoco.exec</destFile>
 							<includes>
-								<include>com.od.eai.services.ctusoap.*</include>
+								<include>com.example.integration.*</include>
 							</includes>
 						</configuration>
 					</execution>
@@ -274,10 +279,10 @@
 						<configuration>
 							<dataFile>${project.build.directory}/code-coverage/jacoco.exec</dataFile>
 							<includes>
-								<include>com/od/eai/services/ctusoap/*.class</include>
-								<include>com/od/eai/services/ctusoap/config/**/*.class</include>
-								<include>com/od/eai/services/ctusoap/routes/**/*.class</include>
-								<include>com/od/eai/services/ctusoap/util/**/*.class</include>
+								<include>com/example/integration/*.class</include>
+								<include>com/example/integration/config/**/*.class</include>
+								<include>com/example/integration/routes/**/*.class</include>
+								<include>com/example/integration/util/**/*.class</include>
 							</includes>
 						</configuration>
 					</execution>

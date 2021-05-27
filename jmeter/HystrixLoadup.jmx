@@ -29,9 +29,9 @@
         <AuthManager guiclass="AuthPanel" testclass="AuthManager" testname="HTTP Authorization Manager" enabled="true">
           <collectionProp name="AuthManager.auth_list">
             <elementProp name="" elementType="Authorization">
-              <stringProp name="Authorization.url">http://localhost:8085/eaiapi/sayhello</stringProp>
-              <stringProp name="Authorization.username">eai</stringProp>
-              <stringProp name="Authorization.password">eai</stringProp>
+              <stringProp name="Authorization.url">http://localhost:8085/integrationapi/sayhello</stringProp>
+              <stringProp name="Authorization.username">integration</stringProp>
+              <stringProp name="Authorization.password">integration</stringProp>
               <stringProp name="Authorization.domain"></stringProp>
               <stringProp name="Authorization.realm"></stringProp>
             </elementProp>
@@ -53,7 +53,7 @@
           <stringProp name="HTTPSampler.port">8085</stringProp>
           <stringProp name="HTTPSampler.protocol"></stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">/eaiapi/sayhello</stringProp>
+          <stringProp name="HTTPSampler.path">/integrationapi/sayhello</stringProp>
           <stringProp name="HTTPSampler.method">GET</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -83,9 +83,9 @@
         <AuthManager guiclass="AuthPanel" testclass="AuthManager" testname="HTTP Authorization Manager" enabled="true">
           <collectionProp name="AuthManager.auth_list">
             <elementProp name="" elementType="Authorization">
-              <stringProp name="Authorization.url">http://localhost:8085/eaiapi/hystrixTest</stringProp>
-              <stringProp name="Authorization.username">eai</stringProp>
-              <stringProp name="Authorization.password">eai</stringProp>
+              <stringProp name="Authorization.url">http://localhost:8085/integrationapi/hystrixTest</stringProp>
+              <stringProp name="Authorization.username">integration</stringProp>
+              <stringProp name="Authorization.password">integration</stringProp>
               <stringProp name="Authorization.domain"></stringProp>
               <stringProp name="Authorization.realm"></stringProp>
             </elementProp>
@@ -107,7 +107,7 @@
           <stringProp name="HTTPSampler.port">8085</stringProp>
           <stringProp name="HTTPSampler.protocol"></stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">/eaiapi/hystrixTest/100</stringProp>
+          <stringProp name="HTTPSampler.path">/integrationapi/hystrixTest/100</stringProp>
           <stringProp name="HTTPSampler.method">GET</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -137,9 +137,9 @@
         <AuthManager guiclass="AuthPanel" testclass="AuthManager" testname="HTTP Authorization Manager" enabled="true">
           <collectionProp name="AuthManager.auth_list">
             <elementProp name="" elementType="Authorization">
-              <stringProp name="Authorization.url">http://localhost:8085/eaiapi/hystrixTest</stringProp>
-              <stringProp name="Authorization.username">eai</stringProp>
-              <stringProp name="Authorization.password">eai</stringProp>
+              <stringProp name="Authorization.url">http://localhost:8085/integrationapi/hystrixTest</stringProp>
+              <stringProp name="Authorization.username">integration</stringProp>
+              <stringProp name="Authorization.password">integration</stringProp>
               <stringProp name="Authorization.domain"></stringProp>
               <stringProp name="Authorization.realm"></stringProp>
             </elementProp>
@@ -161,7 +161,7 @@
           <stringProp name="HTTPSampler.port">8085</stringProp>
           <stringProp name="HTTPSampler.protocol"></stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">/eaiapi/hystrixTest/800</stringProp>
+          <stringProp name="HTTPSampler.path">/integrationapi/hystrixTest/800</stringProp>
           <stringProp name="HTTPSampler.method">GET</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
