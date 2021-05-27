@@ -26,26 +26,23 @@ public class JmsToSOAPOutboundRoutes extends RouteBuilder {
 			.routeId("multicast-outbound-route")
 			.errorHandler(noErrorHandler())
 			.log(LoggingLevel.INFO, "External call for single Order : ${body}")
-			//.doTry()
-				//.log(LoggingLevel.ERROR, "inside doTry()")
 				.multicast(new JMSRollbackAggregationStrategy())
 					.parallelProcessing()
 					.to("direct:soapRoute-A", "direct:soapRoute-B")
 				.end()
-			//.doCatch(Exception.class)
-				//.log(LoggingLevel.ERROR, "Order processed in soapRoute-A")
-			//.endDoTry()
 			.choice()
 				.when(exchangeProperty("exception").isNull())
 					.to("direct:final-route")
 				.otherwise()
 					.throwException(new Exception("Order processing failed. Rollback please."))
 			.end();
+
 		
 		from("direct:soapRoute-A")
 			.routeId("soapRoute-A")
 			.errorHandler(noErrorHandler())
 			.log(LoggingLevel.INFO, "Order processed in soapRoute-A");
+		
 		
 		from("direct:soapRoute-B")
 			.routeId("soapRoute-B")
@@ -56,6 +53,7 @@ public class JmsToSOAPOutboundRoutes extends RouteBuilder {
 				.otherwise()
 					.log(LoggingLevel.INFO, "Order processed in soapRoute-B")
 			.end();
+		
 		
 		from("direct:final-route")
 			.routeId("final-route")
