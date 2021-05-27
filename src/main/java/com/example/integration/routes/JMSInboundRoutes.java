@@ -32,6 +32,7 @@ public class JMSInboundRoutes extends EndpointRouteBuilder {
 				//.acknowledgementModeName("CLIENT_ACKNOWLEDGE")
 				.connectionFactory(poolConn)
 				.disableReplyTo(true)
+				.lazyCreateTransactionManager(false)
 				.testConnectionOnStartup(true)
 				.build(getContext());
 
@@ -45,7 +46,9 @@ public class JMSInboundRoutes extends EndpointRouteBuilder {
 		
 		configureExceptions();
 		
-		from(jms("jms", "test.queue").transacted(true))
+		from(jms("jms", "test.queue")
+				//.transacted(true)
+				.acknowledgementModeName("CLIENT_ACKNOWLEDGE"))
 			.routeId("jms-consumer-route")
 			.log(LoggingLevel.INFO,"AMQ Payload received : ${body}")
 			.to(JMSProcessingRoutes.JMS_PROCESSING_ROUTE);
@@ -55,7 +58,7 @@ public class JMSInboundRoutes extends EndpointRouteBuilder {
 	private void configureExceptions() {
 		onException(Exception.class)
 			.id("exceptionJMSInboundRoute")
-			.useOriginalMessage()
+			.useOriginalMessage().maximumRedeliveries(0)
 			//.maximumRedeliveries(2).redeliveryDelay(1000L)
 			.log(LoggingLevel.ERROR, "Exception occurred in jmsInboundRoute : ${exception}");
 	}
