@@ -1,0 +1,256 @@
+<wsdl:definitions
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/"
+	xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+	xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+	xmlns:tns="http://mydemo.com/calcUtilityService/"
+	xmlns:s="http://www.w3.org/2001/XMLSchema"
+	xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+	xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	targetNamespace="http://mydemo.com/calcUtilityService/">
+	<wsdl:types>
+		<s:schema elementFormDefault="qualified" targetNamespace="http://mydemo.com/calcUtilityService/">
+			<s:element name="Add">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="1" maxOccurs="1" name="intA"
+							type="s:int" />
+						<s:element minOccurs="1" maxOccurs="1" name="intB"
+							type="s:int" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="AddResponse">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="1" maxOccurs="1" name="AddResult"
+							type="s:int" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="Subtract">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="1" maxOccurs="1" name="intA"
+							type="s:int" />
+						<s:element minOccurs="1" maxOccurs="1" name="intB"
+							type="s:int" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="SubtractResponse">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="1" maxOccurs="1"
+							name="SubtractResult" type="s:int" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="Multiply">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="1" maxOccurs="1" name="intA"
+							type="s:int" />
+						<s:element minOccurs="1" maxOccurs="1" name="intB"
+							type="s:int" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="MultiplyResponse">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="1" maxOccurs="1"
+							name="MultiplyResult" type="s:int" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="Divide">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="1" maxOccurs="1" name="intA"
+							type="s:int" />
+						<s:element minOccurs="1" maxOccurs="1" name="intB"
+							type="s:int" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="DivideResponse">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="1" maxOccurs="1"
+							name="DivideResult" type="s:int" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="error">
+                <s:complexType>
+                    <s:sequence>
+                        <s:element minOccurs="0" name="reason" type="s:string" />
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+		</s:schema>
+	</wsdl:types>
+	<wsdl:message name="AddRequest">
+		<wsdl:part name="parameters" element="tns:Add" />
+	</wsdl:message>
+	<wsdl:message name="AddResponse">
+		<wsdl:part name="parameters" element="tns:AddResponse" />
+	</wsdl:message>
+	<wsdl:message name="SubtractRequest">
+		<wsdl:part name="parameters" element="tns:Subtract" />
+	</wsdl:message>
+	<wsdl:message name="SubtractResponse">
+		<wsdl:part name="parameters" element="tns:SubtractResponse" />
+	</wsdl:message>
+	<wsdl:message name="MultiplyRequest">
+		<wsdl:part name="parameters" element="tns:Multiply" />
+	</wsdl:message>
+	<wsdl:message name="MultiplyResponse">
+		<wsdl:part name="parameters" element="tns:MultiplyResponse" />
+	</wsdl:message>
+	<wsdl:message name="DivideRequest">
+		<wsdl:part name="parameters" element="tns:Divide" />
+	</wsdl:message>
+	<wsdl:message name="DivideResponse">
+		<wsdl:part name="parameters" element="tns:DivideResponse" />
+	</wsdl:message>
+	<wsdl:message name="ErrorMessage">
+        <wsdl:part name="error" element="tns:error" />
+    </wsdl:message>
+    
+	<wsdl:portType name="calcUtilityService">
+		<wsdl:operation name="Add">
+			<wsdl:documentation
+				xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+			</wsdl:documentation>
+			<wsdl:input message="tns:AddRequest" />
+			<wsdl:output message="tns:AddResponse" />
+			<wsdl:fault name="error" message="tns:ErrorMessage" />
+		</wsdl:operation>
+		<wsdl:operation name="Subtract">
+			<wsdl:input message="tns:SubtractRequest" />
+			<wsdl:output message="tns:SubtractResponse" />
+			<wsdl:fault name="error" message="tns:ErrorMessage" />
+		</wsdl:operation>
+		<wsdl:operation name="Multiply">
+			<wsdl:input message="tns:MultiplyRequest" />
+			<wsdl:output message="tns:MultiplyResponse" />
+			<wsdl:fault name="error" message="tns:ErrorMessage" />
+		</wsdl:operation>
+		<wsdl:operation name="Divide">
+			<wsdl:input message="tns:DivideRequest" />
+			<wsdl:output message="tns:DivideResponse" />
+			<wsdl:fault name="error" message="tns:ErrorMessage" />
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="calcUtilityServiceSoap" type="tns:calcUtilityService">
+		<soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document" />
+		<wsdl:operation name="Add">
+	<!-- 		<soap:operation soapAction="http://mydemo.com/calcUtilityService/Add"
+				style="document" /> -->
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="error">
+                <soap:fault name="error" use="literal" />
+            </wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="Subtract">
+			<!-- <soap:operation
+				soapAction="http://mydemo.com/calcUtilityService/Subtract" style="document" /> -->
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="error">
+                <soap:fault name="error" use="literal" />
+            </wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="Multiply">
+			<!-- <soap:operation
+				soapAction="http://mydemo.com/calcUtilityService/Multiply" style="document" /> -->
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="error">
+                <soap:fault name="error" use="literal" />
+            </wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="Divide">
+			<!-- <soap:operation soapAction="http://mydemo.com/calcUtilityService/Divide"
+				style="document" /> -->
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="error">
+                <soap:fault name="error" use="literal" />
+            </wsdl:fault>
+		</wsdl:operation>
+	</wsdl:binding>
+	<!-- <wsdl:binding name="CalcSoap12"
+		type="tns:CalcSoap">
+		<soap12:binding
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="Add">
+			<soap12:operation
+				soapAction="http://mydemo.com/calcUtilityService/Add" style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="Subtract">
+			<soap12:operation
+				soapAction="http://mydemo.com/calcUtilityService/Subtract" style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="Multiply">
+			<soap12:operation
+				soapAction="http://mydemo.com/calcUtilityService/Multiply" style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="Divide">
+			<soap12:operation
+				soapAction="http://mydemo.com/calcUtilityService/Divide" style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding> -->
+	<wsdl:service name="calcUtilityService">
+		<wsdl:port name="calcUtilityServiceSoap" binding="tns:calcUtilityServiceSoap">
+			<soap:address location="http://0.0.0.0:8080/api/calcUtility" />
+		</wsdl:port>
+		<!-- <wsdl:port name="CalcSoap12" binding="tns:CalcSoap12">
+			<soap12:address location="/api/calcUtility" />
+		</wsdl:port> -->
+	</wsdl:service>
+</wsdl:definitions>
